@@ -1,0 +1,856 @@
+{% extends "store/base.html" %}
+{% load static %}
+
+{% block title %}
+Billing & Payment
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+/* =========================
+   PAGE
+========================= */
+
+.billing-page {
+    width: 92%;
+    max-width: 1200px;
+    margin: 50px auto;
+}
+
+.billing-title {
+    text-align: center;
+    color: #ff4f88;
+    font-size: 38px;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+
+/* =========================
+   MAIN LAYOUT
+========================= */
+
+.billing-layout {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.billing-card,
+.order-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+}
+
+.card-title {
+    color: #ff4f88;
+    font-size: 25px;
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    font-size: 15px;
+
+    box-sizing: border-box;
+
+    transition: 0.2s;
+}
+
+.form-group textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+
+    border-color: #ff4f88;
+
+    box-shadow: 0 0 0 3px rgba(255,79,136,0.10);
+}
+
+
+/* =========================
+   PAYMENT METHODS
+========================= */
+
+.payment-title {
+    color: #333;
+    font-size: 21px;
+    margin: 30px 0 15px;
+}
+
+.payment-option {
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 17px;
+
+    margin-bottom: 12px;
+
+    border: 2px solid #f0dce4;
+
+    border-radius: 14px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.payment-option:hover {
+    border-color: #ff9fbd;
+    background: #fff8fb;
+}
+
+.payment-option input {
+    accent-color: #ff4f88;
+}
+
+.payment-content {
+    flex: 1;
+}
+
+.payment-content strong {
+    display: block;
+    font-size: 17px;
+    margin-bottom: 4px;
+}
+
+.payment-content span {
+    color: #777;
+    font-size: 13px;
+}
+
+
+/* =========================
+   EASYPaisa BOX
+========================= */
+
+.easypaisa-box {
+
+    display: none;
+
+    background: #fff7fa;
+
+    border: 1px solid #ffd0df;
+
+    border-radius: 14px;
+
+    padding: 18px;
+
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.easypaisa-box p {
+    margin-top: 0;
+    color: #555;
+    font-size: 14px;
+}
+
+.easypaisa-box strong {
+    color: #ff4f88;
+}
+
+
+/* =========================
+   BANK BOX
+========================= */
+
+.bank-box {
+
+    display: none;
+
+    background: #fff7fa;
+
+    border: 1px solid #ffd0df;
+
+    border-radius: 14px;
+
+    padding: 18px;
+
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.bank-box p {
+    margin: 7px 0;
+    color: #444;
+}
+
+
+/* =========================
+   ORDER SUMMARY
+========================= */
+
+.order-card {
+    position: sticky;
+    top: 30px;
+}
+
+.order-card h2 {
+    color: #ff4f88;
+    margin-bottom: 25px;
+}
+
+
+/* Product */
+
+.order-product {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding-bottom: 18px;
+
+    margin-bottom: 18px;
+
+    border-bottom: 1px solid #eee;
+}
+
+.order-product img {
+
+    width: 75px;
+    height: 75px;
+
+    object-fit: cover;
+
+    border-radius: 12px;
+}
+
+.order-product-info {
+    flex: 1;
+}
+
+.order-product-info h4 {
+    margin: 0 0 6px;
+    font-size: 16px;
+}
+
+.order-product-info p {
+    margin: 0;
+    color: #777;
+    font-size: 14px;
+}
+
+.order-price {
+    font-weight: 600;
+}
+
+
+/* Summary rows */
+
+.summary-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 15px;
+
+    font-size: 16px;
+}
+
+.summary-total {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 20px;
+    padding-top: 20px;
+
+    border-top: 1px solid #ddd;
+
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.summary-total span:last-child {
+    color: #ff4f88;
+}
+
+
+/* =========================
+   COMPLETE ORDER
+========================= */
+
+.complete-order {
+
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 15px;
+
+    border: none;
+
+    background: #ff4f88;
+
+    color: white;
+
+    border-radius: 13px;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.complete-order:hover {
+
+    background: #ff2f72;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 18px rgba(255,79,136,0.25);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 850px) {
+
+    .billing-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .order-card {
+        position: static;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full {
+        grid-column: auto;
+    }
+
+    .billing-page {
+        width: 94%;
+    }
+
+}
+
+</style>
+
+
+<div class="billing-page">
+
+    <h1 class="billing-title">
+        🌸 Billing & Payment
+    </h1>
+
+
+    <div class="billing-layout">
+
+
+        <!-- =========================
+             LEFT SIDE
+        ========================== -->
+
+        <div class="billing-card">
+
+            <h2 class="card-title">
+                Delivery Information
+            </h2>
+
+
+            <form method="POST" id="billing-form">
+
+                {% csrf_token %}
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>
+                            First Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="first_name"
+                            placeholder="Enter first name"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Last Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="last_name"
+                            placeholder="Enter last name"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Enter email"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            name="phone"
+                            placeholder="03XXXXXXXXX"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label>
+                            Address
+                        </label>
+
+                        <textarea
+                            name="address"
+                            placeholder="House number, street, area..."
+                            required></textarea>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            City
+                        </label>
+
+                        <input
+                            type="text"
+                            name="city"
+                            placeholder="Enter city"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Postal Code
+                        </label>
+
+                        <input
+                            type="text"
+                            name="postal_code"
+                            placeholder="Postal code">
+
+                    </div>
+
+                </div>
+
+
+                <!-- PAYMENT -->
+
+                <h3 class="payment-title">
+                    Payment Method
+                </h3>
+
+
+                <!-- Easypaisa -->
+
+                <label class="payment-option">
+
+                    <input
+                        type="radio"
+                        name="payment_method"
+                        value="easypaisa"
+                        id="easypaisa"
+                        required>
+
+                    <div class="payment-content">
+
+                        <strong>
+                            📱 Easypaisa
+                        </strong>
+
+                        <span>
+                            Pay using Easypaisa
+                        </span>
+
+                    </div>
+
+                </label>
+
+
+                <div class="easypaisa-box" id="easypaisa-box">
+
+                    <p>
+                        You can pay through Easypaisa.
+                    </p>
+
+                    <p>
+                        Easypaisa Number:
+                        <strong>
+                            03XX-XXXXXXX
+                        </strong>
+                    </p>
+
+                    <p>
+                        After payment, keep your transaction ID
+                        for confirmation.
+                    </p>
+
+                </div>
+
+
+                <!-- Cash on Delivery -->
+
+                <label class="payment-option">
+
+                    <input
+                        type="radio"
+                        name="payment_method"
+                        value="cod"
+                        id="cod">
+
+                    <div class="payment-content">
+
+                        <strong>
+                            💵 Cash on Delivery
+                        </strong>
+
+                        <span>
+                            Pay when your order is delivered
+                        </span>
+
+                    </div>
+
+                </label>
+
+
+                <!-- Bank -->
+
+                <label class="payment-option">
+
+                    <input
+                        type="radio"
+                        name="payment_method"
+                        value="bank"
+                        id="bank">
+
+                    <div class="payment-content">
+
+                        <strong>
+                            🏦 Bank Deposit
+                        </strong>
+
+                        <span>
+                            Pay directly into our bank account
+                        </span>
+
+                    </div>
+
+                </label>
+
+
+                <div class="bank-box" id="bank-box">
+
+                    <p>
+                        <strong>Bank:</strong>
+                        Your Bank Name
+                    </p>
+
+                    <p>
+                        <strong>Account Title:</strong>
+                        Crochet Store
+                    </p>
+
+                    <p>
+                        <strong>Account Number:</strong>
+                        XXXXXXXX
+                    </p>
+
+                    <p>
+                        <strong>IBAN:</strong>
+                        PKXXXXXXXXXXXXXXXX
+                    </p>
+
+                    <p>
+                        Please keep your deposit receipt.
+                    </p>
+
+                </div>
+
+
+                <!-- COMPLETE ORDER -->
+
+                <button
+                    type="submit"
+                    class="complete-order">
+
+                    Complete Order 🌸
+
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- =========================
+             RIGHT SIDE
+        ========================== -->
+
+        <div class="order-card">
+
+            <h2>
+                Your Order
+            </h2>
+
+
+            {% for item in basket %}
+
+            <div class="order-product">
+
+                {% with item.product.images.first as img %}
+
+                    {% if img %}
+
+                        <img
+                            src="{{ img.image.url }}"
+                            alt="{{ item.product.title }}">
+
+                    {% else %}
+
+                        <img
+                            src="{% static 'images/no-image.png' %}"
+                            alt="No image">
+
+                    {% endif %}
+
+                {% endwith %}
+
+
+                <div class="order-product-info">
+
+                    <h4>
+                        {{ item.product.title }}
+                    </h4>
+
+                    <p>
+                        Quantity: {{ item.qty }}
+                    </p>
+
+                </div>
+
+
+                <div class="order-price">
+
+                    Rs {{ item.total_price }}
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+
+            <div class="summary-row">
+
+                <span>
+                    Subtotal
+                </span>
+
+                <span>
+                    Rs {{ basket.get_subtotal }}
+                </span>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Shipping
+                </span>
+
+                <span>
+                    Rs 200
+                </span>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Tax
+                </span>
+
+                <span>
+                    Rs 100
+                </span>
+
+            </div>
+
+
+            <div class="summary-total">
+
+                <span>
+                    Total
+                </span>
+
+                <span>
+                    Rs {{ basket.get_subtotal|add:300 }}
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   PAYMENT METHOD
+========================= */
+
+const easypaisa = document.getElementById("easypaisa");
+const cod = document.getElementById("cod");
+const bank = document.getElementById("bank");
+
+const easypaisaBox = document.getElementById("easypaisa-box");
+const bankBox = document.getElementById("bank-box");
+
+
+easypaisa.addEventListener("change", function () {
+
+    if (this.checked) {
+
+        easypaisaBox.style.display = "block";
+        bankBox.style.display = "none";
+
+    }
+
+});
+
+
+cod.addEventListener("change", function () {
+
+    if (this.checked) {
+
+        easypaisaBox.style.display = "none";
+        bankBox.style.display = "none";
+
+    }
+
+});
+
+
+bank.addEventListener("change", function () {
+
+    if (this.checked) {
+
+        easypaisaBox.style.display = "none";
+        bankBox.style.display = "block";
+
+    }
+
+});
+
+</script>
+
+{% endblock %}

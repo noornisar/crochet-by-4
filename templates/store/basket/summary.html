@@ -1,0 +1,455 @@
+{% extends "../base.html" %}
+{% load static %}
+
+{% block title %}
+Shopping Basket
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+body{
+    background:#fff7fa;
+}
+
+.basket-container{
+    width:90%;
+    margin:40px auto;
+}
+
+.page-title{
+    text-align:center;
+    font-size:38px;
+    font-weight:700;
+    color:#ff4f88;
+    margin-bottom:40px;
+}
+
+.basket-layout{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:30px;
+}
+
+.basket-card{
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:20px;
+
+    display:flex;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.basket-image{
+
+    width:150px;
+
+    height:150px;
+
+    object-fit:cover;
+
+    border-radius:15px;
+
+}
+
+.basket-details{
+
+    flex:1;
+
+    margin-left:25px;
+
+}
+
+.basket-details h3{
+
+    font-size:28px;
+
+    margin-bottom:10px;
+
+}
+
+.price{
+
+    color:#ff4f88;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    margin-bottom:15px;
+
+}
+
+.qty-box{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:20px;
+
+}
+
+.qty-box button{
+
+    width:35px;
+
+    height:35px;
+
+    border:none;
+
+    background:#ffd6e7;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+}
+
+.qty-box input{
+
+    width:60px;
+
+    text-align:center;
+
+    height:35px;
+
+    border:1px solid #ddd;
+
+    border-radius:8px;
+
+}
+
+.action-buttons{
+
+    display:flex;
+
+    gap:15px;
+
+}
+
+.update-btn{
+
+    background:#ff4f88;
+
+    color:white;
+
+    border:none;
+
+    padding:10px 22px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+}
+
+.delete-btn{
+
+    background:#333;
+
+    color:white;
+
+    border:none;
+
+    padding:10px 22px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+}
+
+.summary{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    height:fit-content;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.summary h2{
+
+    margin-bottom:25px;
+
+    color:#ff4f88;
+
+}
+
+.summary-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:15px;
+
+    font-size:18px;
+
+}
+
+.total{
+
+    font-size:24px;
+
+    font-weight:bold;
+
+}
+
+.checkout{
+
+    width:100%;
+
+    display:block;
+
+    text-align:center;
+
+    margin-top:25px;
+
+    padding:15px;
+
+    background:#ff4f88;
+
+    color:white;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+.checkout:hover{
+
+    background:#e83f76;
+
+}
+
+</style>
+
+<div class="basket-container">
+
+    <h1 class="page-title">
+        🛒 Shopping Basket
+    </h1>
+
+    <div class="basket-layout">
+
+        <div>
+
+            {% for item in basket %}
+
+            <div class="basket-card">
+
+               {% with item.product.images.first as img %}
+    {% if img %}
+        <img src="{{ img.image.url }}" class="basket-image" alt="{{ item.product.title }}">
+    {% else %}
+        <img src="{% static 'images/no-image.png' %}" class="basket-image">
+    {% endif %}
+{% endwith %}
+
+                <div class="basket-details">
+
+                    <h3>{{ item.product.title }}</h3>
+
+                    <p class="price">
+                        Rs {{ item.product.price }}
+                    </p>
+
+                    <div class="qty-box">
+
+                        <button class="minus-btn"
+        data-id="{{ item.product.id }}">
+-
+</button>
+
+<input
+class="qty-input"
+data-id="{{ item.product.id }}"
+type="number"
+value="{{ item.qty }}"
+min="1">
+
+<button class="plus-btn"
+        data-id="{{ item.product.id }}">
++
+</button>
+
+                    </div>
+
+                    <div class="action-buttons">
+
+                        
+
+                        
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <h2 style="text-align:center;color:gray">
+                Your basket is empty 🛒
+            </h2>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="summary">
+
+            <h2>Order Summary</h2>
+
+            <div class="summary-row">
+
+                <span>Subtotal</span>
+
+                <span>Rs {{ basket.get_subtotal }}</span>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>Shipping</span>
+
+                <span>Rs 200</span>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>Tax</span>
+
+                <span>Rs 100</span>
+
+            </div>
+
+            <hr>
+
+            <div class="summary-row total">
+
+                <span>Total</span>
+
+                <span>Rs {{ basket.get_subtotal }}</span>
+
+            </div>
+<a href="{% url 'basket:checkout' %}" class="checkout">
+    Proceed to Checkout
+</a>
+
+        </div>
+
+    </div>
+
+</div>
+<script>
+
+
+    $(".plus-btn").click(function(){
+
+    let id = $(this).data("id");
+
+    let input = $(".qty-input[data-id='"+id+"']");
+
+    let qty = parseInt(input.val());
+
+    qty++;
+
+    input.val(qty);
+
+    updateBasket(id, qty);
+
+});
+
+
+$(".minus-btn").click(function(){
+
+    let id = $(this).data("id");
+
+    let input = $(".qty-input[data-id='"+id+"']");
+
+    let qty = parseInt(input.val());
+
+    if(qty > 1){
+
+        qty--;
+
+        input.val(qty);
+
+        updateBasket(id, qty);
+
+    }
+
+});
+
+
+function updateBasket(id, qty){
+
+    $.ajax({
+
+        type:"POST",
+
+        url:"{% url 'basket:basket_update' %}",
+
+        data:{
+
+            productid:id,
+
+            productqty:qty,
+
+            action:"post",
+
+            csrfmiddlewaretoken:"{{ csrf_token }}"
+
+        },
+
+        success:function(json){
+
+            $("#basket-qty").text(json.qty);
+
+            location.reload();
+
+        }
+
+    });
+
+}
+
+$("#checkout-btn").click(function(){
+
+    window.location.href = "{% url 'basket:checkout' %}";
+
+});
+</script>
+
+
+{% endblock %}

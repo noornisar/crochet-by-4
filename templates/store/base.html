@@ -1,0 +1,729 @@
+{% load static %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crochet Store</title>
+   
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            background:#f8f8f8;
+        }
+
+       header{
+     background:#FFD6E7;
+     padding:15px 5%;
+     display:flex;
+     justify-content:space-between;
+      align-items:center;
+     gap:30px;
+     box-shadow:0 3px 8px rgba(0,0,0,.08);
+     }
+
+    .logo{
+        font-size:22px;
+     font-weight:700;
+     color:#222;
+     white-space:nowrap;
+     }
+
+        nav ul{
+            display:flex;
+            list-style:none;
+            gap:35px;
+        }
+
+        nav ul li a{
+            text-decoration:none;
+            color:#000;
+            font-size:17px;
+            font-weight:500;
+            transition:.3s;
+        }
+
+        nav ul li a:hover{
+            color:#ff4f88;
+        }
+        nav{
+    flex:1;
+}
+
+nav ul{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    list-style:none;
+    gap:28px;
+}
+
+nav ul li a{
+    font-size:17px;
+    font-weight:500;
+}
+
+        .buttons{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+        .btn{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    background:white;
+    color:#222;
+    text-decoration:none;
+
+    padding:10px 16px;
+
+    border-radius:12px;
+
+    font-size:15px;
+    font-weight:600;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+
+    transition:.3s;
+}
+
+       .btn:hover{
+    background:#ff4f88;
+    color:white;
+}
+        .btn i{
+    font-size:17px;
+}
+
+        .search-box{
+    display:flex;
+    align-items:center;
+    background:white;
+    border-radius:30px;
+    overflow:hidden;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+     width:260px;
+    height:44px;
+}
+
+.search-box input{
+    border:none;
+    outline:none;
+    padding:10px 18px;
+    width:220px;
+    font-size:15px;
+    background:transparent;
+    width:100%;
+    padding:0 18px;
+}
+
+.search-box button{
+    border:none;
+    background:#ff8fb1;
+    color:white;
+    width:48px;
+    height:42px;
+    cursor:pointer;
+    transition:.3s;
+    width:45px;
+    height:44px;
+}
+
+.search-box button:hover{
+    background:#ff5c93;
+}
+.dropdown{
+    position:relative;
+    display:flex;
+    align-items:center;
+}
+
+.dropdown-btn{
+    border:none;
+    background:none;
+    cursor:pointer;
+    font-size:15px;
+    margin-left:5px;
+}
+
+.dropdown-menu{
+
+    display:none;
+
+    position:absolute;
+
+    top:40px;
+
+    left:0;
+
+    background:white;
+
+    width:220px;
+
+    border-radius:8px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+
+    list-style:none;
+
+    padding:10px 0;
+
+    z-index:1000;
+}
+
+.dropdown-menu.show{
+    display:block;
+}
+#cart-sidebar{
+
+    position:fixed;
+
+    top:0;
+
+    right:-430px;
+
+    width:400px;
+
+    height:100vh;
+
+    background:#fff;
+
+    transition:.4s;
+
+    box-shadow:-8px 0 25px rgba(0,0,0,.15);
+
+    z-index:9999;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+#cart-sidebar.active{
+
+    right:0;
+
+}
+
+.cart-header{
+
+    background:#FFD6E7;
+
+    padding:20px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.cart-header h2{
+
+    font-size:28px;
+
+    color:#222;
+
+}
+
+#close-cart{
+
+    width:35px;
+
+    height:35px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:white;
+
+    cursor:pointer;
+
+    font-size:20px;
+
+}
+
+#cart-items{
+
+    flex:1;
+
+    overflow:auto;
+
+    padding:20px;
+
+}
+
+.cart-item{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-bottom:20px;
+
+    padding-bottom:15px;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.cart-item img{
+
+    width:80px;
+
+    height:80px;
+
+    border-radius:10px;
+
+    object-fit:cover;
+
+}
+
+.item-details{
+
+    flex:1;
+
+}
+
+.item-details h4{
+
+    margin-bottom:8px;
+
+    font-size:18px;
+
+}
+
+.item-details p{
+
+    color:#ff4f88;
+
+    font-weight:bold;
+
+}
+
+.cart-summary{
+
+    padding:20px;
+
+    border-top:1px solid #eee;
+
+}
+
+.summary-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:12px;
+
+}
+
+.total{
+
+    font-size:22px;
+
+    font-weight:bold;
+
+}
+
+.checkout{
+
+    width:100%;
+
+    display:block;
+
+    text-align:center;
+
+    margin-top:25px;
+
+    padding:15px;
+
+    background:#ff4f88;
+
+    color:white;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+.checkout:hover{
+
+    background:#e83f76;
+
+}
+
+.buttons{
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+}
+
+.welcome-user{
+
+    background:white;
+    padding:10px 18px;
+    border-radius:10px;
+    font-weight:600;
+    color:#ff4f88;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+}
+
+.basket-badge{
+
+    background:#ff4f88;
+    color:white;
+    min-width:22px;
+    height:22px;
+    border-radius:50%;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    font-size:13px;
+    margin-left:8px;
+    font-weight:bold;
+
+}
+
+.dropdown-menu li{
+
+    list-style:none;
+
+}
+
+.dropdown-menu li a{
+
+    display:block;
+    padding:12px 20px;
+    color:#444;
+    text-decoration:none;
+    transition:.3s;
+
+}
+
+.dropdown-menu li a:hover{
+
+    background:#ffd6e7;
+    color:#ff4f88;
+
+}
+.cart-btn{
+    position:relative;
+}
+
+#basket-qty{
+
+    position:absolute;
+
+    top:6px;
+
+    right:10px;
+
+    width:22px;
+
+    height:22px;
+
+    background:#ff4f88;
+
+    color:white;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:12px;
+
+    font-weight:bold;
+}
+
+
+
+.whatsapp-button {
+
+    position: fixed;
+
+    right: 25px;
+    bottom: 25px;
+
+    width: 60px;
+    height: 60px;
+
+    background: #25D366;
+
+    color: white;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+
+    font-size: 32px;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.20);
+
+    z-index: 9999;
+
+    transition: all 0.3s ease;
+}
+
+
+.whatsapp-button:hover {
+
+    transform: scale(1.1);
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+
+}
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+      🌸 Crochet 
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            
+            <li><a href="{% url 'store:shop' %}">Shop</a></li>
+             <li class="dropdown">
+
+    <a href="#">
+        Categories
+    </a>
+
+    <button class="dropdown-btn">
+        <i class="fa-solid fa-chevron-down"></i>
+    </button>
+
+    <ul class="dropdown-menu">
+
+        <li><a href="">All</a></li>
+
+        {% for category in categories %}
+        <option value="{{ category.id }}">
+            {{ category.name }}
+        </option>
+    {% endfor %}
+
+    </ul>
+
+</li>
+
+        <li><a href="#">Contact</a></li>
+
+    </ul>
+</nav>
+
+
+    
+   
+    <div class="buttons">
+
+       
+{% if user.is_authenticated %}
+
+        <span class="welcome-user">
+            👋 Hi, {{ user.username }}
+        </span>
+
+        <a href="{% url 'account:logout' %}" class="btn">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </a>
+
+    {% else %}
+
+        <a href="{% url 'account:login' %}" class="btn">
+            <i class="fa-solid fa-user"></i>
+            Login
+        </a>
+
+        <a href="{% url 'account:register' %}" class="btn">
+            <i class="fa-solid fa-user-plus"></i>
+            Register
+        </a>
+
+    {% endif %}
+
+   <a href="{% url 'basket:basket_summary' %}" class="btn cart-btn">
+
+        <i class="fa-solid fa-cart-shopping"></i>
+
+        Basket
+
+        <span id="basket-qty" class="basket-badge">
+            {% with total_qty=basket|length %}
+                {{ total_qty }}
+            {% endwith %}
+        </span>
+
+    </a>
+
+    <div class="search-box">
+
+        <input type="text" placeholder="Search handmade items">
+
+        <button type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+    </div>
+    </div>
+
+          
+
+        <div class="search-box">
+
+    <input type="text" placeholder="Search items">
+
+    <button type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+
+     </div>
+
+        
+
+    </div> 
+
+
+    
+  
+</header>
+<div id="cart-sidebar">
+
+    <div class="cart-header">
+
+        <h2>🛒 Your Cart</h2>
+
+        <button id="close-cart">&times;</button>
+
+    </div>
+
+    <div id="cart-items">
+
+        <!-- Products will come here -->
+
+    </div>
+
+    <div class="cart-summary">
+
+        <div class="summary-row">
+            <span>Subtotal</span>
+            <span>Rs <span id="subtotal">0</span></span>
+        </div>
+
+        <div class="summary-row">
+            <span>Shipping</span>
+            <span>Rs 200</span>
+        </div>
+
+        <div class="summary-row">
+            <span>Tax</span>
+            <span>Rs <span id="tax">0</span></span>
+        </div>
+
+        <hr>
+
+        <div class="summary-row total">
+
+            <span>Total</span>
+
+            <span>Rs <span id="total">0</span></span>
+
+        </div>
+
+     <a href="{% url 'basket:checkout' %}" class="checkout">
+    Proceed to Checkout
+</a>
+
+    </div>
+
+</div>
+
+<script>
+const btn = document.querySelector(".dropdown-btn");
+const menu = document.querySelector(".dropdown-menu");
+
+btn.addEventListener("click", function(e){
+    e.stopPropagation();
+    menu.classList.toggle("show");
+});
+
+document.addEventListener("click", function(){
+    menu.classList.remove("show");
+});
+$("#checkout-btn").click(function(){
+
+    window.location.href = "{% url 'basket:checkout' %}";
+
+});
+</script>
+
+<a
+    href="https://wa.me/923137975149"
+    class="whatsapp-button"
+    target="_blank"
+    rel="noopener"
+    aria-label="Chat with us on WhatsApp"
+>
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+ </body>
+   <div id="content"> {% block content %} {% endblock %}
+   </div>
+
+
+
+</html>

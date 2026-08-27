@@ -1,0 +1,647 @@
+ {% extends "./base.html" %}
+
+ {% load static %}
+
+ {% block title %} Home {% endblock%}
+
+ {% block content%}
+
+
+ <style>
+    .hero{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:70px 10%;
+
+background:#FFF4F8;
+
+}
+
+.hero-text{
+
+width:50%;
+
+}
+
+.hero-text h1{
+
+font-size:55px;
+
+color:#ff4f88;
+
+margin-bottom:20px;
+
+}
+
+.hero-text p{
+
+font-size:18px;
+
+line-height:1.8;
+
+margin-bottom:30px;
+
+color:#444;
+
+}
+.hero-image{
+    width: 55%;
+    display: flex;
+    justify-content: center;
+}
+
+.hero-image img{
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+.shop-btn{
+
+background:#ff8fb1;
+
+color:white;
+
+padding:15px 35px;
+
+border-radius:30px;
+
+text-decoration:none;
+
+font-weight:bold;
+
+}
+
+.hero-image img{
+
+width:500px;
+
+}
+
+.featured{
+
+padding:80px 10%;
+
+background:white;
+
+}
+
+.featured h2{
+
+text-align:center;
+
+font-size:40px;
+
+margin-bottom:50px;
+
+color:#ff4f88;
+
+}
+
+.products{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:30px;
+
+}
+
+.card{
+
+background:#fff8fb;
+
+padding:20px;
+
+border-radius:20px;
+
+box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+text-align:center;
+
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-10px);
+
+}
+
+.card img{
+
+width:100%;
+
+height:260px;
+
+object-fit:cover;
+
+border-radius:15px;
+
+}
+
+.card h3{
+
+margin-top:15px;
+
+}
+
+.price{
+
+font-size:22px;
+
+color:#ff4f88;
+
+font-weight:bold;
+
+margin:15px 0;
+
+}
+
+.buy-btn{
+
+background:#ff8fb1;
+
+padding:10px 25px;
+
+color:white;
+
+text-decoration:none;
+
+border-radius:30px;
+
+display:inline-block;
+
+}
+
+.why{
+
+background:#FFEAF2;
+
+padding:80px 10%;
+
+}
+
+.why h2{
+
+text-align:center;
+
+margin-bottom:50px;
+
+font-size:40px;
+
+}
+
+.why-box{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:25px;
+
+}
+
+.why-box div{
+
+background:white;
+
+padding:30px;
+
+border-radius:20px;
+
+text-align:center;
+
+}
+.product-slider{
+
+    position:relative;
+    width:100%;
+    height:280px;
+    overflow:hidden;
+    border-radius:20px;
+    background:#f5f5f5;
+
+}
+
+.product-slider img{
+
+    position:absolute;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    opacity:0;
+
+    transition:opacity .7s ease;
+
+}
+
+.product-slider img.active{
+
+    opacity:1;
+
+}
+
+
+.prev,
+.next{
+
+    position:absolute;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.85);
+
+    cursor:pointer;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    z-index:100;
+
+}
+
+.prev{
+
+    left:10px;
+
+}
+
+.next{
+
+    right:10px;
+
+}
+
+.prev:hover,
+.next:hover{
+
+    background:#ff4f88;
+
+    color:white;
+
+}
+ </style>
+ <!-- Hero Section -->
+
+<section class="hero">
+
+    <div class="hero-text">
+
+        <h1>
+            Handmade Crochet Creations
+        </h1>
+
+        <p>
+
+            Welcome to Crochet Store!
+
+            We create beautiful handmade crochet items crafted with love and care.
+
+            We also accept customized orders including bouquets, bags, keychains,
+            teddy bears, flowers, baby gifts, home décor and much more.
+
+        </p>
+
+        <a href="#" class="shop-btn">
+            Shop Now
+        </a>
+
+    </div>
+    
+</section>
+
+
+<!-- Featured Products -->
+
+<section class="featured">
+
+    <h2>Products</h2>
+
+    <div class="products">
+
+        {% for product in products %}
+
+        <div class="card">
+            
+       <div class="product-slider">
+
+    <a href="{% url 'store:product_detail' product.slug %}">
+
+        {% for image in product.images.all %}
+
+        <img src="{{ image.image.url }}"
+             class="{% if forloop.first %}active{% endif %}">
+
+        {% endfor %}
+
+    </a>
+
+    <button class="prev">&#10094;</button>
+
+    <button class="next">&#10095;</button>
+
+</div>
+
+    
+
+
+
+    </a>
+
+    <h3>
+
+        <a href="{% url 'store:product_detail' product.slug %}">
+            {{ product.title }}
+        </a>
+
+    </h3>
+
+    <p class="price">
+        Rs {{ product.price }}
+    </p>
+
+    <a href="{% url 'store:product_detail' product.slug %}" class="buy-btn">
+
+        View Details
+
+    </a>
+
+</div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<!-- Why Choose Us -->
+
+<section class="why">
+
+<h2>Why Choose Us?</h2>
+
+<div class="why-box">
+
+<div>
+
+<h3>🧶 Handmade</h3>
+
+<p>Every item is crafted carefully with love.</p>
+
+</div>
+
+<div>
+
+<h3>🎁 Customized Orders</h3>
+
+<p>Bouquets, bags, teddy bears, flowers and gifts made specially for you.</p>
+
+</div>
+
+<div>
+
+<h3>🌸 Premium Quality</h3>
+
+<p>Soft yarn and beautiful finishing.</p>
+
+</div>
+
+<div>
+
+<h3>🚚 Fast Delivery</h3>
+
+<p>Quick delivery across Pakistan.</p>
+
+</div>
+
+</div>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    const sliders = document.querySelectorAll(".product-slider");
+
+    sliders.forEach(function(slider){
+
+        const slides = slider.querySelectorAll("img");
+
+        let current = 0;
+
+        if(slides.length > 1){
+
+            setInterval(function(){
+
+                slides[current].classList.remove("active");
+
+                current++;
+
+                if(current >= slides.length){
+
+                    current = 0;
+
+                }
+
+                slides[current].classList.add("active");
+
+            }, 2000);
+
+        }
+
+    });
+
+});
+
+
+
+document.querySelectorAll(".product-slider").forEach(function(slider){
+
+    let slides = slider.querySelectorAll(".slide");
+
+    if(slides.length <= 1){
+        return;
+    }
+
+    let current = 0;
+
+    function showSlide(index){
+
+        slides.forEach(function(img){
+
+            img.classList.remove("active");
+
+        });
+
+        slides[index].classList.add("active");
+
+    }
+
+    function nextSlide(){
+
+        current++;
+
+        if(current >= slides.length){
+
+            current = 0;
+
+        }
+
+        showSlide(current);
+
+    }
+
+    function prevSlide(){
+
+        current--;
+
+        if(current < 0){
+
+            current = slides.length-1;
+
+        }
+
+        showSlide(current);
+
+    }
+
+    slider.querySelector(".next").addEventListener("click",function(e){
+
+        e.preventDefault();
+
+        nextSlide();
+
+    });
+
+    slider.querySelector(".prev").addEventListener("click",function(e){
+
+        e.preventDefault();
+
+        prevSlide();
+
+    });
+
+    setInterval(nextSlide,3000);
+
+});document.addEventListener("DOMContentLoaded", function () {
+
+    document.querySelectorAll(".product-slider").forEach(function(slider){
+
+        const slides = slider.querySelectorAll("img");
+
+        const prev = slider.querySelector(".prev");
+
+        const next = slider.querySelector(".next");
+
+        let current = 0;
+
+        function showSlide(index){
+
+            slides.forEach(function(img){
+
+                img.classList.remove("active");
+
+            });
+
+            slides[index].classList.add("active");
+
+        }
+
+        function nextSlide(){
+
+            current++;
+
+            if(current >= slides.length){
+
+                current = 0;
+
+            }
+
+            showSlide(current);
+
+        }
+
+        function prevSlide(){
+
+            current--;
+
+            if(current < 0){
+
+                current = slides.length - 1;
+
+            }
+
+            showSlide(current);
+
+        }
+
+        if(slides.length > 1){
+
+            let interval = setInterval(nextSlide,3000);
+
+            next.addEventListener("click",function(e){
+
+                e.preventDefault();
+
+                e.stopPropagation();
+
+                nextSlide();
+
+            });
+
+            prev.addEventListener("click",function(e){
+
+                e.preventDefault();
+
+                e.stopPropagation();
+
+                prevSlide();
+
+            });
+
+            slider.addEventListener("mouseenter",function(){
+
+                clearInterval(interval);
+
+            });
+
+            slider.addEventListener("mouseleave",function(){
+
+                interval = setInterval(nextSlide,3000);
+
+            });
+
+        }
+
+    });
+
+});
+
+
+</script>
+
+ {% endblock%}
