@@ -557,7 +557,7 @@
                 <ul class="dropdown-menu">
                     <li><a href="{% url 'store:shop' %}">All Categories</a></li>
                     {% for category in categories %}
-                    <li><a href="{% url 'store:category_list' category.slug %}">{{ category.name }}</a></li>
+                    <li><a href="{% url 'store:shop' %}">{{ category.name }}</a></li>
                     {% endfor %}
                 </ul>
             </li>
