@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 import os
+import shutil
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -90,10 +91,17 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+db_path = BASE_DIR / 'db.sqlite3'
+if 'VERCEL' in os.environ:
+    tmp_db = Path('/tmp/db.sqlite3')
+    if db_path.exists() and not tmp_db.exists():
+        shutil.copy2(db_path, tmp_db)
+    db_path = tmp_db
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': db_path,
     }
 }
 
