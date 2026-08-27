@@ -29,11 +29,23 @@ def product_detail(request, slug):
 from .models import Category
 
 def shop(request):
-
     categories = Category.objects.prefetch_related(
         "products__images"
     ).all()
+    return render(
+        request,
+        "store/shop.html",
+        {
+            "categories": categories
+        }
+    )
 
+def category_list(request, category_slug=None):
+    if category_slug:
+        category = get_object_or_404(Category, slug=category_slug)
+        categories = Category.objects.filter(id=category.id).prefetch_related("products__images")
+    else:
+        categories = Category.objects.prefetch_related("products__images").all()
     return render(
         request,
         "store/shop.html",
