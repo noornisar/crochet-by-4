@@ -59,7 +59,7 @@
             justify-content:center;
         }
 
-        .desktop-nav ul{
+        .desktop-nav > ul{
             display:flex;
             justify-content:center;
             align-items:center;
@@ -67,7 +67,7 @@
             gap:28px;
         }
 
-        .desktop-nav ul li a{
+        .desktop-nav > ul > li > a{
             text-decoration:none;
             color:#000;
             font-size:16px;
@@ -75,55 +75,85 @@
             transition:.3s;
         }
 
-        .desktop-nav ul li a:hover{
+        .desktop-nav > ul > li > a:hover{
             color:#ff4f88;
         }
 
+        /* Dropdown Button & Container */
         .dropdown{
             position:relative;
-            display:flex;
-            align-items:center;
+            display:inline-block;
         }
 
-        .dropdown-btn{
-            border:none;
+        .dropdown-toggle-btn{
             background:none;
+            border:none;
+            color:#000;
+            font-size:16px;
+            font-weight:500;
             cursor:pointer;
-            font-size:14px;
-            margin-left:5px;
-            color:#333;
+            display:inline-flex;
+            align-items:center;
+            gap:6px;
+            padding:6px 0;
+            transition:.3s;
         }
 
+        .dropdown-toggle-btn:hover{
+            color:#ff4f88;
+        }
+
+        .dropdown-toggle-btn i{
+            font-size:12px;
+            transition:transform .3s ease;
+        }
+
+        .dropdown-toggle-btn.active i{
+            transform:rotate(180deg);
+        }
+
+        /* Hidden Dropdown Menu (Opens ON CLICK) */
         .dropdown-menu{
-            display:none;
+            display:none !important;
             position:absolute;
-            top:35px;
+            top:calc(100% + 8px);
             left:0;
             background:white;
-            width:200px;
-            border-radius:10px;
-            box-shadow:0 5px 15px rgba(0,0,0,.15);
+            min-width:210px;
+            border-radius:12px;
+            box-shadow:0 10px 25px rgba(0,0,0,.15);
             list-style:none;
             padding:8px 0;
-            z-index:1001;
+            z-index:99999;
+            flex-direction:column;
+            border:1px solid #f0f0f0;
         }
 
         .dropdown-menu.show{
+            display:flex !important;
+        }
+
+        .dropdown-menu li{
+            width:100%;
             display:block;
         }
 
         .dropdown-menu li a{
             display:block;
+            width:100%;
             padding:10px 18px;
-            color:#444;
-            text-decoration:none;
-            transition:.3s;
+            color:#333;
             font-size:14px;
+            text-decoration:none;
+            white-space:nowrap;
+            transition:.2s;
+            font-weight:500;
         }
 
         .dropdown-menu li a:hover{
-            background:#ffd6e7;
+            background:#fff0f5;
             color:#ff4f88;
+            padding-left:22px;
         }
 
         /* Header Actions (Right Side) */
@@ -229,7 +259,7 @@
 
         /* Mobile Drawer & Toggle (HIDDEN on Desktop by default) */
         .mobile-toggle{
-            display:none;
+            display:none !important;
             background:white;
             border:none;
             width:40px;
@@ -250,11 +280,11 @@
         }
 
         .mobile-drawer{
-            display:none;
+            display:none !important;
         }
 
         .nav-backdrop{
-            display:none;
+            display:none !important;
         }
 
         /* Cart Sidebar */
@@ -268,7 +298,7 @@
             background:#fff;
             transition:.4s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow:-8px 0 25px rgba(0,0,0,.15);
-            z-index:9999;
+            z-index:99999;
             display:flex;
             flex-direction:column;
         }
@@ -488,7 +518,7 @@
                 list-style: none;
                 display: flex;
                 flex-direction: column;
-                gap: 12px;
+                gap: 8px;
                 width: 100%;
                 margin-top: 18px;
             }
@@ -509,25 +539,37 @@
                 color: #ff4f88;
             }
 
-            .mobile-dropdown-header{
+            .mobile-dropdown{
+                width: 100%;
+            }
+
+            .mobile-dropdown-btn{
+                width: 100%;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                padding: 10px 12px;
+                border-radius: 8px;
+            }
+
+            .mobile-dropdown-btn:hover{
+                background: #fff0f5;
             }
 
             .mobile-dropdown-menu{
-                display: none;
-                position: static;
-                width: 100%;
-                box-shadow: none;
-                padding: 5px 0 5px 15px;
-                background: #fff8fb;
-                border-radius: 8px;
-                margin-top: 5px;
+                display: none !important;
+                position: static !important;
+                width: 100% !important;
+                box-shadow: none !important;
+                padding: 4px 0 4px 15px !important;
+                background: #fff8fb !important;
+                border-radius: 8px !important;
+                margin-top: 4px !important;
+                border: none !important;
             }
 
             .mobile-dropdown-menu.show{
-                display: block;
+                display: flex !important;
             }
 
             .mobile-auth-section{
@@ -547,6 +589,7 @@
 
             /* Backdrop */
             .nav-backdrop{
+                display: none !important;
                 position: fixed;
                 top: 0;
                 left: 0;
@@ -609,14 +652,13 @@
             <li><a href="/">Home</a></li>
             <li><a href="{% url 'store:shop' %}">Shop</a></li>
             <li class="dropdown">
-                <a href="{% url 'store:shop' %}">Categories</a>
-                <button class="dropdown-btn desktop-dropdown-btn" type="button" aria-label="Toggle categories">
-                    <i class="fa-solid fa-chevron-down"></i>
+                <button class="dropdown-toggle-btn" id="desktop-categories-btn" type="button" aria-label="Toggle categories">
+                    Categories <i class="fa-solid fa-chevron-down"></i>
                 </button>
-                <ul class="dropdown-menu desktop-dropdown-menu">
+                <ul class="dropdown-menu" id="desktop-categories-menu">
                     <li><a href="{% url 'store:shop' %}">All Categories</a></li>
                     {% for category in categories %}
-                    <li><a href="{% url 'store:shop' %}">{{ category.name }}</a></li>
+                    <li><a href="{% url 'store:category_list' category.slug %}">{{ category.name }}</a></li>
                     {% endfor %}
                 </ul>
             </li>
@@ -688,17 +730,14 @@
     <ul class="mobile-nav-links">
         <li><a href="/">Home</a></li>
         <li><a href="{% url 'store:shop' %}">Shop</a></li>
-        <li class="dropdown mobile-dropdown">
-            <div class="mobile-dropdown-header">
-                <a href="{% url 'store:shop' %}">Categories</a>
-                <button class="dropdown-btn mobile-cat-toggle" type="button" aria-label="Toggle categories">
-                    <i class="fa-solid fa-chevron-down"></i>
-                </button>
-            </div>
-            <ul class="dropdown-menu mobile-dropdown-menu">
+        <li class="mobile-dropdown">
+            <button class="dropdown-toggle-btn mobile-dropdown-btn" id="mobile-categories-btn" type="button">
+                Categories <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <ul class="dropdown-menu mobile-dropdown-menu" id="mobile-categories-menu">
                 <li><a href="{% url 'store:shop' %}">All Categories</a></li>
                 {% for category in categories %}
-                <li><a href="{% url 'store:shop' %}">{{ category.name }}</a></li>
+                <li><a href="{% url 'store:category_list' category.slug %}">{{ category.name }}</a></li>
                 {% endfor %}
             </ul>
         </li>
@@ -767,7 +806,8 @@ const closeNav = document.getElementById("close-nav");
 const navBackdrop = document.getElementById("nav-backdrop");
 
 if(mobileToggle && mobileDrawer){
-    mobileToggle.addEventListener("click", function(){
+    mobileToggle.addEventListener("click", function(e){
+        e.stopPropagation();
         mobileDrawer.classList.add("open");
         if(navBackdrop) navBackdrop.classList.add("show");
     });
@@ -781,30 +821,40 @@ function closeMobileDrawer(){
 if(closeNav) closeNav.addEventListener("click", closeMobileDrawer);
 if(navBackdrop) navBackdrop.addEventListener("click", closeMobileDrawer);
 
-// Desktop Dropdown
-const desktopDropBtn = document.querySelector(".desktop-dropdown-btn");
-const desktopDropMenu = document.querySelector(".desktop-dropdown-menu");
-if(desktopDropBtn && desktopDropMenu){
-    desktopDropBtn.addEventListener("click", function(e){
+// Desktop Categories Dropdown Click
+const desktopCatBtn = document.getElementById("desktop-categories-btn");
+const desktopCatMenu = document.getElementById("desktop-categories-menu");
+
+if(desktopCatBtn && desktopCatMenu){
+    desktopCatBtn.addEventListener("click", function(e){
         e.stopPropagation();
-        desktopDropMenu.classList.toggle("show");
+        desktopCatBtn.classList.toggle("active");
+        desktopCatMenu.classList.toggle("show");
     });
 }
 
-// Mobile Dropdown
-const mobileCatToggle = document.querySelector(".mobile-cat-toggle");
-const mobileDropMenu = document.querySelector(".mobile-dropdown-menu");
-if(mobileCatToggle && mobileDropMenu){
-    mobileCatToggle.addEventListener("click", function(e){
+// Mobile Categories Dropdown Click
+const mobileCatBtn = document.getElementById("mobile-categories-btn");
+const mobileCatMenu = document.getElementById("mobile-categories-menu");
+
+if(mobileCatBtn && mobileCatMenu){
+    mobileCatBtn.addEventListener("click", function(e){
         e.stopPropagation();
-        mobileDropMenu.classList.toggle("show");
+        mobileCatBtn.classList.toggle("active");
+        mobileCatMenu.classList.toggle("show");
     });
 }
 
 // Close dropdowns on outside click
-document.addEventListener("click", function(){
-    if(desktopDropMenu) desktopDropMenu.classList.remove("show");
-    if(mobileDropMenu) mobileDropMenu.classList.remove("show");
+document.addEventListener("click", function(e){
+    if(desktopCatMenu && !desktopCatMenu.contains(e.target) && e.target !== desktopCatBtn){
+        desktopCatMenu.classList.remove("show");
+        if(desktopCatBtn) desktopCatBtn.classList.remove("active");
+    }
+    if(mobileCatMenu && !mobileCatMenu.contains(e.target) && e.target !== mobileCatBtn){
+        mobileCatMenu.classList.remove("show");
+        if(mobileCatBtn) mobileCatBtn.classList.remove("active");
+    }
 });
 </script>
 
