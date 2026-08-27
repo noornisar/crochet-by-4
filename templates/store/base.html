@@ -1,24 +1,20 @@
 {% load static %}
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crochet Store</title>
-   
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
     <style>
         *{
             margin:0;
@@ -32,6 +28,9 @@
             overflow-x:hidden;
         }
 
+        /* =========================
+           HEADER & NAVIGATION BAR
+        ========================= */
         header{
             background:#FFD6E7;
             padding:12px 5%;
@@ -53,16 +52,14 @@
             text-decoration:none;
         }
 
-        .logo a{
-            color:#222;
-            text-decoration:none;
-        }
-
-        nav{
+        /* Desktop Nav Styles (Default) */
+        .desktop-nav{
             flex:1;
+            display:flex;
+            justify-content:center;
         }
 
-        nav ul{
+        .desktop-nav ul{
             display:flex;
             justify-content:center;
             align-items:center;
@@ -70,7 +67,7 @@
             gap:28px;
         }
 
-        nav ul li a{
+        .desktop-nav ul li a{
             text-decoration:none;
             color:#000;
             font-size:16px;
@@ -78,7 +75,7 @@
             transition:.3s;
         }
 
-        nav ul li a:hover{
+        .desktop-nav ul li a:hover{
             color:#ff4f88;
         }
 
@@ -129,10 +126,17 @@
             color:#ff4f88;
         }
 
+        /* Header Actions (Right Side) */
         .header-actions{
             display:flex;
             align-items:center;
             gap:12px;
+        }
+
+        .desktop-auth{
+            display:flex;
+            align-items:center;
+            gap:10px;
         }
 
         .btn{
@@ -193,7 +197,7 @@
             border-radius:30px;
             overflow:hidden;
             box-shadow:0 2px 8px rgba(0,0,0,.08);
-            width:230px;
+            width:220px;
             height:40px;
         }
 
@@ -223,20 +227,34 @@
             background:#ff5c93;
         }
 
-        /* Mobile Hamburger Toggle */
+        /* Mobile Drawer & Toggle (HIDDEN on Desktop by default) */
         .mobile-toggle{
             display:none;
             background:white;
             border:none;
-            width:42px;
-            height:42px;
+            width:40px;
+            height:40px;
             border-radius:10px;
             box-shadow:0 2px 8px rgba(0,0,0,.1);
-            font-size:20px;
+            font-size:19px;
             color:#333;
             cursor:pointer;
             align-items:center;
             justify-content:center;
+            transition:.3s;
+        }
+
+        .mobile-toggle:hover{
+            background:#ff4f88;
+            color:white;
+        }
+
+        .mobile-drawer{
+            display:none;
+        }
+
+        .nav-backdrop{
+            display:none;
         }
 
         /* Cart Sidebar */
@@ -384,140 +402,194 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.25);
         }
 
-        /* Mobile Backdrop */
-        .nav-backdrop{
-            display:none;
-            position:fixed;
-            top:0;
-            left:0;
-            width:100vw;
-            height:100vh;
-            background:rgba(0,0,0,.4);
-            z-index:998;
-        }
-
-        .nav-backdrop.show{
-            display:block;
-        }
-
-        /* =========================
-           RESPONSIVE BREAKPOINTS
-        ========================= */
+        /* ========================================================
+           RESPONSIVE: MOBILE & TABLET STYLES (Screen width <= 992px)
+        ======================================================== */
         @media (max-width: 992px){
-            header{
-                padding:12px 4%;
+            /* Hide desktop navigation and desktop elements */
+            .desktop-nav{
+                display: none !important;
             }
 
-            .mobile-toggle{
-                display:inline-flex;
-            }
-
-            nav{
-                position:fixed;
-                top:0;
-                left:-100%;
-                width:280px;
-                height:100vh;
-                background:white;
-                box-shadow:5px 0 25px rgba(0,0,0,.15);
-                z-index:999;
-                transition:.35s ease;
-                padding:25px 20px;
-                overflow-y:auto;
-            }
-
-            nav.open{
-                left:0;
-            }
-
-            nav ul{
-                flex-direction:column;
-                align-items:flex-start;
-                gap:18px;
-                width:100%;
-                margin-top:20px;
-            }
-
-            nav ul li{
-                width:100%;
-            }
-
-            nav ul li a{
-                display:block;
-                padding:8px 0;
-                font-size:17px;
-            }
-
-            .dropdown-menu{
-                position:static;
-                width:100%;
-                box-shadow:none;
-                padding-left:15px;
-                background:#fff8fb;
-                margin-top:8px;
+            .desktop-search{
+                display: none !important;
             }
 
             .desktop-auth{
-                display:none;
+                display: none !important;
+            }
+
+            /* Show mobile toggle */
+            .mobile-toggle{
+                display: inline-flex !important;
+            }
+
+            /* Enable Mobile Drawer */
+            .mobile-drawer{
+                display: flex !important;
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 290px;
+                max-width: 85vw;
+                height: 100vh;
+                background: white;
+                box-shadow: 5px 0 25px rgba(0,0,0,.15);
+                z-index: 99999;
+                transition: left 0.35s ease;
+                padding: 22px 20px;
+                overflow-y: auto;
+            }
+
+            .mobile-drawer.open{
+                left: 0 !important;
             }
 
             .mobile-nav-header{
-                display:flex;
-                justify-content:space-between;
-                align-items:center;
-                padding-bottom:15px;
-                border-bottom:1px solid #eee;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-bottom: 15px;
+                border-bottom: 1px solid #eee;
             }
 
-            .mobile-auth-section{
-                display:flex;
-                flex-direction:column;
-                gap:10px;
-                margin-top:25px;
-                padding-top:20px;
-                border-top:1px solid #eee;
-                width:100%;
+            .mobile-menu-title{
+                font-weight: 700;
+                color: #ff4f88;
+                font-size: 18px;
             }
 
-            .mobile-auth-section .btn{
-                justify-content:center;
-            }
-
-            .search-box{
-                display:none;
+            .close-nav-btn{
+                border: none;
+                background: #fff0f5;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                font-size: 20px;
+                cursor: pointer;
+                color: #444;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
             .mobile-search-container{
-                margin-top:15px;
-                width:100%;
+                margin-top: 15px;
+                width: 100%;
             }
 
             .mobile-search-container .search-box{
-                display:flex;
-                width:100%;
+                display: flex;
+                width: 100%;
+            }
+
+            .mobile-nav-links{
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                width: 100%;
+                margin-top: 18px;
+            }
+
+            .mobile-nav-links li a{
+                display: block;
+                padding: 10px 12px;
+                font-size: 16px;
+                color: #222;
+                text-decoration: none;
+                border-radius: 8px;
+                transition: .2s;
+                font-weight: 500;
+            }
+
+            .mobile-nav-links li a:hover{
+                background: #fff0f5;
+                color: #ff4f88;
+            }
+
+            .mobile-dropdown-header{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .mobile-dropdown-menu{
+                display: none;
+                position: static;
+                width: 100%;
+                box-shadow: none;
+                padding: 5px 0 5px 15px;
+                background: #fff8fb;
+                border-radius: 8px;
+                margin-top: 5px;
+            }
+
+            .mobile-dropdown-menu.show{
+                display: block;
+            }
+
+            .mobile-auth-section{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 25px;
+                padding-top: 20px;
+                border-top: 1px solid #eee;
+                width: 100%;
+            }
+
+            .mobile-auth-section .btn{
+                justify-content: center;
+                width: 100%;
+            }
+
+            /* Backdrop */
+            .nav-backdrop{
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0,0,0,.45);
+                z-index: 99998;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s ease;
+            }
+
+            .nav-backdrop.show{
+                display: block !important;
+                opacity: 1;
+                pointer-events: auto;
             }
         }
 
         @media (max-width: 576px){
             header{
-                padding:10px 4%;
+                padding: 10px 4%;
             }
 
             .logo{
-                font-size:19px;
+                font-size: 19px;
             }
 
             .btn{
-                padding:8px 12px;
-                font-size:13px;
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+
+            .basket-text{
+                display: none;
             }
 
             .whatsapp-button{
-                width:48px;
-                height:48px;
-                font-size:24px;
-                right:15px;
-                bottom:15px;
+                width: 48px;
+                height: 48px;
+                font-size: 24px;
+                right: 15px;
+                bottom: 15px;
             }
         }
     </style>
@@ -526,35 +598,22 @@
 <body>
 
 <header>
+    <!-- Logo -->
     <a href="/" class="logo">
       🌸 Crochet Store
     </a>
 
-    <!-- Navigation Menu (Desktop & Mobile Drawer) -->
-    <nav id="main-nav">
-        <div class="mobile-nav-header">
-            <span style="font-weight:700; color:#ff4f88; font-size:18px;">🌸 Menu</span>
-            <button id="close-nav" style="border:none; background:none; font-size:22px; cursor:pointer; color:#666;">&times;</button>
-        </div>
-
-        <div class="mobile-search-container">
-            <div class="search-box">
-                <input type="text" placeholder="Search handmade items">
-                <button type="submit">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </div>
-        </div>
-
+    <!-- Desktop Navigation Menu (Visible ONLY on Desktop) -->
+    <nav class="desktop-nav">
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="{% url 'store:shop' %}">Shop</a></li>
             <li class="dropdown">
-                <a href="#">Categories</a>
-                <button class="dropdown-btn" type="button" aria-label="Toggle categories">
+                <a href="{% url 'store:shop' %}">Categories</a>
+                <button class="dropdown-btn desktop-dropdown-btn" type="button" aria-label="Toggle categories">
                     <i class="fa-solid fa-chevron-down"></i>
                 </button>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu desktop-dropdown-menu">
                     <li><a href="{% url 'store:shop' %}">All Categories</a></li>
                     {% for category in categories %}
                     <li><a href="{% url 'store:shop' %}">{{ category.name }}</a></li>
@@ -563,36 +622,19 @@
             </li>
             <li><a href="#contact">Contact</a></li>
         </ul>
-
-        <!-- Mobile Drawer Auth Buttons -->
-        <div class="mobile-auth-section">
-            {% if user.is_authenticated %}
-                <span class="welcome-user">👋 Hi, {{ user.username }}</span>
-                <a href="{% url 'account:logout' %}" class="btn">
-                    <i class="fa-solid fa-right-from-bracket"></i> Logout
-                </a>
-            {% else %}
-                <a href="{% url 'account:login' %}" class="btn">
-                    <i class="fa-solid fa-user"></i> Login
-                </a>
-                <a href="{% url 'account:register' %}" class="btn">
-                    <i class="fa-solid fa-user-plus"></i> Register
-                </a>
-            {% endif %}
-        </div>
     </nav>
 
     <!-- Header Actions (Right Side) -->
     <div class="header-actions">
-        <!-- Desktop Search Box -->
-        <div class="search-box">
+        <!-- Desktop Search Box (Visible ONLY on Desktop) -->
+        <div class="search-box desktop-search">
             <input type="text" placeholder="Search items...">
             <button type="submit">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </div>
 
-        <!-- Desktop Auth Section -->
+        <!-- Desktop Auth Section (Visible ONLY on Desktop) -->
         <div class="desktop-auth">
             {% if user.is_authenticated %}
                 <span class="welcome-user">👋 {{ user.username }}</span>
@@ -603,10 +645,13 @@
                 <a href="{% url 'account:login' %}" class="btn">
                     <i class="fa-solid fa-user"></i> Login
                 </a>
+                <a href="{% url 'account:register' %}" class="btn">
+                    <i class="fa-solid fa-user-plus"></i> Register
+                </a>
             {% endif %}
         </div>
 
-        <!-- Basket Button (Both Desktop & Mobile) -->
+        <!-- Basket Button (Visible on Both Desktop & Mobile) -->
         <a href="{% url 'basket:basket_summary' %}" class="btn cart-btn">
             <i class="fa-solid fa-cart-shopping"></i>
             <span class="basket-text">Basket</span>
@@ -617,22 +662,78 @@
             </span>
         </a>
 
-        <!-- Mobile Hamburger Toggle Button -->
+        <!-- Mobile Hamburger Toggle Button (Visible ONLY on Mobile) -->
         <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu">
             <i class="fa-solid fa-bars"></i>
         </button>
     </div>
 </header>
 
+<!-- Mobile Navigation Drawer (Visible ONLY on Mobile when toggled) -->
+<nav class="mobile-drawer" id="mobile-drawer">
+    <div class="mobile-nav-header">
+        <span class="mobile-menu-title">🌸 Menu</span>
+        <button id="close-nav" class="close-nav-btn" aria-label="Close menu">&times;</button>
+    </div>
+
+    <div class="mobile-search-container">
+        <div class="search-box">
+            <input type="text" placeholder="Search handmade items">
+            <button type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </div>
+    </div>
+
+    <ul class="mobile-nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="{% url 'store:shop' %}">Shop</a></li>
+        <li class="dropdown mobile-dropdown">
+            <div class="mobile-dropdown-header">
+                <a href="{% url 'store:shop' %}">Categories</a>
+                <button class="dropdown-btn mobile-cat-toggle" type="button" aria-label="Toggle categories">
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+            </div>
+            <ul class="dropdown-menu mobile-dropdown-menu">
+                <li><a href="{% url 'store:shop' %}">All Categories</a></li>
+                {% for category in categories %}
+                <li><a href="{% url 'store:shop' %}">{{ category.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <!-- Mobile Drawer Auth Buttons -->
+    <div class="mobile-auth-section">
+        {% if user.is_authenticated %}
+            <span class="welcome-user" style="text-align:center;">👋 Hi, {{ user.username }}</span>
+            <a href="{% url 'account:logout' %}" class="btn">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+        {% else %}
+            <a href="{% url 'account:login' %}" class="btn">
+                <i class="fa-solid fa-user"></i> Login
+            </a>
+            <a href="{% url 'account:register' %}" class="btn">
+                <i class="fa-solid fa-user-plus"></i> Register
+            </a>
+        {% endif %}
+    </div>
+</nav>
+
+<!-- Backdrop overlay for mobile menu -->
 <div class="nav-backdrop" id="nav-backdrop"></div>
 
+<!-- Cart Slide-out Sidebar -->
 <div id="cart-sidebar">
     <div class="cart-header">
         <h2>🛒 Your Cart</h2>
         <button id="close-cart">&times;</button>
     </div>
     <div id="cart-items">
-        <!-- Products will come here -->
+        <!-- Products will load here -->
     </div>
     <div class="cart-summary">
         <div class="summary-row">
@@ -659,41 +760,51 @@
 </div>
 
 <script>
-// Mobile Navigation Drawer Toggle
+// Mobile Drawer Navigation Toggle
 const mobileToggle = document.getElementById("mobile-toggle");
-const mainNav = document.getElementById("main-nav");
+const mobileDrawer = document.getElementById("mobile-drawer");
 const closeNav = document.getElementById("close-nav");
 const navBackdrop = document.getElementById("nav-backdrop");
 
-if(mobileToggle && mainNav){
+if(mobileToggle && mobileDrawer){
     mobileToggle.addEventListener("click", function(){
-        mainNav.classList.add("open");
+        mobileDrawer.classList.add("open");
         if(navBackdrop) navBackdrop.classList.add("show");
     });
 }
 
-function closeMobileMenu(){
-    if(mainNav) mainNav.classList.remove("open");
+function closeMobileDrawer(){
+    if(mobileDrawer) mobileDrawer.classList.remove("open");
     if(navBackdrop) navBackdrop.classList.remove("show");
 }
 
-if(closeNav) closeNav.addEventListener("click", closeMobileMenu);
-if(navBackdrop) navBackdrop.addEventListener("click", closeMobileMenu);
+if(closeNav) closeNav.addEventListener("click", closeMobileDrawer);
+if(navBackdrop) navBackdrop.addEventListener("click", closeMobileDrawer);
 
-// Dropdown Categories
-const dropdownBtns = document.querySelectorAll(".dropdown-btn");
-dropdownBtns.forEach(function(btn){
-    btn.addEventListener("click", function(e){
+// Desktop Dropdown
+const desktopDropBtn = document.querySelector(".desktop-dropdown-btn");
+const desktopDropMenu = document.querySelector(".desktop-dropdown-menu");
+if(desktopDropBtn && desktopDropMenu){
+    desktopDropBtn.addEventListener("click", function(e){
         e.stopPropagation();
-        const menu = this.parentElement.querySelector(".dropdown-menu");
-        if(menu) menu.classList.toggle("show");
+        desktopDropMenu.classList.toggle("show");
     });
-});
+}
 
-document.addEventListener("click", function(){
-    document.querySelectorAll(".dropdown-menu").forEach(function(menu){
-        menu.classList.remove("show");
+// Mobile Dropdown
+const mobileCatToggle = document.querySelector(".mobile-cat-toggle");
+const mobileDropMenu = document.querySelector(".mobile-dropdown-menu");
+if(mobileCatToggle && mobileDropMenu){
+    mobileCatToggle.addEventListener("click", function(e){
+        e.stopPropagation();
+        mobileDropMenu.classList.toggle("show");
     });
+}
+
+// Close dropdowns on outside click
+document.addEventListener("click", function(){
+    if(desktopDropMenu) desktopDropMenu.classList.remove("show");
+    if(mobileDropMenu) mobileDropMenu.classList.remove("show");
 });
 </script>
 
@@ -712,6 +823,4 @@ document.addEventListener("click", function(){
 </div>
 
 </body>
-</html>
-
 </html>
