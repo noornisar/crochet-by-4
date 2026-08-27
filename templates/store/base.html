@@ -29,35 +29,51 @@
 
         body{
             background:#f8f8f8;
+            overflow-x:hidden;
         }
 
-       header{
-     background:#FFD6E7;
-     padding:15px 5%;
-     display:flex;
-     justify-content:space-between;
-      align-items:center;
-     gap:30px;
-     box-shadow:0 3px 8px rgba(0,0,0,.08);
-     }
+        header{
+            background:#FFD6E7;
+            padding:12px 5%;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:20px;
+            box-shadow:0 3px 8px rgba(0,0,0,.08);
+            position:sticky;
+            top:0;
+            z-index:1000;
+        }
 
-    .logo{
-        font-size:22px;
-     font-weight:700;
-     color:#222;
-     white-space:nowrap;
-     }
+        .logo{
+            font-size:22px;
+            font-weight:700;
+            color:#222;
+            white-space:nowrap;
+            text-decoration:none;
+        }
+
+        .logo a{
+            color:#222;
+            text-decoration:none;
+        }
+
+        nav{
+            flex:1;
+        }
 
         nav ul{
             display:flex;
+            justify-content:center;
+            align-items:center;
             list-style:none;
-            gap:35px;
+            gap:28px;
         }
 
         nav ul li a{
             text-decoration:none;
             color:#000;
-            font-size:17px;
+            font-size:16px;
             font-weight:500;
             transition:.3s;
         }
@@ -65,648 +81,619 @@
         nav ul li a:hover{
             color:#ff4f88;
         }
-        nav{
-    flex:1;
-}
 
-nav ul{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    list-style:none;
-    gap:28px;
-}
+        .dropdown{
+            position:relative;
+            display:flex;
+            align-items:center;
+        }
 
-nav ul li a{
-    font-size:17px;
-    font-weight:500;
-}
+        .dropdown-btn{
+            border:none;
+            background:none;
+            cursor:pointer;
+            font-size:14px;
+            margin-left:5px;
+            color:#333;
+        }
 
-        .buttons{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
+        .dropdown-menu{
+            display:none;
+            position:absolute;
+            top:35px;
+            left:0;
+            background:white;
+            width:200px;
+            border-radius:10px;
+            box-shadow:0 5px 15px rgba(0,0,0,.15);
+            list-style:none;
+            padding:8px 0;
+            z-index:1001;
+        }
+
+        .dropdown-menu.show{
+            display:block;
+        }
+
+        .dropdown-menu li a{
+            display:block;
+            padding:10px 18px;
+            color:#444;
+            text-decoration:none;
+            transition:.3s;
+            font-size:14px;
+        }
+
+        .dropdown-menu li a:hover{
+            background:#ffd6e7;
+            color:#ff4f88;
+        }
+
+        .header-actions{
+            display:flex;
+            align-items:center;
+            gap:12px;
+        }
 
         .btn{
-    display:flex;
-    align-items:center;
-    gap:8px;
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            background:white;
+            color:#222;
+            text-decoration:none;
+            padding:9px 15px;
+            border-radius:12px;
+            font-size:14px;
+            font-weight:600;
+            box-shadow:0 3px 8px rgba(0,0,0,.08);
+            transition:.3s;
+            white-space:nowrap;
+        }
 
-    background:white;
-    color:#222;
-    text-decoration:none;
+        .btn:hover{
+            background:#ff4f88;
+            color:white;
+        }
 
-    padding:10px 16px;
-
-    border-radius:12px;
-
-    font-size:15px;
-    font-weight:600;
-
-    box-shadow:0 3px 10px rgba(0,0,0,.08);
-
-    transition:.3s;
-}
-
-       .btn:hover{
-    background:#ff4f88;
-    color:white;
-}
         .btn i{
-    font-size:17px;
-}
+            font-size:15px;
+        }
+
+        .welcome-user{
+            background:white;
+            padding:8px 14px;
+            border-radius:10px;
+            font-weight:600;
+            color:#ff4f88;
+            font-size:14px;
+            box-shadow:0 2px 6px rgba(0,0,0,.08);
+            white-space:nowrap;
+        }
+
+        .basket-badge{
+            background:#ff4f88;
+            color:white;
+            min-width:20px;
+            height:20px;
+            border-radius:50%;
+            display:inline-flex;
+            justify-content:center;
+            align-items:center;
+            font-size:12px;
+            margin-left:6px;
+            font-weight:bold;
+            padding:0 5px;
+        }
 
         .search-box{
-    display:flex;
-    align-items:center;
-    background:white;
-    border-radius:30px;
-    overflow:hidden;
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
-     width:260px;
-    height:44px;
-}
-
-.search-box input{
-    border:none;
-    outline:none;
-    padding:10px 18px;
-    width:220px;
-    font-size:15px;
-    background:transparent;
-    width:100%;
-    padding:0 18px;
-}
-
-.search-box button{
-    border:none;
-    background:#ff8fb1;
-    color:white;
-    width:48px;
-    height:42px;
-    cursor:pointer;
-    transition:.3s;
-    width:45px;
-    height:44px;
-}
-
-.search-box button:hover{
-    background:#ff5c93;
-}
-.dropdown{
-    position:relative;
-    display:flex;
-    align-items:center;
-}
-
-.dropdown-btn{
-    border:none;
-    background:none;
-    cursor:pointer;
-    font-size:15px;
-    margin-left:5px;
-}
-
-.dropdown-menu{
-
-    display:none;
-
-    position:absolute;
-
-    top:40px;
-
-    left:0;
-
-    background:white;
-
-    width:220px;
-
-    border-radius:8px;
-
-    box-shadow:0 5px 15px rgba(0,0,0,.15);
-
-    list-style:none;
-
-    padding:10px 0;
-
-    z-index:1000;
-}
-
-.dropdown-menu.show{
-    display:block;
-}
-#cart-sidebar{
-
-    position:fixed;
-
-    top:0;
-
-    right:-430px;
-
-    width:400px;
-
-    height:100vh;
-
-    background:#fff;
-
-    transition:.4s;
-
-    box-shadow:-8px 0 25px rgba(0,0,0,.15);
-
-    z-index:9999;
-
-    display:flex;
-
-    flex-direction:column;
-
-}
-
-#cart-sidebar.active{
-
-    right:0;
-
-}
-
-.cart-header{
-
-    background:#FFD6E7;
-
-    padding:20px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    border-bottom:1px solid #eee;
-
-}
-
-.cart-header h2{
-
-    font-size:28px;
-
-    color:#222;
-
-}
-
-#close-cart{
-
-    width:35px;
-
-    height:35px;
-
-    border:none;
-
-    border-radius:50%;
-
-    background:white;
-
-    cursor:pointer;
-
-    font-size:20px;
-
-}
-
-#cart-items{
-
-    flex:1;
-
-    overflow:auto;
-
-    padding:20px;
-
-}
-
-.cart-item{
-
-    display:flex;
-
-    gap:15px;
-
-    margin-bottom:20px;
-
-    padding-bottom:15px;
-
-    border-bottom:1px solid #eee;
-
-}
-
-.cart-item img{
-
-    width:80px;
-
-    height:80px;
-
-    border-radius:10px;
-
-    object-fit:cover;
-
-}
-
-.item-details{
-
-    flex:1;
-
-}
-
-.item-details h4{
-
-    margin-bottom:8px;
-
-    font-size:18px;
-
-}
-
-.item-details p{
-
-    color:#ff4f88;
-
-    font-weight:bold;
-
-}
-
-.cart-summary{
-
-    padding:20px;
-
-    border-top:1px solid #eee;
-
-}
-
-.summary-row{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    margin-bottom:12px;
-
-}
-
-.total{
-
-    font-size:22px;
-
-    font-weight:bold;
-
-}
-
-.checkout{
-
-    width:100%;
-
-    display:block;
-
-    text-align:center;
-
-    margin-top:25px;
-
-    padding:15px;
-
-    background:#ff4f88;
-
-    color:white;
-
-    border-radius:12px;
-
-    text-decoration:none;
-
-    font-size:18px;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-}
-
-.checkout:hover{
-
-    background:#e83f76;
-
-}
-
-.buttons{
-
-    display:flex;
-    align-items:center;
-    gap:15px;
-
-}
-
-.welcome-user{
-
-    background:white;
-    padding:10px 18px;
-    border-radius:10px;
-    font-weight:600;
-    color:#ff4f88;
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
-
-}
-
-.basket-badge{
-
-    background:#ff4f88;
-    color:white;
-    min-width:22px;
-    height:22px;
-    border-radius:50%;
-    display:inline-flex;
-    justify-content:center;
-    align-items:center;
-    font-size:13px;
-    margin-left:8px;
-    font-weight:bold;
-
-}
-
-.dropdown-menu li{
-
-    list-style:none;
-
-}
-
-.dropdown-menu li a{
-
-    display:block;
-    padding:12px 20px;
-    color:#444;
-    text-decoration:none;
-    transition:.3s;
-
-}
-
-.dropdown-menu li a:hover{
-
-    background:#ffd6e7;
-    color:#ff4f88;
-
-}
-.cart-btn{
-    position:relative;
-}
-
-#basket-qty{
-
-    position:absolute;
-
-    top:6px;
-
-    right:10px;
-
-    width:22px;
-
-    height:22px;
-
-    background:#ff4f88;
-
-    color:white;
-
-    border-radius:50%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-size:12px;
-
-    font-weight:bold;
-}
-
-
-
-.whatsapp-button {
-
-    position: fixed;
-
-    right: 25px;
-    bottom: 25px;
-
-    width: 60px;
-    height: 60px;
-
-    background: #25D366;
-
-    color: white;
-
-    border-radius: 50%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    text-decoration: none;
-
-    font-size: 32px;
-
-    box-shadow: 0 5px 15px rgba(0,0,0,0.20);
-
-    z-index: 9999;
-
-    transition: all 0.3s ease;
-}
-
-
-.whatsapp-button:hover {
-
-    transform: scale(1.1);
-
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-
-}
+            display:flex;
+            align-items:center;
+            background:white;
+            border-radius:30px;
+            overflow:hidden;
+            box-shadow:0 2px 8px rgba(0,0,0,.08);
+            width:230px;
+            height:40px;
+        }
+
+        .search-box input{
+            border:none;
+            outline:none;
+            padding:0 15px;
+            width:100%;
+            font-size:14px;
+            background:transparent;
+        }
+
+        .search-box button{
+            border:none;
+            background:#ff8fb1;
+            color:white;
+            width:42px;
+            height:40px;
+            cursor:pointer;
+            transition:.3s;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+
+        .search-box button:hover{
+            background:#ff5c93;
+        }
+
+        /* Mobile Hamburger Toggle */
+        .mobile-toggle{
+            display:none;
+            background:white;
+            border:none;
+            width:42px;
+            height:42px;
+            border-radius:10px;
+            box-shadow:0 2px 8px rgba(0,0,0,.1);
+            font-size:20px;
+            color:#333;
+            cursor:pointer;
+            align-items:center;
+            justify-content:center;
+        }
+
+        /* Cart Sidebar */
+        #cart-sidebar{
+            position:fixed;
+            top:0;
+            right:-100%;
+            width:100%;
+            max-width:380px;
+            height:100vh;
+            background:#fff;
+            transition:.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow:-8px 0 25px rgba(0,0,0,.15);
+            z-index:9999;
+            display:flex;
+            flex-direction:column;
+        }
+
+        #cart-sidebar.active{
+            right:0;
+        }
+
+        .cart-header{
+            background:#FFD6E7;
+            padding:18px 20px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            border-bottom:1px solid #eee;
+        }
+
+        .cart-header h2{
+            font-size:22px;
+            color:#222;
+        }
+
+        #close-cart{
+            width:34px;
+            height:34px;
+            border:none;
+            border-radius:50%;
+            background:white;
+            cursor:pointer;
+            font-size:20px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+
+        #cart-items{
+            flex:1;
+            overflow-y:auto;
+            padding:20px;
+        }
+
+        .cart-item{
+            display:flex;
+            gap:15px;
+            margin-bottom:15px;
+            padding-bottom:15px;
+            border-bottom:1px solid #eee;
+        }
+
+        .cart-item img{
+            width:70px;
+            height:70px;
+            border-radius:10px;
+            object-fit:cover;
+        }
+
+        .item-details{
+            flex:1;
+        }
+
+        .item-details h4{
+            margin-bottom:6px;
+            font-size:16px;
+        }
+
+        .item-details p{
+            color:#ff4f88;
+            font-weight:bold;
+        }
+
+        .cart-summary{
+            padding:20px;
+            border-top:1px solid #eee;
+            background:#fafafa;
+        }
+
+        .summary-row{
+            display:flex;
+            justify-content:space-between;
+            margin-bottom:10px;
+            font-size:15px;
+        }
+
+        .total{
+            font-size:19px;
+            font-weight:bold;
+        }
+
+        .checkout{
+            width:100%;
+            display:block;
+            text-align:center;
+            margin-top:18px;
+            padding:14px;
+            background:#ff4f88;
+            color:white;
+            border-radius:12px;
+            text-decoration:none;
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+            transition:.3s;
+        }
+
+        .checkout:hover{
+            background:#e83f76;
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-button {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 55px;
+            height: 55px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 28px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.20);
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-button:hover {
+            transform: scale(1.08);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        }
+
+        /* Mobile Backdrop */
+        .nav-backdrop{
+            display:none;
+            position:fixed;
+            top:0;
+            left:0;
+            width:100vw;
+            height:100vh;
+            background:rgba(0,0,0,.4);
+            z-index:998;
+        }
+
+        .nav-backdrop.show{
+            display:block;
+        }
+
+        /* =========================
+           RESPONSIVE BREAKPOINTS
+        ========================= */
+        @media (max-width: 992px){
+            header{
+                padding:12px 4%;
+            }
+
+            .mobile-toggle{
+                display:inline-flex;
+            }
+
+            nav{
+                position:fixed;
+                top:0;
+                left:-100%;
+                width:280px;
+                height:100vh;
+                background:white;
+                box-shadow:5px 0 25px rgba(0,0,0,.15);
+                z-index:999;
+                transition:.35s ease;
+                padding:25px 20px;
+                overflow-y:auto;
+            }
+
+            nav.open{
+                left:0;
+            }
+
+            nav ul{
+                flex-direction:column;
+                align-items:flex-start;
+                gap:18px;
+                width:100%;
+                margin-top:20px;
+            }
+
+            nav ul li{
+                width:100%;
+            }
+
+            nav ul li a{
+                display:block;
+                padding:8px 0;
+                font-size:17px;
+            }
+
+            .dropdown-menu{
+                position:static;
+                width:100%;
+                box-shadow:none;
+                padding-left:15px;
+                background:#fff8fb;
+                margin-top:8px;
+            }
+
+            .desktop-auth{
+                display:none;
+            }
+
+            .mobile-nav-header{
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                padding-bottom:15px;
+                border-bottom:1px solid #eee;
+            }
+
+            .mobile-auth-section{
+                display:flex;
+                flex-direction:column;
+                gap:10px;
+                margin-top:25px;
+                padding-top:20px;
+                border-top:1px solid #eee;
+                width:100%;
+            }
+
+            .mobile-auth-section .btn{
+                justify-content:center;
+            }
+
+            .search-box{
+                display:none;
+            }
+
+            .mobile-search-container{
+                margin-top:15px;
+                width:100%;
+            }
+
+            .mobile-search-container .search-box{
+                display:flex;
+                width:100%;
+            }
+        }
+
+        @media (max-width: 576px){
+            header{
+                padding:10px 4%;
+            }
+
+            .logo{
+                font-size:19px;
+            }
+
+            .btn{
+                padding:8px 12px;
+                font-size:13px;
+            }
+
+            .whatsapp-button{
+                width:48px;
+                height:48px;
+                font-size:24px;
+                right:15px;
+                bottom:15px;
+            }
+        }
     </style>
 </head>
 
 <body>
 
 <header>
+    <a href="/" class="logo">
+      🌸 Crochet Store
+    </a>
 
-    <div class="logo">
-      🌸 Crochet 
-    </div>
+    <!-- Navigation Menu (Desktop & Mobile Drawer) -->
+    <nav id="main-nav">
+        <div class="mobile-nav-header">
+            <span style="font-weight:700; color:#ff4f88; font-size:18px;">🌸 Menu</span>
+            <button id="close-nav" style="border:none; background:none; font-size:22px; cursor:pointer; color:#666;">&times;</button>
+        </div>
 
-    <nav>
+        <div class="mobile-search-container">
+            <div class="search-box">
+                <input type="text" placeholder="Search handmade items">
+                <button type="submit">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+        </div>
+
         <ul>
             <li><a href="/">Home</a></li>
-            
             <li><a href="{% url 'store:shop' %}">Shop</a></li>
-             <li class="dropdown">
+            <li class="dropdown">
+                <a href="#">Categories</a>
+                <button class="dropdown-btn" type="button" aria-label="Toggle categories">
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'store:shop' %}">All Categories</a></li>
+                    {% for category in categories %}
+                    <li><a href="{% url 'store:category_list' category.slug %}">{{ category.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
 
-    <a href="#">
-        Categories
-    </a>
+        <!-- Mobile Drawer Auth Buttons -->
+        <div class="mobile-auth-section">
+            {% if user.is_authenticated %}
+                <span class="welcome-user">👋 Hi, {{ user.username }}</span>
+                <a href="{% url 'account:logout' %}" class="btn">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </a>
+            {% else %}
+                <a href="{% url 'account:login' %}" class="btn">
+                    <i class="fa-solid fa-user"></i> Login
+                </a>
+                <a href="{% url 'account:register' %}" class="btn">
+                    <i class="fa-solid fa-user-plus"></i> Register
+                </a>
+            {% endif %}
+        </div>
+    </nav>
 
-    <button class="dropdown-btn">
-        <i class="fa-solid fa-chevron-down"></i>
-    </button>
-
-    <ul class="dropdown-menu">
-
-        <li><a href="">All</a></li>
-
-        {% for category in categories %}
-        <option value="{{ category.id }}">
-            {{ category.name }}
-        </option>
-    {% endfor %}
-
-    </ul>
-
-</li>
-
-        <li><a href="#">Contact</a></li>
-
-    </ul>
-</nav>
-
-
-    
-   
-    <div class="buttons">
-
-       
-{% if user.is_authenticated %}
-
-        <span class="welcome-user">
-            👋 Hi, {{ user.username }}
-        </span>
-
-        <a href="{% url 'account:logout' %}" class="btn">
-            <i class="fa-solid fa-right-from-bracket"></i>
-            Logout
-        </a>
-
-    {% else %}
-
-        <a href="{% url 'account:login' %}" class="btn">
-            <i class="fa-solid fa-user"></i>
-            Login
-        </a>
-
-        <a href="{% url 'account:register' %}" class="btn">
-            <i class="fa-solid fa-user-plus"></i>
-            Register
-        </a>
-
-    {% endif %}
-
-   <a href="{% url 'basket:basket_summary' %}" class="btn cart-btn">
-
-        <i class="fa-solid fa-cart-shopping"></i>
-
-        Basket
-
-        <span id="basket-qty" class="basket-badge">
-            {% with total_qty=basket|length %}
-                {{ total_qty }}
-            {% endwith %}
-        </span>
-
-    </a>
-
-    <div class="search-box">
-
-        <input type="text" placeholder="Search handmade items">
-
-        <button type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-
-    </div>
-    </div>
-
-          
-
+    <!-- Header Actions (Right Side) -->
+    <div class="header-actions">
+        <!-- Desktop Search Box -->
         <div class="search-box">
+            <input type="text" placeholder="Search items...">
+            <button type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </div>
 
-    <input type="text" placeholder="Search items">
+        <!-- Desktop Auth Section -->
+        <div class="desktop-auth">
+            {% if user.is_authenticated %}
+                <span class="welcome-user">👋 {{ user.username }}</span>
+                <a href="{% url 'account:logout' %}" class="btn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </a>
+            {% else %}
+                <a href="{% url 'account:login' %}" class="btn">
+                    <i class="fa-solid fa-user"></i> Login
+                </a>
+            {% endif %}
+        </div>
 
-    <button type="submit">
-        <i class="fa-solid fa-magnifying-glass"></i>
-    </button>
+        <!-- Basket Button (Both Desktop & Mobile) -->
+        <a href="{% url 'basket:basket_summary' %}" class="btn cart-btn">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="basket-text">Basket</span>
+            <span id="basket-qty" class="basket-badge">
+                {% with total_qty=basket|length %}
+                    {{ total_qty }}
+                {% endwith %}
+            </span>
+        </a>
 
-     </div>
-
-        
-
-    </div> 
-
-
-    
-  
+        <!-- Mobile Hamburger Toggle Button -->
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </div>
 </header>
+
+<div class="nav-backdrop" id="nav-backdrop"></div>
+
 <div id="cart-sidebar">
-
     <div class="cart-header">
-
         <h2>🛒 Your Cart</h2>
-
         <button id="close-cart">&times;</button>
-
     </div>
-
     <div id="cart-items">
-
         <!-- Products will come here -->
-
     </div>
-
     <div class="cart-summary">
-
         <div class="summary-row">
             <span>Subtotal</span>
             <span>Rs <span id="subtotal">0</span></span>
         </div>
-
         <div class="summary-row">
             <span>Shipping</span>
             <span>Rs 200</span>
         </div>
-
         <div class="summary-row">
             <span>Tax</span>
             <span>Rs <span id="tax">0</span></span>
         </div>
-
-        <hr>
-
+        <hr style="margin:10px 0; border:0; border-top:1px solid #ddd;">
         <div class="summary-row total">
-
             <span>Total</span>
-
             <span>Rs <span id="total">0</span></span>
-
         </div>
-
-     <a href="{% url 'basket:checkout' %}" class="checkout">
-    Proceed to Checkout
-</a>
-
+        <a href="{% url 'basket:checkout' %}" class="checkout">
+            Proceed to Checkout
+        </a>
     </div>
-
 </div>
 
 <script>
-const btn = document.querySelector(".dropdown-btn");
-const menu = document.querySelector(".dropdown-menu");
+// Mobile Navigation Drawer Toggle
+const mobileToggle = document.getElementById("mobile-toggle");
+const mainNav = document.getElementById("main-nav");
+const closeNav = document.getElementById("close-nav");
+const navBackdrop = document.getElementById("nav-backdrop");
 
-btn.addEventListener("click", function(e){
-    e.stopPropagation();
-    menu.classList.toggle("show");
+if(mobileToggle && mainNav){
+    mobileToggle.addEventListener("click", function(){
+        mainNav.classList.add("open");
+        if(navBackdrop) navBackdrop.classList.add("show");
+    });
+}
+
+function closeMobileMenu(){
+    if(mainNav) mainNav.classList.remove("open");
+    if(navBackdrop) navBackdrop.classList.remove("show");
+}
+
+if(closeNav) closeNav.addEventListener("click", closeMobileMenu);
+if(navBackdrop) navBackdrop.addEventListener("click", closeMobileMenu);
+
+// Dropdown Categories
+const dropdownBtns = document.querySelectorAll(".dropdown-btn");
+dropdownBtns.forEach(function(btn){
+    btn.addEventListener("click", function(e){
+        e.stopPropagation();
+        const menu = this.parentElement.querySelector(".dropdown-menu");
+        if(menu) menu.classList.toggle("show");
+    });
 });
 
 document.addEventListener("click", function(){
-    menu.classList.remove("show");
-});
-$("#checkout-btn").click(function(){
-
-    window.location.href = "{% url 'basket:checkout' %}";
-
+    document.querySelectorAll(".dropdown-menu").forEach(function(menu){
+        menu.classList.remove("show");
+    });
 });
 </script>
 
@@ -720,10 +707,11 @@ $("#checkout-btn").click(function(){
     <i class="fab fa-whatsapp"></i>
 </a>
 
- </body>
-   <div id="content"> {% block content %} {% endblock %}
-   </div>
+<div id="content">
+    {% block content %}{% endblock %}
+</div>
 
-
+</body>
+</html>
 
 </html>

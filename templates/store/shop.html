@@ -9,163 +9,166 @@ Shop
 <style>
 
 .shop-container{
-
-    width:90%;
-    margin:40px auto;
-
+    width:92%;
+    max-width:1300px;
+    margin:30px auto;
 }
 
 .shop-title{
-
     text-align:center;
     color:#ff4f88;
-    margin-bottom:50px;
-    font-size:42px;
-
+    margin-bottom:35px;
+    font-size:36px;
+    font-weight:700;
 }
 
 .category-section{
-
-    margin-bottom:70px;
-
+    margin-bottom:50px;
 }
 
 .category-title{
-
-    font-size:32px;
+    font-size:26px;
     color:#ff4f88;
-    margin-bottom:25px;
-    border-left:6px solid #ff4f88;
-    padding-left:15px;
-
+    margin-bottom:20px;
+    border-left:5px solid #ff4f88;
+    padding-left:12px;
 }
 
 .product-grid{
-
     display:grid;
-
-    grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
-
-    gap:30px;
-
+    grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));
+    gap:25px;
 }
 
-..product-card{
-
+.product-card{
     background:#fff8fb;
-
-    border-radius:25px;
-
+    border-radius:20px;
     overflow:hidden;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.10);
-
-    transition:.4s;
-
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.3s;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
 }
 
 .product-card:hover{
-
-    transform:translateY(-8px);
-
+    transform:translateY(-6px);
 }
+
 .product-slider{
-
     position:relative;
-
     width:100%;
-
-    height:280px;
-
+    height:250px;
     overflow:hidden;
-
-    border-radius:25px 25px 25px 25px;
-
+    border-radius:20px 20px 0 0;
+    background:#f9f9f9;
 }
 
 .product-slider img{
-
     position:absolute;
-
+    top:0;
+    left:0;
     width:100%;
-
     height:100%;
-
     object-fit:cover;
-
     opacity:0;
-
     transition:opacity .8s ease;
-
 }
 
 .product-slider img.active{
-
     opacity:1;
-
 }
 
 .product-info{
-
-    padding:20px;
-
+    padding:18px;
     text-align:center;
-
 }
 
 .product-info h3{
+    margin:8px 0;
+    font-size:19px;
+}
 
-    margin:10px 0;
+.product-info h3 a{
+    color:#222;
+    text-decoration:none;
+    transition:.3s;
+}
 
-    font-size:26px;
-
+.product-info h3 a:hover{
+    color:#ff4f88;
 }
 
 .price{
-
     color:#ff4f88;
-
-    font-size:24px;
-
+    font-size:20px;
     font-weight:bold;
-
-    margin:15px 0;
-
+    margin:10px 0 14px;
 }
 
-
-
 .details-btn{
-
     display:inline-block;
-
     background:#ff4f88;
-
     color:white;
-
-    padding:12px 30px;
-
+    padding:10px 24px;
     border-radius:30px;
-
     text-decoration:none;
-
+    font-weight:600;
+    font-size:14px;
     transition:.3s;
-
 }
 
 .details-btn:hover{
-
     background:#ff2f72;
-
 }
-.product-grid{
 
-    display:grid;
+/* =========================
+   RESPONSIVE DESIGN (MOBILE)
+========================= */
+@media (max-width: 768px){
+    .shop-title{
+        font-size:28px;
+        margin-bottom:25px;
+    }
 
-    grid-template-columns:repeat(4,1fr);
+    .category-title{
+        font-size:22px;
+    }
+}
 
-    gap:30px;
+@media (max-width: 576px){
+    .shop-container{
+        width:95%;
+        margin:20px auto;
+    }
 
+    .product-grid{
+        grid-template-columns:repeat(2, 1fr);
+        gap:12px;
+    }
+
+    .product-slider{
+        height:160px;
+    }
+
+    .product-info{
+        padding:12px;
+    }
+
+    .product-info h3{
+        font-size:15px;
+    }
+
+    .price{
+        font-size:16px;
+        margin:6px 0 10px;
+    }
+
+    .details-btn{
+        padding:8px 14px;
+        font-size:12px;
+        width:100%;
+    }
 }
 
 </style>

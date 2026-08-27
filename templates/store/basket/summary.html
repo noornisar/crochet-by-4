@@ -14,242 +14,204 @@ body{
 }
 
 .basket-container{
-    width:90%;
-    margin:40px auto;
+    width:92%;
+    max-width:1200px;
+    margin:30px auto;
 }
 
 .page-title{
     text-align:center;
-    font-size:38px;
+    font-size:34px;
     font-weight:700;
     color:#ff4f88;
-    margin-bottom:40px;
+    margin-bottom:30px;
 }
 
 .basket-layout{
     display:grid;
     grid-template-columns:2fr 1fr;
     gap:30px;
+    align-items:start;
 }
 
 .basket-card{
-
     background:#fff;
-
     border-radius:18px;
-
     padding:20px;
-
     display:flex;
-
     align-items:center;
-
     margin-bottom:20px;
-
     box-shadow:0 5px 15px rgba(0,0,0,.08);
-
 }
 
 .basket-image{
-
-    width:150px;
-
-    height:150px;
-
+    width:130px;
+    height:130px;
     object-fit:cover;
-
     border-radius:15px;
-
 }
 
 .basket-details{
-
     flex:1;
-
-    margin-left:25px;
-
+    margin-left:20px;
 }
 
 .basket-details h3{
-
-    font-size:28px;
-
-    margin-bottom:10px;
-
+    font-size:22px;
+    margin-bottom:8px;
 }
 
 .price{
-
     color:#ff4f88;
-
-    font-size:24px;
-
+    font-size:20px;
     font-weight:bold;
-
-    margin-bottom:15px;
-
+    margin-bottom:12px;
 }
 
 .qty-box{
-
     display:flex;
-
     align-items:center;
-
     gap:10px;
-
-    margin-bottom:20px;
-
+    margin-bottom:15px;
 }
 
 .qty-box button{
-
     width:35px;
-
     height:35px;
-
     border:none;
-
     background:#ffd6e7;
-
     border-radius:8px;
-
     cursor:pointer;
-
     font-size:18px;
+    transition:.2s;
+}
 
+.qty-box button:hover{
+    background:#ffb8d3;
 }
 
 .qty-box input{
-
-    width:60px;
-
+    width:55px;
     text-align:center;
-
     height:35px;
-
     border:1px solid #ddd;
-
     border-radius:8px;
-
+    font-weight:600;
 }
 
 .action-buttons{
-
     display:flex;
-
-    gap:15px;
-
+    gap:12px;
+    flex-wrap:wrap;
 }
 
 .update-btn{
-
     background:#ff4f88;
-
     color:white;
-
     border:none;
-
-    padding:10px 22px;
-
+    padding:9px 18px;
     border-radius:10px;
-
     cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
 
+.update-btn:hover{
+    background:#e03e74;
 }
 
 .delete-btn{
-
     background:#333;
-
     color:white;
-
     border:none;
-
-    padding:10px 22px;
-
+    padding:9px 18px;
     border-radius:10px;
-
     cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
 
+.delete-btn:hover{
+    background:#111;
 }
 
 .summary{
-
     background:white;
-
     border-radius:18px;
-
     padding:25px;
-
     height:fit-content;
-
     box-shadow:0 5px 15px rgba(0,0,0,.08);
-
 }
 
 .summary h2{
-
-    margin-bottom:25px;
-
+    margin-bottom:20px;
     color:#ff4f88;
-
+    font-size:24px;
 }
 
 .summary-row{
-
     display:flex;
-
     justify-content:space-between;
-
-    margin-bottom:15px;
-
-    font-size:18px;
-
+    margin-bottom:12px;
+    font-size:16px;
 }
 
 .total{
-
-    font-size:24px;
-
+    font-size:20px;
     font-weight:bold;
-
 }
 
 .checkout{
-
     width:100%;
-
     display:block;
-
     text-align:center;
-
-    margin-top:25px;
-
-    padding:15px;
-
+    margin-top:20px;
+    padding:14px;
     background:#ff4f88;
-
     color:white;
-
     border-radius:12px;
-
     text-decoration:none;
-
-    font-size:18px;
-
+    font-size:16px;
     font-weight:bold;
-
     cursor:pointer;
-
+    transition:.3s;
 }
 
 .checkout:hover{
-
-    background:#e83f76;
-
+    background:#e03e74;
 }
 
+/* =========================
+   MOBILE RESPONSIVENESS
+========================= */
+@media (max-width: 850px){
+    .basket-layout{
+        grid-template-columns:1fr;
+        gap:20px;
+    }
+}
+
+@media (max-width: 576px){
+    .basket-card{
+        flex-direction:column;
+        text-align:center;
+        padding:15px;
+    }
+
+    .basket-details{
+        margin-left:0;
+        margin-top:15px;
+        width:100%;
+    }
+
+    .qty-box, .action-buttons{
+        justify-content:center;
+    }
+
+    .page-title{
+        font-size:26px;
+    }
+}
 </style>
 
 <div class="basket-container">

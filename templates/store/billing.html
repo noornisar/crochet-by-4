@@ -386,9 +386,14 @@ Billing & Payment
 }
 
 @media (max-width: 600px) {
+    .billing-title {
+        font-size: 28px;
+        margin-bottom: 25px;
+    }
 
     .form-row {
         grid-template-columns: 1fr;
+        gap: 0;
     }
 
     .form-group.full {
@@ -396,11 +401,16 @@ Billing & Payment
     }
 
     .billing-page {
-        width: 94%;
+        width: 95%;
+        margin: 25px auto;
     }
 
+    .billing-card,
+    .order-card {
+        padding: 20px 15px;
+        border-radius: 16px;
+    }
 }
-
 </style>
 
 
