@@ -362,76 +362,63 @@ $("#minus").click(function () {
 });
 
 // Add To Cart
+$(document).on("click", "#add-button", function(e){
+    e.preventDefault();
 
-$(document).on("click","#add-button",function(e){
+    $.ajax({
+        type: "POST",
+        url: "{% url 'basket:basket_add' %}",
+        data: {
+            productid: $("#add-button").val(),
+            productqty: $("#select").val(),
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+            action: "post"
+        },
+        success: function(json){
+            $("#basket-qty").text(json.qty);
+            $("#subtotal").text(json.subtotal);
+            $("#shipping").text(json.shipping);
+            $("#tax").text(json.tax);
+            $("#total").text(json.total);
 
-e.preventDefault();
+            if (json.items && json.items.length > 0) {
+                let itemsHtml = "";
+                json.items.forEach(function(item) {
+                    let imageTag = item.image 
+                        ? `<img src="${item.image}" alt="${item.title}">` 
+                        : `<div style="width:65px;height:65px;background:#eee;border-radius:10px;display:flex;align-items:center;justify-content:center;">🛍️</div>`;
+                    
+                    itemsHtml += `
+                        <div class="cart-item" data-id="${item.id}">
+                            ${imageTag}
+                            <div class="item-details">
+                                <h4>${item.title}</h4>
+                                <p>Rs ${item.price}</p>
+                                <small>Quantity : ${item.qty}</small>
+                            </div>
+                            <button type="button" class="cart-item-delete-btn" data-id="${item.id}" title="Remove item" aria-label="Delete item">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
+                    `;
+                });
+                $("#cart-items").html(itemsHtml);
+            } else {
+                $("#cart-items").html('<p class="empty-cart-msg" style="text-align: center; color: #888; padding: 20px 0;">Your cart is empty.</p>');
+            }
 
-$.ajax({
-
-type:"POST",
-
-url:"{% url 'basket:basket_add' %}",
-
-data:{
-
-productid:$("#add-button").val(),
-
-productqty:$("#select").val(),
-
-csrfmiddlewaretoken:"{{ csrf_token }}",
-
-action:"post"
-
-},
-
-success:function(json){
-
-$("#basket-qty").text(json.qty);
-
-$("#cart-sidebar").addClass("active");
-
-$("#cart-items").html(`
-
-<div class="cart-item">
-
-<img src="${json.image}">
-
-<div class="item-details">
-
-<h4>${json.product}</h4>
-
-<p>Rs ${json.price}</p>
-
-<small>Quantity : ${json.productqty}</small>
-
-</div>
-
-</div>
-
-`);
-
-},
-
-error:function(xhr){
-
-console.log(xhr.responseText);
-
-}
-
+            $("#cart-sidebar").addClass("active");
+        },
+        error: function(xhr){
+            console.log(xhr.responseText);
+        }
+    });
 });
-
-});
-
 
 // Close Cart
-
 $("#close-cart").click(function(){
-
-$("#cart-sidebar").removeClass("active");
-
+    $("#cart-sidebar").removeClass("active");
 });
-
 </script>
 
 {% endblock %}

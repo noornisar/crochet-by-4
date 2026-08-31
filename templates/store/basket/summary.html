@@ -103,6 +103,7 @@ body{
     display:flex;
     gap:12px;
     flex-wrap:wrap;
+    margin-top:10px;
 }
 
 .update-btn{
@@ -121,18 +122,26 @@ body{
 }
 
 .delete-btn{
-    background:#333;
-    color:white;
-    border:none;
-    padding:9px 18px;
+    background:#fff0f5;
+    color:#ff4f88;
+    border:1.5px solid #ffc0d6;
+    padding:8px 16px;
     border-radius:10px;
     cursor:pointer;
     font-weight:600;
-    transition:.3s;
+    font-size:14px;
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    transition:all .25s ease;
 }
 
 .delete-btn:hover{
-    background:#111;
+    background:#ff4f88;
+    color:white;
+    border-color:#ff4f88;
+    transform:translateY(-2px);
+    box-shadow:0 4px 12px rgba(255, 79, 136, 0.25);
 }
 
 .summary{
@@ -266,11 +275,9 @@ min="1">
                     </div>
 
                     <div class="action-buttons">
-
-                        
-
-                        
-
+                        <button type="button" class="delete-btn" data-id="{{ item.product.id }}" aria-label="Delete item from basket">
+                            <i class="fa-solid fa-trash-can"></i> Delete
+                        </button>
                     </div>
 
                 </div>
@@ -303,15 +310,15 @@ min="1">
 
                 <span>Shipping</span>
 
-                <span>Rs 200</span>
+                <span>Rs {{ basket.get_shipping_price }}</span>
 
             </div>
 
             <div class="summary-row">
 
-                <span>Tax</span>
+                <span>Tax (10%)</span>
 
-                <span>Rs 100</span>
+                <span>Rs {{ basket.get_tax }}</span>
 
             </div>
 
@@ -321,7 +328,7 @@ min="1">
 
                 <span>Total</span>
 
-                <span>Rs {{ basket.get_subtotal }}</span>
+                <span>Rs {{ basket.get_total_price }}</span>
 
             </div>
 <a href="{% url 'basket:checkout' %}" class="checkout">
@@ -335,82 +342,68 @@ min="1">
 </div>
 <script>
 
-
     $(".plus-btn").click(function(){
-
-    let id = $(this).data("id");
-
-    let input = $(".qty-input[data-id='"+id+"']");
-
-    let qty = parseInt(input.val());
-
-    qty++;
-
-    input.val(qty);
-
-    updateBasket(id, qty);
-
-});
-
-
-$(".minus-btn").click(function(){
-
-    let id = $(this).data("id");
-
-    let input = $(".qty-input[data-id='"+id+"']");
-
-    let qty = parseInt(input.val());
-
-    if(qty > 1){
-
-        qty--;
-
+        let id = $(this).data("id");
+        let input = $(".qty-input[data-id='"+id+"']");
+        let qty = parseInt(input.val());
+        qty++;
         input.val(qty);
-
         updateBasket(id, qty);
-
-    }
-
-});
-
-
-function updateBasket(id, qty){
-
-    $.ajax({
-
-        type:"POST",
-
-        url:"{% url 'basket:basket_update' %}",
-
-        data:{
-
-            productid:id,
-
-            productqty:qty,
-
-            action:"post",
-
-            csrfmiddlewaretoken:"{{ csrf_token }}"
-
-        },
-
-        success:function(json){
-
-            $("#basket-qty").text(json.qty);
-
-            location.reload();
-
-        }
-
     });
 
-}
+    $(".minus-btn").click(function(){
+        let id = $(this).data("id");
+        let input = $(".qty-input[data-id='"+id+"']");
+        let qty = parseInt(input.val());
+        if(qty > 1){
+            qty--;
+            input.val(qty);
+            updateBasket(id, qty);
+        }
+    });
 
-$("#checkout-btn").click(function(){
+    $(document).on("click", ".delete-btn", function(e){
+        e.preventDefault();
+        let id = $(this).data("id");
 
-    window.location.href = "{% url 'basket:checkout' %}";
+        $.ajax({
+            type: "POST",
+            url: "{% url 'basket:basket_delete' %}",
+            data: {
+                productid: id,
+                action: "post",
+                csrfmiddlewaretoken: "{{ csrf_token }}"
+            },
+            success: function(json){
+                $("#basket-qty").text(json.qty);
+                location.reload();
+            },
+            error: function(xhr){
+                console.log(xhr.responseText);
+            }
+        });
+    });
 
-});
+    function updateBasket(id, qty){
+        $.ajax({
+            type:"POST",
+            url:"{% url 'basket:basket_update' %}",
+            data:{
+                productid:id,
+                productqty:qty,
+                action:"post",
+                csrfmiddlewaretoken:"{{ csrf_token }}"
+            },
+            success:function(json){
+                $("#basket-qty").text(json.qty);
+                location.reload();
+            }
+        });
+    }
+
+    $("#checkout-btn").click(function(){
+        window.location.href = "{% url 'basket:checkout' %}";
+    });
 </script>
 
 
