@@ -1,0 +1,35 @@
+=======================================================
+🌸 {{ store_name }} - Order Confirmation #{{ order_number }}
+=======================================================
+
+Dear {{ customer_name }},
+
+Thank you for your order! We have received your order and are preparing your handmade crochet creations.
+
+ORDER DETAILS:
+-------------------------------------------------------
+Order Number: #{{ order_number }}
+Order Date:   {{ order_date|date:"F j, Y, g:i A" }}
+Customer:     {{ customer_name }} ({{ customer_email }})
+Payment:      {{ order.payment_method|title }}
+{% if order.address %}Shipping To:  {{ order.address }}, {{ order.city }} ({{ order.postal_code }}){% endif %}
+
+ORDERED ITEMS:
+-------------------------------------------------------
+{% for item in items %}
+- {{ item.product.title }} x {{ item.quantity }} @ Rs {{ item.price }} = Rs {{ item.get_total_price }}
+{% endfor %}
+
+TOTALS:
+-------------------------------------------------------
+Subtotal:         Rs {{ subtotal }}
+Shipping Charges: Rs {{ shipping_cost }}
+Tax (10%):        Rs {{ tax }}
+Grand Total:      Rs {{ total_price }}
+
+PAYMENT VERIFICATION:
+-------------------------------------------------------
+Please send your payment screenshot / transaction slip to our official WhatsApp at 0313-7975149 mentioning your Order #{{ order_number }}.
+
+Thank you for shopping handmade at {{ store_name }}!
+http://{{ site_domain }}/

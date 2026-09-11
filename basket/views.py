@@ -1,8 +1,13 @@
-from django.shortcuts import render, get_object_or_404 
+import logging
+from django.shortcuts import render, redirect, get_object_or_404 
 from django.http import JsonResponse
+from django.contrib.sites.shortcuts import get_current_site
 
-from store.models import Product
+from store.models import Product, Order, OrderItem
+from store.services.email_service import send_order_confirmation_email
 from .basket import Basket
+
+logger = logging.getLogger('store')
 
 def basket_summary(request):
     basket = Basket(request)
@@ -73,16 +78,128 @@ def basket_delete(request):
 
 def checkout(request):
     basket = Basket(request)
+    if len(basket) == 0:
+        return redirect('store:shop')
+
+    if request.method == "POST":
+        first_name = request.POST.get("first_name", "").strip()
+        last_name = request.POST.get("last_name", "").strip()
+        full_name = f"{first_name} {last_name}".strip()
+        if not full_name and request.user.is_authenticated:
+            full_name = request.user.get_full_name() or request.user.username
+
+        email = request.POST.get("email", "").strip()
+        if not email and request.user.is_authenticated:
+            email = request.user.email
+
+        phone = request.POST.get("phone", "").strip()
+        address = request.POST.get("address", "").strip()
+        city = request.POST.get("city", "").strip()
+        postal_code = request.POST.get("postal_code", "").strip()
+
+        request.session['checkout_info'] = {
+            'first_name': first_name,
+            'last_name': last_name,
+            'full_name': full_name or "Customer",
+            'email': email,
+            'phone': phone,
+            'address': address,
+            'city': city,
+            'postal_code': postal_code,
+        }
+        return redirect("basket:billing")
+
+    checkout_info = request.session.get('checkout_info', {})
     return render(
         request,
         "store/checkout.html",
-        {"basket": basket}
+        {"basket": basket, "checkout_info": checkout_info}
     )
 
 def billing(request):
     basket = Basket(request)
+    if len(basket) == 0:
+        return redirect('store:shop')
+
+    checkout_info = request.session.get('checkout_info', {})
+
+    if request.method == "POST":
+        payment_method = request.POST.get("payment_method", "bank")
+
+        customer_email = (
+            request.POST.get("email")
+            or checkout_info.get("email")
+            or (request.user.email if request.user.is_authenticated else "")
+        ).strip()
+        customer_name = (
+            request.POST.get("full_name")
+            or checkout_info.get("full_name")
+            or (request.user.get_full_name() or request.user.username if request.user.is_authenticated else "Customer")
+        ).strip()
+        phone = (request.POST.get("phone") or checkout_info.get("phone", "")).strip()
+        address = (request.POST.get("address") or checkout_info.get("address", "")).strip()
+        city = (request.POST.get("city") or checkout_info.get("city", "")).strip()
+        postal_code = (request.POST.get("postal_code") or checkout_info.get("postal_code", "")).strip()
+
+        if not customer_email:
+            messages.error(request, "Please enter your contact email on the checkout page before proceeding.")
+            return redirect("basket:checkout")
+
+        # 1. Create the Order
+        order = Order.objects.create(
+            user=request.user if request.user.is_authenticated else None,
+            full_name=customer_name or "Valued Customer",
+            email=customer_email,
+            phone=phone,
+            address=address,
+            city=city,
+            postal_code=postal_code,
+            payment_method=payment_method,
+            subtotal=basket.get_subtotal(),
+            shipping_cost=basket.get_shipping_price(),
+            tax=basket.get_tax(),
+            total_price=basket.get_total_price(),
+        )
+
+        # 2. Create OrderItems from basket
+        for item in basket:
+            OrderItem.objects.create(
+                order=order,
+                product=item['product'],
+                price=item['price'],
+                quantity=item['qty']
+            )
+
+        # 3. Safely send Order Confirmation Email (Never crashes the order)
+        host = request.get_host()
+        try:
+            current_site = get_current_site(request)
+            domain = current_site.domain if (current_site and current_site.domain != 'example.com') else host
+        except Exception:
+            domain = host or '127.0.0.1:8000'
+
+        try:
+            sent, err = send_order_confirmation_email(order, site_domain=domain)
+            if not sent:
+                logger.warning(f"Customer confirmation email was not sent for order #{order.order_number}: {err}")
+        except Exception as e:
+            logger.error(f"Failed to send confirmation email for order #{order.id}: {e}")
+
+        # 4. Clear the basket and checkout session
+        basket.clear()
+        if 'checkout_info' in request.session:
+            del request.session['checkout_info']
+
+        # 5. Redirect to dedicated order confirmation page
+        return redirect("basket:order_confirmation", order_number=order.order_number)
+
     return render(
         request,
         "store/billing.html",
-        {"basket": basket}
+        {"basket": basket, "checkout_info": checkout_info}
     )
+
+
+def order_confirmation(request, order_number):
+    order = get_object_or_404(Order, order_number=order_number)
+    return render(request, "store/order_success.html", {"order": order})

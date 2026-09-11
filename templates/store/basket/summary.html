@@ -11,20 +11,23 @@ Shopping Basket
 
 body{
     background:#fff7fa;
+    font-family: var(--font-ui) !important;
 }
 
 .basket-container{
     width:92%;
     max-width:1200px;
     margin:30px auto;
+    font-family: var(--font-ui);
 }
 
 .page-title{
     text-align:center;
     font-size:34px;
     font-weight:700;
-    color:#ff4f88;
+    color:#D15B80;
     margin-bottom:30px;
+    font-family: var(--font-branding) !important;
 }
 
 .basket-layout{
@@ -41,7 +44,8 @@ body{
     display:flex;
     align-items:center;
     margin-bottom:20px;
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    border: 1px solid rgba(209, 91, 128, 0.12);
+    box-shadow:0 5px 18px rgba(209, 91, 128, 0.06);
 }
 
 .basket-image{
@@ -49,6 +53,7 @@ body{
     height:130px;
     object-fit:cover;
     border-radius:15px;
+    border: 1px solid rgba(209, 91, 128, 0.15);
 }
 
 .basket-details{
@@ -59,13 +64,17 @@ body{
 .basket-details h3{
     font-size:22px;
     margin-bottom:8px;
+    font-family: var(--font-branding) !important;
+    font-weight: 600;
+    color: #2D3748;
 }
 
 .price{
-    color:#ff4f88;
+    color:#D15B80;
     font-size:20px;
     font-weight:bold;
     margin-bottom:12px;
+    font-family: var(--font-branding) !important;
 }
 
 .qty-box{
@@ -78,16 +87,19 @@ body{
 .qty-box button{
     width:35px;
     height:35px;
-    border:none;
-    background:#ffd6e7;
+    border: 1px solid rgba(209, 91, 128, 0.2);
+    background:#FFF0F5;
+    color: #D15B80;
     border-radius:8px;
     cursor:pointer;
     font-size:18px;
+    font-family: var(--font-ui);
     transition:.2s;
 }
 
 .qty-box button:hover{
-    background:#ffb8d3;
+    background:#D15B80;
+    color: white;
 }
 
 .qty-box input{
@@ -97,6 +109,7 @@ body{
     border:1px solid #ddd;
     border-radius:8px;
     font-weight:600;
+    font-family: var(--font-ui);
 }
 
 .action-buttons{
@@ -107,29 +120,31 @@ body{
 }
 
 .update-btn{
-    background:#ff4f88;
+    background:#D15B80;
     color:white;
     border:none;
     padding:9px 18px;
     border-radius:10px;
     cursor:pointer;
     font-weight:600;
+    font-family: var(--font-ui);
     transition:.3s;
 }
 
 .update-btn:hover{
-    background:#e03e74;
+    background:#B84368;
 }
 
 .delete-btn{
-    background:#fff0f5;
-    color:#ff4f88;
-    border:1.5px solid #ffc0d6;
+    background:#FFF0F5;
+    color:#D15B80;
+    border:1.5px solid rgba(209, 91, 128, 0.25);
     padding:8px 16px;
     border-radius:10px;
     cursor:pointer;
     font-weight:600;
     font-size:14px;
+    font-family: var(--font-ui);
     display:inline-flex;
     align-items:center;
     gap:7px;
@@ -137,11 +152,11 @@ body{
 }
 
 .delete-btn:hover{
-    background:#ff4f88;
+    background:#D15B80;
     color:white;
-    border-color:#ff4f88;
+    border-color:#D15B80;
     transform:translateY(-2px);
-    box-shadow:0 4px 12px rgba(255, 79, 136, 0.25);
+    box-shadow:0 4px 12px rgba(209, 91, 128, 0.25);
 }
 
 .summary{
@@ -149,13 +164,16 @@ body{
     border-radius:18px;
     padding:25px;
     height:fit-content;
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    border: 1px solid rgba(209, 91, 128, 0.12);
+    box-shadow:0 5px 18px rgba(209, 91, 128, 0.06);
+    font-family: var(--font-ui);
 }
 
 .summary h2{
     margin-bottom:20px;
-    color:#ff4f88;
+    color:#D15B80;
     font-size:24px;
+    font-family: var(--font-branding) !important;
 }
 
 .summary-row{
@@ -168,6 +186,7 @@ body{
 .total{
     font-size:20px;
     font-weight:bold;
+    font-family: var(--font-branding);
 }
 
 .checkout{
@@ -176,18 +195,20 @@ body{
     text-align:center;
     margin-top:20px;
     padding:14px;
-    background:#ff4f88;
+    background:#D15B80;
     color:white;
     border-radius:12px;
     text-decoration:none;
     font-size:16px;
     font-weight:bold;
+    font-family: var(--font-ui);
     cursor:pointer;
     transition:.3s;
 }
 
 .checkout:hover{
-    background:#e03e74;
+    background:#B84368;
+    box-shadow: 0 4px 14px rgba(209, 91, 128, 0.3);
 }
 
 /* =========================

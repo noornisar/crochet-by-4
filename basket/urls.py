@@ -10,5 +10,6 @@ urlpatterns = [
     path('delete/', views.basket_delete, name='basket_delete'),
     path('checkout/', views.checkout, name='checkout'),
     path('billing/', views.billing, name='billing'),
+    path('order-confirmation/<str:order_number>/', views.order_confirmation, name='order_confirmation'),
 ]
 

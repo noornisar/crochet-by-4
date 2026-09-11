@@ -119,4 +119,9 @@ class Basket:
 
         if product_id in self.basket:
             del self.basket[product_id]
-            self.session.modified = True        
+            self.session.modified = True
+
+    def clear(self):
+        if 'skey' in self.session:
+            del self.session['skey']
+            self.session.modified = True

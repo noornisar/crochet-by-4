@@ -1,0 +1,14 @@
+Hello {{ customer_name }}!
+
+Welcome to {{ store_name }}! We are delighted to have you with us.
+
+Each piece at {{ store_name }} is handcrafted with love, premium yarns, and delicate detail.
+
+Explore our shop:
+http://{{ site_domain }}/shop/
+
+If you ever need assistance or custom orders, message us on WhatsApp at 0313-7975149 or reply to this email.
+
+Warm regards,
+The {{ store_name }} Team
+http://{{ site_domain }}/

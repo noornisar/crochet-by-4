@@ -1,0 +1,324 @@
+{% extends "store/base.html" %}
+{% load static %}
+
+{% block title %}
+Contact Us - Crochet Store
+{% endblock %}
+
+{% block content %}
+
+<style>
+.contact-container {
+    width: 90%;
+    max-width: 1050px;
+    margin: 40px auto 70px;
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.contact-header h1 {
+    color: #D15B80;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.contact-header p {
+    color: #666;
+    font-size: 16px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.contact-info-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 32px 26px;
+    box-shadow: 0 8px 25px rgba(209, 91, 128, 0.08);
+    border: 1px solid rgba(209, 91, 128, 0.16);
+}
+
+.contact-info-card h2 {
+    color: #D15B80;
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.contact-info-card p {
+    color: #555;
+    font-size: 14.5px;
+    line-height: 1.65;
+    margin-bottom: 24px;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.info-icon {
+    width: 44px;
+    height: 44px;
+    background: #FFF0F5;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #D15B80;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.info-text strong {
+    display: block;
+    color: #222;
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+.info-text span, .info-text a {
+    color: #666;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.info-text a:hover {
+    color: #D15B80;
+}
+
+.whatsapp-direct-card {
+    background: linear-gradient(135deg, #f0fff4 0%, #e6f9ed 100%);
+    border: 1.5px solid #a3e6be;
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-top: 25px;
+}
+
+.whatsapp-direct-card h4 {
+    color: #128c7e;
+    margin: 0 0 6px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.whatsapp-direct-card p {
+    font-size: 13px;
+    color: #2a5840;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.whatsapp-small-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #25d366;
+    color: white !important;
+    text-decoration: none;
+    padding: 9px 18px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 13.5px;
+}
+
+.contact-form-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 35px 30px;
+    box-shadow: 0 8px 25px rgba(209, 91, 128, 0.08);
+    border: 1px solid rgba(209, 91, 128, 0.16);
+}
+
+.contact-form-card h2 {
+    color: #D15B80;
+    font-size: 22px;
+    margin-bottom: 22px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #444;
+    font-size: 13.5px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid rgba(209, 91, 128, 0.25);
+    border-radius: 10px;
+    font-size: 14px;
+    outline: none;
+    box-sizing: border-box;
+    transition: .3s;
+    font-family: inherit;
+}
+
+.form-control:focus {
+    border-color: #D15B80;
+    box-shadow: 0 0 8px rgba(209, 91, 128, .18);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #D15B80 0%, #B84368 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(209, 91, 128, 0.25);
+    transition: .3s;
+    margin-top: 6px;
+}
+
+.submit-btn:hover {
+    background: #B84368;
+    transform: translateY(-1px);
+}
+
+.alert-success {
+    background: #e6f9ed;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 22px;
+    font-size: 14px;
+}
+
+.alert-warning {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 22px;
+    font-size: 14px;
+}
+
+@media (max-width: 800px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<div class="contact-container">
+    <div class="contact-header">
+        <h1>🌸 Get in Touch</h1>
+        <p>Have a question, feedback, or custom crochet order? We'd love to hear from you!</p>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="{% if message.tags == 'success' %}alert-success{% else %}alert-warning{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="contact-grid">
+        <!-- Contact Details -->
+        <div class="contact-info-card">
+            <h2>Contact Information</h2>
+            <p>Every crochet piece is hand-stitched with love. Reach out to us for custom orders, color inquiries, or order updates.</p>
+
+            <div class="info-item">
+                <div class="info-icon">
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+                <div class="info-text">
+                    <strong>Email Support</strong>
+                    <a href="mailto:noornisar96@gmail.com">noornisar96@gmail.com</a>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <div class="info-text">
+                    <strong>WhatsApp Hotline</strong>
+                    <a href="https://wa.me/923137975149" target="_blank" rel="noopener">0313-7975149</a>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-icon">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+                <div class="info-text">
+                    <strong>Response Time</strong>
+                    <span>Usually within a few hours</span>
+                </div>
+            </div>
+
+            <div class="whatsapp-direct-card">
+                <h4><i class="fab fa-whatsapp"></i> Instant WhatsApp Chat</h4>
+                <p>Need a quick response for custom handmade orders? Chat directly with us on WhatsApp.</p>
+                <a href="https://wa.me/923137975149" target="_blank" rel="noopener" class="whatsapp-small-btn">
+                    <i class="fab fa-whatsapp"></i> Open WhatsApp
+                </a>
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form-card">
+            <h2>Send Us a Message</h2>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label>Your Name</label>
+                    {{ form.name }}
+                    {{ form.name.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    {{ form.email }}
+                    {{ form.email.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label>Subject</label>
+                    {{ form.subject }}
+                    {{ form.subject.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label>Your Message</label>
+                    {{ form.message }}
+                    {{ form.message.errors }}
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Send Message 🌸
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

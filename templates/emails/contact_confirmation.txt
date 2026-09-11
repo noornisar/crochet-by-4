@@ -1,0 +1,9 @@
+Hi {{ name }},
+
+Thank you for reaching out to {{ store_name }}! We have received your inquiry regarding "{{ subject }}" and will get back to you shortly.
+
+If you need urgent assistance, you can also reach us directly on WhatsApp at 0313-7975149.
+
+Warm regards,
+The {{ store_name }} Team
+http://{{ site_domain }}/

@@ -1,0 +1,19 @@
+New Customer Order Received! - {{ store_name }}
+==================================================
+Order Number: #{{ order_number }}
+Date:         {{ order_date|date:"F j, Y, g:i A" }}
+Customer:     {{ customer_name }}
+Email:        {{ customer_email }}
+Phone:        {{ order.phone }}
+Address:      {{ order.address }}, {{ order.city }} ({{ order.postal_code }})
+Payment:      {{ order.payment_method|title }}
+
+ITEMS ORDERED:
+--------------------------------------------------
+{% for item in items %}
+- {{ item.product.title }} x {{ item.quantity }} @ Rs {{ item.price }} = Rs {{ item.get_total_price }}
+{% endfor %}
+
+Grand Total: Rs {{ total_price }}
+--------------------------------------------------
+Manage in Admin: http://{{ site_domain }}/admin/store/order/{{ order.id }}/change/

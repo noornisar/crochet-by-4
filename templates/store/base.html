@@ -5,10 +5,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crochet Store</title>
+    <title>{% block title %}Crochet by 4 | Handmade Crochet Store{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    <!-- Google Fonts: Poppins (Branding & Headings) & Plus Jakarta Sans (Web UI) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
         rel="stylesheet">
 
     <!-- Font Awesome Icons -->
@@ -21,11 +27,105 @@
     <script defer src="https://cloud.umami.is/script.js" data-website-id="91a8079a-87f5-49d4-8bf0-43f987c26c12"></script>
 
     <style>
+        :root {
+            /* Typography: Poppins for branding, Plus Jakarta Sans for Web UI */
+            --font-branding: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-ui: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-rounded: var(--font-branding);
+            --font-body: var(--font-ui);
+
+            /* Brand Colors (Crochet by 4 Theme) */
+            --brand-primary: #D15B80;
+            --brand-primary-hover: #B84368;
+            --brand-primary-light: #FFF0F5;
+            --brand-primary-subtle: rgba(209, 91, 128, 0.12);
+            --brand-border: rgba(209, 91, 128, 0.2);
+            --brand-dark: #2D2529;
+            --brand-muted: #6B5C64;
+            --brand-bg: #FAF7F8;
+            --brand-gradient: linear-gradient(135deg, #D15B80 0%, #B84368 100%);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: var(--font-ui);
+        }
+
+        /* Branding Typography (Poppins) for Titles, Headings & Highlight Elements */
+        h1, h2, h3, h4, h5, h6,
+        .hero-text h1,
+        .hero-banner-title,
+        .featured h2,
+        .category-title,
+        .shop-title,
+        .section-title,
+        .why h2,
+        .why-box h3,
+        .cart-header h2,
+        .checkout-title,
+        .billing-header-title,
+        .contact-title,
+        .contact-card h2,
+        .auth-card h2,
+        .order-confirmed-box h1,
+        .card h3,
+        .card h3 a,
+        .product-info h1,
+        .product-info h3,
+        .product-info h3 a,
+        .product-card .product-info h3,
+        .product-card .product-info h3 a,
+        .item-details h4,
+        .order-product-details h4,
+        .summary-product h4,
+        .price,
+        .order-item-price,
+        .total-price,
+        .total-box,
+        .brand-title,
+        .brand-sub {
+            font-family: var(--font-branding) !important;
+            letter-spacing: -0.2px;
+        }
+
+        /* Web UI Typography (Plus Jakarta Sans) for Navigation, Controls, Buttons & Text */
+        body,
+        p,
+        span,
+        label,
+        input,
+        textarea,
+        select,
+        button,
+        .desktop-nav > ul > li > a,
+        .dropdown-toggle-btn,
+        .dropdown-menu li a,
+        .mobile-nav-links a,
+        .mobile-dropdown-btn,
+        .auth-link,
+        .auth-btn,
+        .btn,
+        .welcome-user,
+        .cart-btn,
+        .basket-text,
+        .basket-badge,
+        .shop-btn,
+        .buy-btn,
+        .details-btn,
+        .checkout,
+        .complete-order-btn,
+        .whatsapp-action-btn,
+        .add-to-cart-btn,
+        .contact-submit-btn {
+            font-family: var(--font-ui) !important;
+        }
+
+        .desktop-nav > ul > li > a,
+        .dropdown-toggle-btn {
+            font-size: 15px;
+            font-weight: 500;
         }
 
         body {
@@ -33,55 +133,93 @@
             overflow-x: hidden;
         }
 
-        /* =========================
-           HEADER & NAVIGATION BAR
-        ========================= */
+        /* ========================================================
+           HEADER & NAVIGATION BAR - MINIMALIST CROCHET BY 4
+        ======================================================== */
         header {
-            background: #FFD6E7;
-            padding: 12px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, .08);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(209, 91, 128, 0.16);
+            box-shadow: 0 2px 14px rgba(168, 59, 94, 0.05);
             position: sticky;
             top: 0;
             z-index: 1000;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .header-inner {
+            max-width: 1240px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            height: 64px;
         }
 
         .logo {
-            font-size: 22px;
-            font-weight: 700;
-            color: #222;
-            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
             text-decoration: none;
+            flex-shrink: 0;
+            transition: transform 0.25s ease, opacity 0.25s ease;
         }
 
-        /* Desktop Nav Styles (Default) */
+        .logo:hover {
+            transform: scale(1.03);
+            opacity: 0.95;
+        }
+
+        .brand-logo-img {
+            height: 48px;
+            width: auto;
+            max-width: 175px;
+            object-fit: contain;
+            display: block;
+            filter: drop-shadow(0 2px 8px rgba(209, 91, 128, 0.15));
+            transition: transform 0.25s ease;
+        }
+
+        .logo:hover .brand-logo-img {
+            transform: translateY(-1px);
+        }
+
+        /* Desktop Nav Styles */
         .desktop-nav {
             flex: 1;
             display: flex;
             justify-content: center;
         }
 
-        .desktop-nav>ul {
+        .desktop-nav > ul {
             display: flex;
             justify-content: center;
             align-items: center;
             list-style: none;
-            gap: 28px;
+            gap: 6px;
+            margin: 0;
+            padding: 0;
         }
 
-        .desktop-nav>ul>li>a {
+        .desktop-nav > ul > li > a {
             text-decoration: none;
-            color: #000;
-            font-size: 16px;
+            color: #4A4045;
+            font-size: 15px;
             font-weight: 500;
-            transition: .3s;
+            padding: 8px 14px;
+            border-radius: 20px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
         }
 
-        .desktop-nav>ul>li>a:hover {
-            color: #ff4f88;
+        .desktop-nav > ul > li > a:hover {
+            color: #D15B80;
+            background: #FFF0F5;
         }
 
         /* Dropdown Button & Container */
@@ -91,26 +229,30 @@
         }
 
         .dropdown-toggle-btn {
-            background: none;
+            background: transparent;
             border: none;
-            color: #000;
-            font-size: 16px;
+            color: #4A4045;
+            font-size: 15px;
             font-weight: 500;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 6px 0;
-            transition: .3s;
+            padding: 8px 14px;
+            border-radius: 20px;
+            transition: all 0.2s ease;
         }
 
-        .dropdown-toggle-btn:hover {
-            color: #ff4f88;
+        .dropdown-toggle-btn:hover,
+        .dropdown-toggle-btn.active {
+            color: #D15B80;
+            background: #FFF0F5;
         }
 
         .dropdown-toggle-btn i {
-            font-size: 12px;
-            transition: transform .3s ease;
+            font-size: 11px;
+            color: #D15B80;
+            transition: transform 0.25s ease;
         }
 
         .dropdown-toggle-btn.active i {
@@ -122,16 +264,17 @@
             display: none !important;
             position: absolute;
             top: calc(100% + 8px);
-            left: 0;
-            background: white;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #FFFFFF;
             min-width: 210px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, .15);
+            border-radius: 16px;
+            box-shadow: 0 12px 32px rgba(139, 58, 87, 0.12);
             list-style: none;
-            padding: 8px 0;
+            padding: 8px;
             z-index: 99999;
             flex-direction: column;
-            border: 1px solid #f0f0f0;
+            border: 1px solid rgba(209, 91, 128, 0.18);
         }
 
         .dropdown-menu.show {
@@ -146,32 +289,90 @@
         .dropdown-menu li a {
             display: block;
             width: 100%;
-            padding: 10px 18px;
-            color: #333;
+            padding: 9px 14px;
+            color: #4A4045;
             font-size: 14px;
             text-decoration: none;
             white-space: nowrap;
-            transition: .2s;
+            transition: all 0.15s ease;
             font-weight: 500;
+            border-radius: 10px;
         }
 
         .dropdown-menu li a:hover {
-            background: #fff0f5;
-            color: #ff4f88;
-            padding-left: 22px;
+            background: #FFF0F5;
+            color: #D15B80;
+            padding-left: 18px;
         }
 
         /* Header Actions (Right Side) */
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
+            flex-shrink: 0;
         }
 
         .desktop-auth {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+        }
+
+        .auth-link {
+            text-decoration: none;
+            color: #4A4045;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 7px 12px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .auth-link:hover {
+            color: #D15B80;
+            background: #FFF0F5;
+        }
+
+        .auth-link i {
+            font-size: 13px;
+            color: #D15B80;
+        }
+
+        .auth-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #FFF0F5;
+            color: #D15B80;
+            text-decoration: none;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid rgba(209, 91, 128, 0.2);
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .auth-btn:hover {
+            background: #D15B80;
+            color: #FFFFFF;
+            border-color: #D15B80;
+        }
+
+        .auth-btn-primary {
+            background: #D15B80;
+            color: #FFFFFF;
+            border-color: #D15B80;
+        }
+
+        .auth-btn-primary:hover {
+            background: #B84368;
+            border-color: #B84368;
         }
 
         .btn {
@@ -181,106 +382,157 @@
             background: white;
             color: #222;
             text-decoration: none;
-            padding: 9px 15px;
+            padding: 8px 14px;
             border-radius: 12px;
             font-size: 14px;
             font-weight: 600;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, .08);
-            transition: .3s;
+            border: 1px solid #eee;
+            transition: .2s ease;
             white-space: nowrap;
         }
 
         .btn:hover {
-            background: #ff4f88;
-            color: white;
-        }
-
-        .btn i {
-            font-size: 15px;
+            background: #FFF0F5;
+            color: #D15B80;
+            border-color: rgba(209, 91, 128, 0.3);
         }
 
         .welcome-user {
-            background: white;
-            padding: 8px 14px;
-            border-radius: 10px;
+            background: #FFF0F5;
+            padding: 6px 12px;
+            border-radius: 20px;
             font-weight: 600;
-            color: #ff4f88;
+            color: #D15B80;
+            font-size: 13px;
+            border: 1px solid rgba(209, 91, 128, 0.18);
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .cart-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #FFF0F5;
+            color: #D15B80;
+            text-decoration: none;
+            padding: 7px 14px;
+            border-radius: 20px;
             font-size: 14px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, .08);
+            font-weight: 600;
+            border: 1px solid rgba(209, 91, 128, 0.22);
+            transition: all 0.2s ease;
             white-space: nowrap;
         }
 
+        .cart-btn:hover {
+            background: #D15B80;
+            color: #FFFFFF;
+            border-color: #D15B80;
+            box-shadow: 0 4px 12px rgba(209, 91, 128, 0.22);
+        }
+
+        .cart-btn i {
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+
+        .cart-btn:hover i {
+            color: #FFFFFF;
+        }
+
         .basket-badge {
-            background: #ff4f88;
+            background: #D15B80;
             color: white;
             min-width: 20px;
             height: 20px;
-            border-radius: 50%;
+            border-radius: 10px;
             display: inline-flex;
             justify-content: center;
             align-items: center;
-            font-size: 12px;
-            margin-left: 6px;
-            font-weight: bold;
-            padding: 0 5px;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 0 6px;
+            transition: all 0.2s ease;
+        }
+
+        .cart-btn:hover .basket-badge {
+            background: #FFFFFF;
+            color: #D15B80;
         }
 
         .search-box {
             display: flex;
             align-items: center;
-            background: white;
-            border-radius: 30px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+            background: #F8F5F7;
+            border: 1px solid #EFE6EA;
+            border-radius: 24px;
+            height: 36px;
+            width: 190px;
+            padding: 0 4px 0 14px;
+            transition: all 0.25s ease;
+        }
+
+        .search-box:focus-within {
+            background: #FFFFFF;
+            border-color: #D15B80;
             width: 220px;
-            height: 40px;
+            box-shadow: 0 0 0 3px rgba(209, 91, 128, 0.12);
         }
 
         .search-box input {
             border: none;
             outline: none;
-            padding: 0 15px;
-            width: 100%;
-            font-size: 14px;
             background: transparent;
+            font-size: 13px;
+            color: #333;
+            width: 100%;
+        }
+
+        .search-box input::placeholder {
+            color: #9C8F96;
         }
 
         .search-box button {
             border: none;
-            background: #ff8fb1;
-            color: white;
-            width: 42px;
-            height: 40px;
+            background: transparent;
+            color: #D15B80;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
             cursor: pointer;
-            transition: .3s;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 13px;
+            transition: all 0.2s ease;
         }
 
         .search-box button:hover {
-            background: #ff5c93;
+            background: #FFF0F5;
+            color: #B84368;
         }
 
         /* Mobile Drawer & Toggle (HIDDEN on Desktop by default) */
         .mobile-toggle {
             display: none !important;
-            background: white;
-            border: none;
-            width: 40px;
-            height: 40px;
+            background: #FFF0F5;
+            border: 1px solid rgba(209, 91, 128, 0.2);
+            width: 38px;
+            height: 38px;
             border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
-            font-size: 19px;
-            color: #333;
+            font-size: 17px;
+            color: #D15B80;
             cursor: pointer;
             align-items: center;
             justify-content: center;
-            transition: .3s;
+            transition: all 0.2s ease;
         }
 
         .mobile-toggle:hover {
-            background: #ff4f88;
+            background: #D15B80;
             color: white;
         }
 
@@ -313,30 +565,37 @@
         }
 
         .cart-header {
-            background: #FFD6E7;
-            padding: 18px 20px;
+            background: #FFF0F5;
+            padding: 16px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid rgba(209, 91, 128, 0.15);
         }
 
         .cart-header h2 {
-            font-size: 22px;
-            color: #222;
+            font-size: 20px;
+            color: #2D2529;
         }
 
         #close-cart {
-            width: 34px;
-            height: 34px;
+            width: 32px;
+            height: 32px;
             border: none;
             border-radius: 50%;
             background: white;
+            color: #D15B80;
             cursor: pointer;
-            font-size: 20px;
+            font-size: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        #close-cart:hover {
+            background: #D15B80;
+            color: white;
         }
 
         #cart-items {
@@ -377,7 +636,7 @@
         }
 
         .item-details p {
-            color: #ff4f88;
+            color: #D15B80;
             font-weight: bold;
             font-size: 14px;
             margin-bottom: 2px;
@@ -390,8 +649,8 @@
 
         .cart-item-delete-btn {
             background: #fff0f5;
-            border: 1px solid #ffd0df;
-            color: #ff4f88;
+            border: 1px solid rgba(209, 91, 128, 0.25);
+            color: #D15B80;
             width: 32px;
             height: 32px;
             border-radius: 50%;
@@ -406,9 +665,9 @@
         }
 
         .cart-item-delete-btn:hover {
-            background: #ff4f88;
+            background: #D15B80;
             color: white;
-            border-color: #ff4f88;
+            border-color: #D15B80;
             transform: scale(1.1);
         }
 
@@ -435,19 +694,20 @@
             display: block;
             text-align: center;
             margin-top: 18px;
-            padding: 14px;
-            background: #ff4f88;
+            padding: 13px;
+            background: #D15B80;
             color: white;
             border-radius: 12px;
             text-decoration: none;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
             cursor: pointer;
-            transition: .3s;
+            transition: .25s ease;
         }
 
         .checkout:hover {
-            background: #e83f76;
+            background: #B84368;
+            box-shadow: 0 4px 14px rgba(209, 91, 128, 0.3);
         }
 
         /* WhatsApp Button */
@@ -479,6 +739,10 @@
            RESPONSIVE: MOBILE & TABLET STYLES (Screen width <= 992px)
         ======================================================== */
         @media (max-width: 992px) {
+            .header-inner {
+                height: 58px;
+                padding: 0 18px;
+            }
 
             /* Hide desktop navigation and desktop elements */
             .desktop-nav {
@@ -509,10 +773,10 @@
                 max-width: 85vw;
                 height: 100vh;
                 background: white;
-                box-shadow: 5px 0 25px rgba(0, 0, 0, .15);
+                box-shadow: 5px 0 25px rgba(139, 58, 87, 0.12);
                 z-index: 99999;
                 transition: left 0.35s ease;
-                padding: 22px 20px;
+                padding: 20px 18px;
                 overflow-y: auto;
             }
 
@@ -524,28 +788,42 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                padding-bottom: 15px;
-                border-bottom: 1px solid #eee;
+                padding-bottom: 14px;
+                border-bottom: 1px solid #f2e8ed;
             }
 
-            .mobile-menu-title {
-                font-weight: 700;
-                color: #ff4f88;
-                font-size: 18px;
+            .mobile-logo-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                text-decoration: none;
+            }
+
+            .mobile-drawer-logo {
+                height: 38px;
+                width: 38px;
+                object-fit: contain;
+                display: block;
             }
 
             .close-nav-btn {
                 border: none;
-                background: #fff0f5;
+                background: #FFF0F5;
                 width: 32px;
                 height: 32px;
                 border-radius: 50%;
                 font-size: 20px;
                 cursor: pointer;
-                color: #444;
+                color: #D15B80;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                transition: all 0.2s ease;
+            }
+
+            .close-nav-btn:hover {
+                background: #D15B80;
+                color: white;
             }
 
             .mobile-search-container {
@@ -562,25 +840,26 @@
                 list-style: none;
                 display: flex;
                 flex-direction: column;
-                gap: 8px;
+                gap: 6px;
                 width: 100%;
-                margin-top: 18px;
+                margin-top: 16px;
+                padding: 0;
             }
 
             .mobile-nav-links li a {
                 display: block;
-                padding: 10px 12px;
-                font-size: 16px;
-                color: #222;
+                padding: 10px 14px;
+                font-size: 15px;
+                color: #333;
                 text-decoration: none;
-                border-radius: 8px;
+                border-radius: 10px;
                 transition: .2s;
                 font-weight: 500;
             }
 
             .mobile-nav-links li a:hover {
-                background: #fff0f5;
-                color: #ff4f88;
+                background: #FFF0F5;
+                color: #D15B80;
             }
 
             .mobile-dropdown {
@@ -592,12 +871,12 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                padding: 10px 12px;
-                border-radius: 8px;
+                padding: 10px 14px;
+                border-radius: 10px;
             }
 
             .mobile-dropdown-btn:hover {
-                background: #fff0f5;
+                background: #FFF0F5;
             }
 
             .mobile-dropdown-menu {
@@ -606,7 +885,7 @@
                 width: 100% !important;
                 box-shadow: none !important;
                 padding: 4px 0 4px 15px !important;
-                background: #fff8fb !important;
+                background: #FFF8FB !important;
                 border-radius: 8px !important;
                 margin-top: 4px !important;
                 border: none !important;
@@ -622,11 +901,13 @@
                 gap: 10px;
                 margin-top: 25px;
                 padding-top: 20px;
-                border-top: 1px solid #eee;
+                border-top: 1px solid #f2e8ed;
                 width: 100%;
             }
 
-            .mobile-auth-section .btn {
+            .mobile-auth-section .btn,
+            .mobile-auth-section .auth-btn,
+            .mobile-auth-section .auth-link {
                 justify-content: center;
                 width: 100%;
             }
@@ -639,7 +920,7 @@
                 left: 0;
                 width: 100vw;
                 height: 100vh;
-                background: rgba(0, 0, 0, .45);
+                background: rgba(0, 0, 0, .4);
                 z-index: 99998;
                 opacity: 0;
                 pointer-events: none;
@@ -654,12 +935,19 @@
         }
 
         @media (max-width: 576px) {
-            header {
-                padding: 10px 4%;
+            .header-inner {
+                height: 54px;
+                padding: 0 14px;
             }
 
-            .logo {
-                font-size: 19px;
+            .brand-logo-img {
+                height: 38px;
+                max-width: 140px;
+            }
+
+            .cart-btn {
+                padding: 6px 10px;
+                font-size: 13px;
             }
 
             .btn {
@@ -685,88 +973,92 @@
 <body>
 
     <header>
-        <!-- Logo -->
-        <a href="/" class="logo">
-            🌸 Crochet by 4
-        </a>
-
-        <!-- Desktop Navigation Menu (Visible ONLY on Desktop) -->
-        <nav class="desktop-nav">
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="{% url 'store:shop' %}">Shop</a></li>
-                <li class="dropdown">
-                    <button class="dropdown-toggle-btn" id="desktop-categories-btn" type="button"
-                        aria-label="Toggle categories">
-                        Categories <i class="fa-solid fa-chevron-down"></i>
-                    </button>
-                    <ul class="dropdown-menu" id="desktop-categories-menu">
-                        <li><a href="{% url 'store:shop' %}">All Categories</a></li>
-                        {% for category in categories %}
-                        <li><a href="{% url 'store:category_list' category.slug %}">{{ category.name }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-
-        <!-- Header Actions (Right Side) -->
-        <div class="header-actions">
-            <!-- Desktop Search Box (Visible ONLY on Desktop) -->
-            <div class="search-box desktop-search">
-                <input type="text" placeholder="Search items...">
-                <button type="submit">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </div>
-
-            <!-- Desktop Auth Section (Visible ONLY on Desktop) -->
-            <div class="desktop-auth">
-                {% if user.is_authenticated %}
-                <span class="welcome-user">👋 {{ user.username }}</span>
-                <a href="{% url 'account:logout' %}" class="btn">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                </a>
-                {% else %}
-                <a href="{% url 'account:login' %}" class="btn">
-                    <i class="fa-solid fa-user"></i> Login
-                </a>
-                <a href="{% url 'account:register' %}" class="btn">
-                    <i class="fa-solid fa-user-plus"></i> Register
-                </a>
-                {% endif %}
-            </div>
-
-            <!-- Basket Button (Visible on Both Desktop & Mobile) -->
-            <a href="{% url 'basket:basket_summary' %}" class="btn cart-btn">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <span class="basket-text">Basket</span>
-                <span id="basket-qty" class="basket-badge">
-                    {% with total_qty=basket|length %}
-                    {{ total_qty }}
-                    {% endwith %}
-                </span>
+        <div class="header-inner">
+            <!-- Brand Logo -->
+            <a href="/" class="logo" aria-label="Crochet by 4 Home">
+                <img src="{% static 'images/brand_logo.png' %}" alt="Crochet by 4" class="brand-logo-img">
             </a>
 
-            <!-- Mobile Hamburger Toggle Button (Visible ONLY on Mobile) -->
-            <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu">
-                <i class="fa-solid fa-bars"></i>
-            </button>
+            <!-- Desktop Navigation Menu (Visible ONLY on Desktop) -->
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="{% url 'store:shop' %}">Shop</a></li>
+                    <li class="dropdown">
+                        <button class="dropdown-toggle-btn" id="desktop-categories-btn" type="button"
+                            aria-label="Toggle categories">
+                            Categories <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <ul class="dropdown-menu" id="desktop-categories-menu">
+                            <li><a href="{% url 'store:shop' %}">All Categories</a></li>
+                            {% for category in categories %}
+                            <li><a href="{% url 'store:category_list' category.slug %}">{{ category.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li><a href="{% url 'store:contact' %}">Contact</a></li>
+                </ul>
+            </nav>
+
+            <!-- Header Actions (Right Side) -->
+            <div class="header-actions">
+                <!-- Desktop Search Box (Visible ONLY on Desktop) -->
+                <div class="search-box desktop-search">
+                    <input type="text" placeholder="Search handmade...">
+                    <button type="button" aria-label="Search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+
+                <!-- Desktop Auth Section (Visible ONLY on Desktop) -->
+                <div class="desktop-auth">
+                    {% if user.is_authenticated %}
+                    <span class="welcome-user">👋 {{ user.username }}</span>
+                    <a href="{% url 'account:logout' %}" class="auth-btn" title="Logout" aria-label="Logout">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </a>
+                    {% else %}
+                    <a href="{% url 'account:login' %}" class="auth-link">
+                        <i class="fa-solid fa-user"></i> Login
+                    </a>
+                    <a href="{% url 'account:register' %}" class="auth-btn auth-btn-primary">
+                        Register
+                    </a>
+                    {% endif %}
+                </div>
+
+                <!-- Basket Button (Visible on Both Desktop & Mobile) -->
+                <a href="{% url 'basket:basket_summary' %}" class="cart-btn" aria-label="View Shopping Basket">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="basket-text">Basket</span>
+                    <span id="basket-qty" class="basket-badge">
+                        {% with total_qty=basket|length %}
+                        {{ total_qty }}
+                        {% endwith %}
+                    </span>
+                </a>
+
+                <!-- Mobile Hamburger Toggle Button (Visible ONLY on Mobile) -->
+                <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
         </div>
     </header>
 
     <!-- Mobile Navigation Drawer (Visible ONLY on Mobile when toggled) -->
     <nav class="mobile-drawer" id="mobile-drawer">
         <div class="mobile-nav-header">
-            <span class="mobile-menu-title">🌸 Menu</span>
+            <a href="/" class="mobile-logo-link" aria-label="Crochet by 4 Home">
+                <img src="{% static 'images/brand_logo.png' %}" alt="Crochet by 4" class="mobile-drawer-logo">
+            </a>
             <button id="close-nav" class="close-nav-btn" aria-label="Close menu">&times;</button>
         </div>
 
         <div class="mobile-search-container">
             <div class="search-box">
-                <input type="text" placeholder="Search handmade items">
-                <button type="submit">
+                <input type="text" placeholder="Search handmade items...">
+                <button type="button" aria-label="Search">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
             </div>
@@ -786,21 +1078,21 @@
                     {% endfor %}
                 </ul>
             </li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="{% url 'store:contact' %}">Contact</a></li>
         </ul>
 
         <!-- Mobile Drawer Auth Buttons -->
         <div class="mobile-auth-section">
             {% if user.is_authenticated %}
-            <span class="welcome-user" style="text-align:center;">👋 Hi, {{ user.username }}</span>
-            <a href="{% url 'account:logout' %}" class="btn">
+            <span class="welcome-user" style="justify-content: center;">👋 Hi, {{ user.username }}</span>
+            <a href="{% url 'account:logout' %}" class="auth-btn" style="justify-content: center;">
                 <i class="fa-solid fa-right-from-bracket"></i> Logout
             </a>
             {% else %}
-            <a href="{% url 'account:login' %}" class="btn">
+            <a href="{% url 'account:login' %}" class="auth-link" style="justify-content: center;">
                 <i class="fa-solid fa-user"></i> Login
             </a>
-            <a href="{% url 'account:register' %}" class="btn">
+            <a href="{% url 'account:register' %}" class="auth-btn auth-btn-primary" style="justify-content: center;">
                 <i class="fa-solid fa-user-plus"></i> Register
             </a>
             {% endif %}

@@ -12,14 +12,16 @@ Checkout - Crochet Store
     width:90%;
     max-width:1150px;
     margin:40px auto;
+    font-family: var(--font-ui);
 }
 
 .checkout-title{
     text-align:center;
-    color:#ff4f88;
+    color:#D15B80;
     font-size:38px;
     font-weight:700;
     margin-bottom:35px;
+    font-family: var(--font-branding) !important;
 }
 
 .checkout-grid{
@@ -33,16 +35,17 @@ Checkout - Crochet Store
     background:#ffffff;
     padding:28px;
     border-radius:20px;
-    box-shadow:0 8px 25px rgba(255, 79, 136, 0.08);
-    border:1px solid #ffe8f0;
+    box-shadow:0 8px 25px rgba(209, 91, 128, 0.06);
+    border:1px solid rgba(209, 91, 128, 0.15);
     margin-bottom:22px;
 }
 
 .checkout-box h2{
     margin-bottom:18px;
-    color:#ff4f88;
+    color:#D15B80;
     font-size:20px;
     font-weight:600;
+    font-family: var(--font-branding) !important;
     display:flex;
     align-items:center;
     gap:10px;
@@ -52,10 +55,10 @@ Checkout - Crochet Store
     width:100%;
     padding:13px 16px;
     margin-bottom:15px;
-    border:1.5px solid #f0dce4;
+    border:1.5px solid rgba(209, 91, 128, 0.2);
     border-radius:12px;
     font-size:14px;
-    font-family:'Poppins',sans-serif;
+    font-family: var(--font-ui);
     outline:none;
     box-sizing:border-box;
     transition:all 0.25s ease;
@@ -63,8 +66,8 @@ Checkout - Crochet Store
 }
 
 .checkout-box input:not([type="radio"]):not([type="checkbox"]):focus{
-    border-color:#ff4f88;
-    box-shadow:0 0 0 4px rgba(255,79,136,0.12);
+    border-color:#D15B80;
+    box-shadow:0 0 0 4px rgba(209, 91, 128, 0.12);
 }
 
 .row{
@@ -81,16 +84,16 @@ Checkout - Crochet Store
     align-items:center;
     justify-content:space-between;
     padding:18px 20px;
-    background:linear-gradient(135deg, #fff7fa 0%, #ffffff 100%);
-    border:2px solid #ff4f88;
+    background:linear-gradient(135deg, #FFF8FB 0%, #ffffff 100%);
+    border:2px solid #D15B80;
     border-radius:16px;
     transition:all 0.3s ease;
-    box-shadow:0 4px 15px rgba(255,79,136,0.08);
+    box-shadow:0 4px 15px rgba(209, 91, 128, 0.08);
 }
 
 .payment-card:hover{
-    box-shadow:0 6px 20px rgba(255,79,136,0.15);
-    border-color:#e03e74;
+    box-shadow:0 6px 20px rgba(209, 91, 128, 0.15);
+    border-color:#B84368;
 }
 
 .payment-card-left{
@@ -102,15 +105,15 @@ Checkout - Crochet Store
 .payment-icon-wrapper{
     width:48px;
     height:48px;
-    background:linear-gradient(135deg, #ffd8e7 0%, #ffeaf2 100%);
+    background:#FFF0F5;
     border-radius:14px;
     display:flex;
     align-items:center;
     justify-content:center;
-    color:#ff4f88;
+    color:#D15B80;
     font-size:22px;
     flex-shrink:0;
-    border:1px solid #ffc0d6;
+    border:1px solid rgba(209, 91, 128, 0.25);
 }
 
 .payment-details strong{
@@ -119,43 +122,47 @@ Checkout - Crochet Store
     font-size:16px;
     font-weight:600;
     margin-bottom:3px;
+    font-family: var(--font-branding);
 }
 
 .payment-details span{
     display:block;
     color:#777;
     font-size:13px;
+    font-family: var(--font-ui);
 }
 
 .payment-selected-badge{
     display:inline-flex;
     align-items:center;
     gap:6px;
-    background:#ff4f88;
+    background:#D15B80;
     color:white;
     font-size:12px;
     font-weight:600;
+    font-family: var(--font-ui);
     padding:6px 14px;
     border-radius:20px;
-    box-shadow:0 3px 10px rgba(255,79,136,0.3);
+    box-shadow:0 3px 10px rgba(209, 91, 128, 0.25);
 }
 
 .payment-info-box{
     display:flex;
     align-items:flex-start;
     gap:12px;
-    background:#fff5f8;
-    border:1px solid #ffd0df;
+    background:#FFF8FB;
+    border:1px solid rgba(209, 91, 128, 0.18);
     border-radius:14px;
     padding:14px 16px;
     margin-top:16px;
     font-size:13px;
     color:#555;
     line-height:1.5;
+    font-family: var(--font-ui);
 }
 
 .payment-info-box i{
-    color:#ff4f88;
+    color:#D15B80;
     font-size:16px;
     margin-top:2px;
     flex-shrink:0;
@@ -171,29 +178,30 @@ Checkout - Crochet Store
     justify-content:center;
     gap:10px;
     padding:16px 24px;
-    background:linear-gradient(135deg, #ff4f88 0%, #ff3377 100%);
+    background:#D15B80;
     color:white !important;
     border:none;
     border-radius:14px;
     font-size:16px;
     font-weight:600;
+    font-family: var(--font-ui);
     text-decoration:none;
     cursor:pointer;
-    box-shadow:0 8px 22px rgba(255,79,136,0.35);
+    box-shadow:0 8px 22px rgba(209, 91, 128, 0.25);
     transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-sizing:border-box;
     margin-top:8px;
 }
 
 .continue-payment-btn:hover{
-    background:linear-gradient(135deg, #ff3377 0%, #e02868 100%);
+    background:#B84368;
     transform:translateY(-2px);
-    box-shadow:0 12px 28px rgba(255,79,136,0.48);
+    box-shadow:0 12px 28px rgba(209, 91, 128, 0.35);
 }
 
 .continue-payment-btn:active{
     transform:translateY(0);
-    box-shadow:0 4px 12px rgba(255,79,136,0.3);
+    box-shadow:0 4px 12px rgba(209, 91, 128, 0.2);
 }
 
 .continue-payment-btn i{
@@ -211,15 +219,17 @@ Checkout - Crochet Store
     background:white;
     padding:28px;
     border-radius:20px;
-    box-shadow:0 8px 25px rgba(255, 79, 136, 0.08);
-    border:1px solid #ffe8f0;
+    box-shadow:0 8px 25px rgba(209, 91, 128, 0.06);
+    border:1px solid rgba(209, 91, 128, 0.15);
     height:fit-content;
+    font-family: var(--font-ui);
 }
 
 .order-summary h2{
-    color:#ff4f88;
+    color:#D15B80;
     font-size:20px;
     font-weight:600;
+    font-family: var(--font-branding) !important;
     margin-bottom:20px;
     display:flex;
     align-items:center;
@@ -232,7 +242,7 @@ Checkout - Crochet Store
     margin-bottom:16px;
     align-items:center;
     padding-bottom:14px;
-    border-bottom:1px solid #fce8f0;
+    border-bottom:1px solid rgba(209, 91, 128, 0.12);
 }
 
 .summary-product:last-of-type{
@@ -244,30 +254,33 @@ Checkout - Crochet Store
     height:65px;
     object-fit:cover;
     border-radius:12px;
-    border:1px solid #ffe0eb;
+    border:1px solid rgba(209, 91, 128, 0.15);
 }
 
 .summary-product h4{
     font-size:15px;
     color:#333;
     margin-bottom:4px;
-    font-weight:500;
+    font-weight:600;
+    font-family: var(--font-branding);
 }
 
 .summary-product p{
     font-size:13px;
     color:#777;
     margin-bottom:4px;
+    font-family: var(--font-ui);
 }
 
 .summary-product strong{
-    color:#ff4f88;
+    color:#D15B80;
     font-size:14px;
+    font-family: var(--font-branding);
 }
 
 .summary-divider{
     border:none;
-    border-top:1.5px dashed #ffd0df;
+    border-top:1.5px dashed rgba(209, 91, 128, 0.2);
     margin:16px 0;
 }
 
@@ -277,15 +290,17 @@ Checkout - Crochet Store
     margin:12px 0;
     font-size:14px;
     color:#555;
+    font-family: var(--font-ui);
 }
 
 .summary-row.total{
     font-size:19px;
     font-weight:700;
-    color:#ff4f88;
+    color:#D15B80;
     margin-top:16px;
     padding-top:14px;
-    border-top:1.5px solid #ffe0eb;
+    border-top:1.5px solid rgba(209, 91, 128, 0.15);
+    font-family: var(--font-branding);
 }
 
 /* =========================
@@ -335,25 +350,59 @@ Checkout - Crochet Store
     <div class="checkout-grid">
 
         <!-- LEFT SIDE -->
-        <div class="checkout-form">
+        <form method="POST" action="{% url 'basket:checkout' %}" class="checkout-form">
+            {% csrf_token %}
 
             <!-- Contact -->
             <div class="checkout-box">
                 <h2><i class="fa-regular fa-envelope"></i> Contact</h2>
-                <input type="email" placeholder="Email Address">
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email Address"
+                    value="{% if checkout_info.email %}{{ checkout_info.email }}{% elif user.is_authenticated %}{{ user.email }}{% endif %}"
+                    required>
             </div>
 
             <!-- Delivery -->
             <div class="checkout-box">
                 <h2><i class="fa-solid fa-truck"></i> Delivery Information</h2>
                 <div class="row">
-                    <input type="text" placeholder="First Name">
-                    <input type="text" placeholder="Last Name">
+                    <input
+                        type="text"
+                        name="first_name"
+                        placeholder="First Name"
+                        value="{% if checkout_info.first_name %}{{ checkout_info.first_name }}{% elif user.is_authenticated %}{{ user.first_name }}{% endif %}"
+                        required>
+                    <input
+                        type="text"
+                        name="last_name"
+                        placeholder="Last Name"
+                        value="{% if checkout_info.last_name %}{{ checkout_info.last_name }}{% elif user.is_authenticated %}{{ user.last_name }}{% endif %}">
                 </div>
-                <input type="text" placeholder="Phone Number">
-                <input type="text" placeholder="Address">
-                <input type="text" placeholder="City">
-                <input type="text" placeholder="Postal Code">
+                <input
+                    type="text"
+                    name="phone"
+                    placeholder="Phone Number (e.g. 0313-XXXXXXX)"
+                    value="{{ checkout_info.phone }}"
+                    required>
+                <input
+                    type="text"
+                    name="address"
+                    placeholder="Street Address"
+                    value="{{ checkout_info.address }}"
+                    required>
+                <input
+                    type="text"
+                    name="city"
+                    placeholder="City"
+                    value="{{ checkout_info.city }}"
+                    required>
+                <input
+                    type="text"
+                    name="postal_code"
+                    placeholder="Postal Code"
+                    value="{{ checkout_info.postal_code }}">
             </div>
 
             <!-- Payment Method -->
@@ -366,30 +415,30 @@ Checkout - Crochet Store
                             <i class="fa-solid fa-building-columns"></i>
                         </div>
                         <div class="payment-details">
-                            <strong>🏦 Bank Deposit</strong>
-                            <span>Pay directly into our official bank account</span>
+                            <strong>🏦 Bank Deposit & 📱 Easypaisa</strong>
+                            <span>Pay directly via Bank Transfer or Easypaisa</span>
                         </div>
                     </div>
                     <span class="payment-selected-badge">
-                        <i class="fa-solid fa-check"></i> Selected
+                        <i class="fa-solid fa-check"></i> Available
                     </span>
                 </div>
 
                 <div class="payment-info-box">
                     <i class="fa-solid fa-circle-info"></i>
                     <div>
-                        Bank account title, account number, IBAN and payment receipt instructions will be provided on the next step.
+                        Account title, account number, IBAN and payment receipt instructions will be chosen on the next payment step.
                     </div>
                 </div>
             </div>
 
             <!-- Continue Button -->
-            <a href="{% url 'basket:billing' %}" class="continue-payment-btn">
+            <button type="submit" class="continue-payment-btn">
                 <span>Continue to Payment</span>
                 <i class="fa-solid fa-arrow-right"></i>
-            </a>
+            </button>
 
-        </div>
+        </form>
 
         <!-- RIGHT SIDE -->
         <div class="order-summary">

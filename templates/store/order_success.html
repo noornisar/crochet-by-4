@@ -1,0 +1,316 @@
+{% extends "store/base.html" %}
+{% load static %}
+
+{% block title %}
+Order Confirmed #{{ order.order_number }} - Crochet Store
+{% endblock %}
+
+{% block content %}
+
+<style>
+.success-container {
+    width: 90%;
+    max-width: 780px;
+    margin: 45px auto 70px;
+    font-family: var(--font-ui);
+}
+
+.success-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background: #FFF0F5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: #D15B80;
+    font-size: 38px;
+    border: 1px solid rgba(209, 91, 128, 0.2);
+    box-shadow: 0 8px 25px rgba(209, 91, 128, 0.15);
+}
+
+.success-title {
+    color: #D15B80;
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-family: var(--font-branding) !important;
+}
+
+.success-subtitle {
+    color: #666;
+    font-size: 16px;
+    font-family: var(--font-ui);
+}
+
+.success-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 8px 25px rgba(209, 91, 128, 0.06);
+    border: 1px solid rgba(209, 91, 128, 0.15);
+    margin-bottom: 25px;
+}
+
+.order-badge-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 18px;
+    border-bottom: 1.5px dashed rgba(209, 91, 128, 0.2);
+    margin-bottom: 20px;
+}
+
+.order-badge-row h3 {
+    margin: 0;
+    color: #222;
+    font-size: 18px;
+    font-family: var(--font-branding);
+    font-weight: 600;
+}
+
+.order-num-pill {
+    background: #D15B80;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 14px;
+    font-family: var(--font-ui);
+}
+
+.email-alert {
+    background: #FFF8FB;
+    border: 1px solid rgba(209, 91, 128, 0.2);
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-ui);
+}
+
+.email-alert i {
+    color: #D15B80;
+    font-size: 20px;
+}
+
+.order-items-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-family: var(--font-ui);
+}
+
+.order-items-table th {
+    text-align: left;
+    padding: 10px 12px;
+    background: #FFF8FB;
+    color: #D15B80;
+    font-size: 13.5px;
+    font-family: var(--font-branding);
+}
+
+.order-items-table td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(209, 91, 128, 0.12);
+    font-size: 14px;
+    font-family: var(--font-ui);
+}
+
+.totals-breakdown {
+    background: #FFF8FB;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-top: 15px;
+    font-family: var(--font-ui);
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14.5px;
+    color: #555;
+    margin-bottom: 8px;
+    font-family: var(--font-ui);
+}
+
+.grand-total-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 700;
+    color: #D15B80;
+    border-top: 1.5px solid rgba(209, 91, 128, 0.15);
+    padding-top: 12px;
+    margin-top: 10px;
+    font-family: var(--font-branding);
+}
+
+.whatsapp-box {
+    background: linear-gradient(135deg, #f0fff4 0%, #e6f9ed 100%);
+    border: 1.5px solid #a3e6be;
+    border-radius: 16px;
+    padding: 22px;
+    margin-top: 25px;
+    text-align: center;
+}
+
+.whatsapp-box h4 {
+    color: #128c7e;
+    font-size: 18px;
+    margin: 0 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.whatsapp-box p {
+    font-size: 14px;
+    color: #2a5840;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+.whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #25d366;
+    color: white !important;
+    text-decoration: none;
+    padding: 13px 26px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 15px;
+    font-family: var(--font-ui);
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);
+    transition: .25s;
+}
+
+.whatsapp-btn:hover {
+    background: #1eb857;
+    transform: translateY(-2px);
+}
+
+.actions-row {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.continue-btn {
+    display: inline-block;
+    background: #D15B80;
+    color: white !important;
+    text-decoration: none;
+    padding: 14px 34px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 16px;
+    font-family: var(--font-ui);
+    box-shadow: 0 6px 20px rgba(209, 91, 128, 0.25);
+    transition: all .25s ease;
+}
+
+.continue-btn:hover {
+    background: #B84368;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(209, 91, 128, 0.35);
+}
+</style>
+
+<div class="success-container">
+    <div class="success-header">
+        <div class="success-icon">
+            <i class="fa-solid fa-heart"></i>
+        </div>
+        <h1 class="success-title">Thank You for Your Order!</h1>
+        <p class="success-subtitle">Your handmade crochet pieces are being prepared with love.</p>
+    </div>
+
+    <div class="success-card">
+        <div class="order-badge-row">
+            <h3>Order Summary</h3>
+            <span class="order-num-pill">Order #{{ order.order_number }}</span>
+        </div>
+
+        <div class="email-alert">
+            <i class="fa-regular fa-envelope"></i>
+            <div>
+                An order confirmation has been emailed to <strong>{{ order.email }}</strong> with complete details.
+            </div>
+        </div>
+
+        <table class="order-items-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th style="text-align:center;">Qty</th>
+                    <th style="text-align:right;">Price</th>
+                    <th style="text-align:right;">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order.items.all %}
+                <tr>
+                    <td><strong>{{ item.product.title }}</strong></td>
+                    <td style="text-align:center;">{{ item.quantity }}</td>
+                    <td style="text-align:right;">Rs {{ item.price }}</td>
+                    <td style="text-align:right;">Rs {{ item.get_total_price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="totals-breakdown">
+            <div class="total-row">
+                <span>Subtotal</span>
+                <span>Rs {{ order.subtotal }}</span>
+            </div>
+            <div class="total-row">
+                <span>Shipping</span>
+                <span>Rs {{ order.shipping_cost }}</span>
+            </div>
+            <div class="total-row">
+                <span>Tax (10%)</span>
+                <span>Rs {{ order.tax }}</span>
+            </div>
+            <div class="grand-total-row">
+                <span>Grand Total</span>
+                <span>Rs {{ order.total_price }}</span>
+            </div>
+        </div>
+
+        <div class="whatsapp-box">
+            <h4><i class="fab fa-whatsapp"></i> Confirm Your Payment</h4>
+            <p>
+                To speed up dispatch, please take a screenshot of your <strong>Easypaisa or Bank Deposit receipt</strong> and share it with us on WhatsApp along with your Order Number (<strong>#{{ order.order_number }}</strong>).
+            </p>
+            <a
+                href="https://wa.me/923137975149?text=Hi%21%20I%20have%20placed%20Order%20%23{{ order.order_number }}%20at%20Crochet%20Store%20for%20Rs%20{{ order.total_price }}.%20Here%20is%20my%20payment%20slip."
+                target="_blank"
+                rel="noopener"
+                class="whatsapp-btn">
+                <i class="fab fa-whatsapp"></i> Share Receipt on WhatsApp (0313-7975149)
+            </a>
+        </div>
+    </div>
+
+    <div class="actions-row">
+        <a href="{% url 'store:shop' %}" class="continue-btn">
+            Continue Shopping 🌸
+        </a>
+    </div>
+</div>
+
+{% endblock %}

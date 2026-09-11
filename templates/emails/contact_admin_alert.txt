@@ -1,0 +1,11 @@
+New Contact Inquiry - {{ store_name }}
+==============================================
+Name:    {{ name }}
+Email:   {{ email }}
+Subject: {{ subject }}
+
+Message:
+----------------------------------------------
+{{ message }}
+----------------------------------------------
+Reply directly to this email to contact {{ name }} at {{ email }}.

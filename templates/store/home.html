@@ -8,63 +8,550 @@
 
 
  <style>
-    .hero{
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        padding:60px 8%;
-        background:#FFF4F8;
-        gap:40px;
+    /* =========================================================
+       SPLIT HERO SECTION: AUTO-SCROLLING PRODUCTS + BUSINESS INFO
+       ========================================================= */
+    .hero-split-section {
+        position: relative;
+        max-width: 1240px;
+        width: 92%;
+        margin: 28px auto 44px;
+        padding: 0;
     }
 
-    .hero-text{
-        flex:1;
-        max-width:600px;
+    .hero-split-grid {
+        display: grid;
+        grid-template-columns: 460px 1fr;
+        gap: 56px;
+        align-items: center;
     }
 
-    .hero-text h1{
-        font-size:48px;
-        color:#ff4f88;
-        margin-bottom:18px;
-        line-height:1.2;
+    /* LEFT COLUMN: AUTO-SCROLLING PRODUCTS FEED */
+    .hero-scroll-col {
+        position: relative;
+        width: 100%;
     }
 
-    .hero-text p{
-        font-size:16px;
-        line-height:1.7;
-        margin-bottom:28px;
-        color:#444;
+    .hero-scroll-window {
+        position: relative;
+        height: 520px;
+        overflow: hidden;
+        border-radius: 24px;
+        padding: 6px 4px;
+        -webkit-mask-image: linear-gradient(
+            to bottom,
+            transparent 0%,
+            black 6%,
+            black 94%,
+            transparent 100%
+        );
+        mask-image: linear-gradient(
+            to bottom,
+            transparent 0%,
+            black 6%,
+            black 94%,
+            transparent 100%
+        );
     }
 
-    .hero-image{
-        flex:1;
-        display:flex;
-        justify-content:center;
-        max-width:500px;
+    .hero-scroll-track {
+        display: flex;
+        flex-direction: column;
+        animation: heroVerticalScroll 26s linear infinite;
+        will-change: transform;
     }
 
-    .hero-image img{
-        width:100%;
-        max-width:450px;
-        height:auto;
-        border-radius:25px;
-        box-shadow:0 10px 25px rgba(0,0,0,0.15);
-        object-fit:cover;
+    .hero-scroll-window:hover .hero-scroll-track,
+    .hero-scroll-window:focus-within .hero-scroll-track {
+        animation-play-state: paused;
     }
 
-    .shop-btn{
-        background:#ff8fb1;
-        color:white;
-        padding:14px 32px;
-        border-radius:30px;
-        text-decoration:none;
-        font-weight:bold;
-        display:inline-block;
-        transition:.3s;
+    @keyframes heroVerticalScroll {
+        0% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY(-50%);
+        }
     }
 
-    .shop-btn:hover{
-        background:#ff4f88;
+    .scroll-track-group {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding-bottom: 16px;
+    }
+
+    /* PRODUCT CARD IN AUTO-SCROLL FEED */
+    .scroll-product-card {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        height: 138px;
+        border-radius: 20px;
+        overflow: hidden;
+        text-decoration: none;
+        box-shadow: 0 6px 20px rgba(45, 37, 41, 0.07);
+        transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease;
+        position: relative;
+    }
+
+    .scroll-product-card:hover {
+        transform: translateY(-3px) scale(1.015);
+        box-shadow: 0 12px 28px rgba(209, 91, 128, 0.22);
+    }
+
+    .scroll-card-media {
+        width: 38%;
+        min-width: 135px;
+        max-width: 155px;
+        position: relative;
+        overflow: hidden;
+        background: #f0f0f0;
+    }
+
+    .scroll-card-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+        transition: transform 0.4s ease;
+    }
+
+    .scroll-product-card:hover .scroll-card-img {
+        transform: scale(1.08);
+    }
+
+    .scroll-card-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 14px 18px;
+        min-width: 0;
+        position: relative;
+    }
+
+    .scroll-card-tag {
+        font-family: var(--font-branding), sans-serif;
+        font-size: 10.5px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        display: inline-block;
+        padding: 3px 8px;
+        border-radius: 12px;
+        margin-bottom: 4px;
+        width: fit-content;
+        max-width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .scroll-card-title {
+        font-family: var(--font-branding), sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 1.25;
+        margin: 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .scroll-card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: auto;
+        padding-top: 6px;
+    }
+
+    .scroll-card-price {
+        font-family: var(--font-branding), sans-serif;
+        font-size: 15.5px;
+        font-weight: 800;
+        letter-spacing: 0.2px;
+    }
+
+    .scroll-card-arrow {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        transition: transform 0.25s ease, background 0.25s ease;
+    }
+
+    .scroll-product-card:hover .scroll-card-arrow {
+        transform: translateX(3px);
+    }
+
+    /* 4 ALTERNATING COLOR THEMES MATCHING THE REFERENCE IMAGE & CROCHET BY 4 */
+    /* Theme 1: Soft Silver Cream / Warm Neutral */
+    .scroll-track-group > .scroll-product-card:nth-child(4n+1) .scroll-card-content {
+        background: #F8F4F6;
+        color: #2D2529;
+    }
+    .scroll-track-group > .scroll-product-card:nth-child(4n+1) .scroll-card-tag {
+        background: rgba(209, 91, 128, 0.12);
+        color: #D15B80;
+    }
+    .scroll-track-group > .scroll-product-card:nth-child(4n+1) .scroll-card-title {
+        color: #2D2529;
+    }
+    .scroll-track-group > .scroll-product-card:nth-child(4n+1) .scroll-card-price {
+        color: #D15B80;
+    }
+    .scroll-track-group > .scroll-product-card:nth-child(4n+1) .scroll-card-arrow {
+        background: rgba(209, 91, 128, 0.14);
+        color: #D15B80;
+    }
+
+    /* Theme 2: Signature Crimson Berry (Vibrant Brand Color like reference Card 2) */
+    .scroll-track-group > .scroll-product-card:nth-child(4n+2) .scroll-card-content {
+        background: linear-gradient(135deg, #D15B80 0%, #B84368 100%);
+        color: #ffffff;
+    }
+    .scroll-track-group > .scroll-product-card:nth-child(4n+2) .scroll-card-tag {
+        background: rgba(255, 255, 255, 0.22);
+        color: #ffffff;
+    }
+    .scroll-track-group > .scroll-product-card:nth-child(4n+2) .scroll-card-title {
+        color: #ffffff;
+    }
+    .scroll-track-group > .scroll-product-card:nth-child(4n+2) .scroll-card-price {
+        color: #FFF0F5;
+    }
+    .scroll-track-group > .scroll-product-card:nth-child(4n+2) .scroll-card-arrow {
+        background: rgba(255, 255, 255, 0.24);
+        color: #ffffff;
+    }
+
+    /* Theme 3: Gentle Soft Rose / Blush (like reference Card 3) */
+    .scroll-track-group > .scroll-product-card:nth-child(4n+3) .scroll-card-content {
+        background: #FCE8EE;
+        color: #381B26;
+    }
+    .scroll-track-group > .scroll-product-card:nth-child(4n+3) .scroll-card-tag {
+        background: rgba(184, 67, 104, 0.12);
+        color: #B84368;
+    }
+    .scroll-track-group > .scroll-product-card:nth-child(4n+3) .scroll-card-title {
+        color: #381B26;
+    }
+    .scroll-track-group > .scroll-product-card:nth-child(4n+3) .scroll-card-price {
+        color: #B84368;
+    }
+    .scroll-track-group > .scroll-product-card:nth-child(4n+3) .scroll-card-arrow {
+        background: rgba(184, 67, 104, 0.14);
+        color: #B84368;
+    }
+
+    /* Theme 4: Deep Wine / Midnight Plum (like reference Card 4) */
+    .scroll-track-group > .scroll-product-card:nth-child(4n+4) .scroll-card-content {
+        background: linear-gradient(135deg, #4A2338 0%, #341525 100%);
+        color: #ffffff;
+    }
+    .scroll-track-group > .scroll-product-card:nth-child(4n+4) .scroll-card-tag {
+        background: rgba(252, 231, 238, 0.18);
+        color: #FCE7EE;
+    }
+    .scroll-track-group > .scroll-product-card:nth-child(4n+4) .scroll-card-title {
+        color: #ffffff;
+    }
+    .scroll-track-group > .scroll-product-card:nth-child(4n+4) .scroll-card-price {
+        color: #FCE7EE;
+    }
+    .scroll-track-group > .scroll-product-card:nth-child(4n+4) .scroll-card-arrow {
+        background: rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+    }
+
+    /* RIGHT COLUMN: BUSINESS INFO HERO */
+    .hero-info-col {
+        padding: 10px 0 10px 10px;
+    }
+
+    .hero-eyebrow-wrap {
+        margin-bottom: 18px;
+    }
+
+    .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 14px;
+        background: rgba(209, 91, 128, 0.08);
+        border: 1px solid rgba(209, 91, 128, 0.2);
+        border-radius: 24px;
+        font-family: var(--font-ui), sans-serif;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        color: var(--brand-primary);
+    }
+
+    .hero-headline {
+        font-family: var(--font-branding), sans-serif !important;
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: 0.4px;
+        text-transform: uppercase;
+        color: #2D2529;
+        line-height: 1.24;
+        margin: 0 0 16px;
+    }
+
+    .hero-headline-highlight {
+        color: var(--brand-primary);
+        display: block;
+        font-weight: 800;
+    }
+
+    .hero-description {
+        font-family: var(--font-ui), sans-serif;
+        font-size: 16px;
+        line-height: 1.7;
+        color: #61555B;
+        margin: 0 0 26px;
+        max-width: 560px;
+    }
+
+    .hero-description strong {
+        color: #2D2529;
+        font-weight: 700;
+    }
+
+    .hero-perks-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 32px;
+    }
+
+    .hero-perk-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        padding: 8px 16px;
+        background: #ffffff;
+        border: 1px solid rgba(209, 91, 128, 0.18);
+        border-radius: 30px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        font-family: var(--font-ui), sans-serif;
+        font-size: 13.5px;
+        font-weight: 600;
+        color: #2D2529;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .hero-perk-pill:hover {
+        transform: translateY(-2px);
+        border-color: var(--brand-primary);
+    }
+
+    .hero-perk-pill i {
+        color: var(--brand-primary);
+        font-size: 14px;
+    }
+
+    .hero-actions-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    .hero-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--brand-gradient);
+        color: #ffffff !important;
+        text-decoration: none;
+        font-family: var(--font-ui), sans-serif;
+        font-size: 14.5px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        padding: 14px 34px;
+        border-radius: 30px;
+        box-shadow: 0 8px 22px rgba(209, 91, 128, 0.35);
+        transition: all 0.3s ease;
+    }
+
+    .hero-btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(209, 91, 128, 0.45);
+        background: linear-gradient(135deg, #B84368 0%, #A23255 100%);
+    }
+
+    .hero-btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: #ffffff;
+        color: var(--brand-primary) !important;
+        text-decoration: none;
+        font-family: var(--font-ui), sans-serif;
+        font-size: 14.5px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        padding: 13px 28px;
+        border-radius: 30px;
+        border: 2px solid rgba(209, 91, 128, 0.35);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+        transition: all 0.3s ease;
+    }
+
+    .hero-btn-secondary:hover {
+        background: #FFF0F5;
+        border-color: var(--brand-primary);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(209, 91, 128, 0.15);
+    }
+
+    .hero-btn-secondary i {
+        font-size: 17px;
+        color: #25D366;
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 1080px) {
+        .hero-split-grid {
+            grid-template-columns: 400px 1fr;
+            gap: 36px;
+        }
+
+        .hero-headline {
+            font-size: 28px;
+            line-height: 1.25;
+        }
+
+        .scroll-product-card {
+            height: 130px;
+        }
+
+        .scroll-card-media {
+            width: 36%;
+            min-width: 120px;
+        }
+    }
+
+    @media (max-width: 920px) {
+        .hero-split-grid {
+            grid-template-columns: 1fr;
+            gap: 36px;
+        }
+
+        .hero-info-col {
+            padding: 0;
+            text-align: center;
+            order: 1;
+        }
+
+        .hero-scroll-col {
+            order: 2;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        .hero-headline {
+            font-size: 26px;
+            line-height: 1.25;
+        }
+
+        .hero-description {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-perks-row {
+            justify-content: center;
+        }
+
+        .hero-actions-row {
+            justify-content: center;
+        }
+
+        .hero-scroll-window {
+            height: 440px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .hero-split-section {
+            width: 94%;
+            margin: 20px auto 32px;
+        }
+
+        .hero-headline {
+            font-size: 22px;
+            line-height: 1.26;
+            margin-bottom: 12px;
+        }
+
+        .hero-eyebrow {
+            font-size: 9.5px;
+            padding: 4px 10px;
+            letter-spacing: 1px;
+        }
+
+        .hero-description {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .hero-scroll-window {
+            height: 380px;
+            border-radius: 18px;
+        }
+
+        .scroll-product-card {
+            height: 118px;
+            border-radius: 16px;
+        }
+
+        .scroll-card-media {
+            width: 35%;
+            min-width: 105px;
+        }
+
+        .scroll-card-content {
+            padding: 10px 12px;
+        }
+
+        .scroll-card-tag {
+            font-size: 9.5px;
+            padding: 2px 6px;
+        }
+
+        .scroll-card-title {
+            font-size: 13px;
+        }
+
+        .scroll-card-price {
+            font-size: 13.5px;
+        }
+
+        .hero-perk-pill {
+            font-size: 12px;
+            padding: 6px 12px;
+        }
+
+        .hero-btn-primary, .hero-btn-secondary {
+            width: 100%;
+            justify-content: center;
+            font-size: 13.5px;
+            padding: 12px 20px;
+        }
     }
 
     .featured{
@@ -76,7 +563,7 @@
         text-align:center;
         font-size:36px;
         margin-bottom:40px;
-        color:#ff4f88;
+        color:#D15B80;
     }
 
     .products{
@@ -86,10 +573,11 @@
     }
 
     .card{
-        background:#fff8fb;
+        background:#ffffff;
+        border: 1px solid rgba(209, 91, 128, 0.14);
         padding:18px;
         border-radius:20px;
-        box-shadow:0 8px 20px rgba(0,0,0,.06);
+        box-shadow:0 8px 20px rgba(0,0,0,.04);
         text-align:center;
         transition:.3s;
         display:flex;
@@ -99,6 +587,8 @@
 
     .card:hover{
         transform:translateY(-6px);
+        box-shadow:0 12px 28px rgba(209, 91, 128, 0.12);
+        border-color: rgba(209, 91, 128, 0.3);
     }
 
     .card h3{
@@ -113,18 +603,18 @@
     }
 
     .card h3 a:hover{
-        color:#ff4f88;
+        color:#D15B80;
     }
 
     .price{
         font-size:20px;
-        color:#ff4f88;
+        color:#D15B80;
         font-weight:bold;
         margin:10px 0 14px;
     }
 
     .buy-btn{
-        background:#ff8fb1;
+        background:#D15B80;
         padding:10px 22px;
         color:white;
         text-decoration:none;
@@ -136,11 +626,14 @@
     }
 
     .buy-btn:hover{
-        background:#ff4f88;
+        background:#B84368;
+        box-shadow:0 4px 14px rgba(209, 91, 128, 0.3);
     }
 
     .why{
-        background:#FFEAF2;
+        background:#FFF7FA;
+        border-top: 1px solid rgba(209, 91, 128, 0.15);
+        border-bottom: 1px solid rgba(209, 91, 128, 0.15);
         padding:60px 8%;
     }
 
@@ -159,6 +652,7 @@
 
     .why-box div{
         background:white;
+        border: 1px solid rgba(209, 91, 128, 0.12);
         padding:25px 20px;
         border-radius:18px;
         text-align:center;
@@ -167,7 +661,7 @@
 
     .why-box h3{
         margin-bottom:10px;
-        color:#ff4f88;
+        color:#D15B80;
         font-size:18px;
     }
 
@@ -231,7 +725,7 @@
 
     .prev:hover,
     .next:hover{
-        background:#ff4f88;
+        background:#D15B80;
         color:white;
     }
 
@@ -323,33 +817,124 @@
         }
     }
  </style>
- <!-- Hero Section -->
+<!-- ==============================================
+     SPLIT HERO SECTION: AUTO-SCROLLING PRODUCTS + BUSINESS INFO
+============================================== -->
+<section class="hero-split-section" id="hero-split-section">
+    <div class="hero-split-grid">
+        <!-- LEFT COLUMN: VERTICAL AUTO-SCROLLING PRODUCT FEED -->
+        <div class="hero-scroll-col" aria-label="Auto-scrolling Featured Products">
+            <div class="hero-scroll-window" id="hero-scroll-window">
+                <div class="hero-scroll-track" id="hero-scroll-track">
+                    <!-- Primary Set of Product Cards -->
+                    <div class="scroll-track-group">
+                        {% for product in scroll_products %}
+                        <a href="{{ product.get_absolute_url }}" class="scroll-product-card" title="{{ product.title }}">
+                            <div class="scroll-card-media">
+                                {% with product.images.first as img %}
+                                {% if img %}
+                                <img src="{{ img.image.url }}" alt="{{ product.title }}" class="scroll-card-img" loading="lazy">
+                                {% else %}
+                                <img src="{% static 'images/no-image.png' %}" alt="{{ product.title }}" class="scroll-card-img" loading="lazy">
+                                {% endif %}
+                                {% endwith %}
+                            </div>
+                            <div class="scroll-card-content">
+                                <span class="scroll-card-tag">
+                                    🌸 {{ product.category.name|default:"Handmade" }}
+                                </span>
+                                <h3 class="scroll-card-title">{{ product.title }}</h3>
+                                <div class="scroll-card-footer">
+                                    <span class="scroll-card-price">Rs {{ product.price }}</span>
+                                    <span class="scroll-card-arrow" aria-hidden="true">
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
 
-<section class="hero">
+                    <!-- Duplicate Set for 100% Seamless Infinite Scroll Loop -->
+                    <div class="scroll-track-group" aria-hidden="true">
+                        {% for product in scroll_products %}
+                        <a href="{{ product.get_absolute_url }}" class="scroll-product-card" tabindex="-1">
+                            <div class="scroll-card-media">
+                                {% with product.images.first as img %}
+                                {% if img %}
+                                <img src="{{ img.image.url }}" alt="" class="scroll-card-img" loading="lazy">
+                                {% else %}
+                                <img src="{% static 'images/no-image.png' %}" alt="" class="scroll-card-img" loading="lazy">
+                                {% endif %}
+                                {% endwith %}
+                            </div>
+                            <div class="scroll-card-content">
+                                <span class="scroll-card-tag">
+                                    🌸 {{ product.category.name|default:"Handmade" }}
+                                </span>
+                                <span class="scroll-card-title">{{ product.title }}</span>
+                                <div class="scroll-card-footer">
+                                    <span class="scroll-card-price">Rs {{ product.price }}</span>
+                                    <span class="scroll-card-arrow">
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <div class="hero-text">
+        <!-- RIGHT COLUMN: BUSINESS INFO & BRAND STORY -->
+        <div class="hero-info-col">
+            <div class="hero-eyebrow-wrap">
+                <span class="hero-eyebrow">
+                    <i class="fa-solid fa-heart" style="color: var(--brand-primary);"></i>
+                    100% Handmade in Pakistan
+                </span>
+            </div>
+            
+            <h1 class="hero-headline">
+                CHERISHED MOMENTS<br>
+                ALWAYS BEGIN WITH<br>
+                <span class="hero-headline-highlight">CROCHET BY 4</span>
+            </h1>
 
-        <h1>
-            Handmade Crochet Creations
-        </h1>
+            <p class="hero-description">
+                Welcome to <strong>Crochet by 4</strong> — where passion and creativity meet craftsmanship. 
+                We create eternal handmade flower bouquets that never wilt, adorable amigurumi plushies, 
+                stylish accessories, and bespoke customized gifts designed specially to make your moments unforgettable.
+            </p>
 
-        <p>
+            <div class="hero-perks-row">
+                <div class="hero-perk-pill">
+                    <i class="fa-solid fa-hand-holding-heart"></i>
+                    <span>100% Handcrafted</span>
+                </div>
+                <div class="hero-perk-pill">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>Custom Orders</span>
+                </div>
+                <div class="hero-perk-pill">
+                    <i class="fa-solid fa-truck-fast"></i>
+                    <span>Nationwide Delivery</span>
+                </div>
+            </div>
 
-            Welcome to Crochet Store!
-
-            We create beautiful handmade crochet items crafted with love and care.
-
-            We also accept customized orders including bouquets, bags, keychains,
-            teddy bears, flowers, baby gifts, home décor and much more.
-
-        </p>
-
-        <a href="#" class="shop-btn">
-            Shop Now
-        </a>
-
+            <div class="hero-actions-row">
+                <a href="{% url 'store:shop' %}" class="hero-btn-primary">
+                    <span>Explore Collection</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="{% url 'store:contact' %}" class="hero-btn-secondary">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>Custom Request</span>
+                </a>
+            </div>
+        </div>
     </div>
-    
 </section>
 
 
@@ -459,206 +1044,77 @@
 </div>
 
 <script>
-
-document.addEventListener("DOMContentLoaded", function(){
-
-    const sliders = document.querySelectorAll(".product-slider");
-
-    sliders.forEach(function(slider){
-
-        const slides = slider.querySelectorAll("img");
-
-        let current = 0;
-
-        if(slides.length > 1){
-
-            setInterval(function(){
-
-                slides[current].classList.remove("active");
-
-                current++;
-
-                if(current >= slides.length){
-
-                    current = 0;
-
-                }
-
-                slides[current].classList.add("active");
-
-            }, 2000);
-
-        }
-
-    });
-
-});
-
-
-
-document.querySelectorAll(".product-slider").forEach(function(slider){
-
-    let slides = slider.querySelectorAll(".slide");
-
-    if(slides.length <= 1){
-        return;
+document.addEventListener("DOMContentLoaded", function () {
+    /* Auto-scroll feed touch pause/resume for mobile */
+    const scrollWindow = document.getElementById("hero-scroll-window");
+    const scrollTrack = document.getElementById("hero-scroll-track");
+    if (scrollWindow && scrollTrack) {
+        scrollWindow.addEventListener("touchstart", function () {
+            scrollTrack.style.animationPlayState = "paused";
+        }, { passive: true });
+        scrollWindow.addEventListener("touchend", function () {
+            scrollTrack.style.animationPlayState = "running";
+        }, { passive: true });
     }
 
-    let current = 0;
+    /* =========================================================
+       2. FEATURED PRODUCTS GRID: MULTI-IMAGE THUMBNAIL SLIDERS
+       ========================================================= */
+    const productSliders = document.querySelectorAll(".product-slider");
+    productSliders.forEach(function (slider) {
+        const slides = slider.querySelectorAll("img");
+        const prev = slider.querySelector(".prev");
+        const next = slider.querySelector(".next");
+        if (!slides || slides.length <= 1) return;
 
-    function showSlide(index){
+        let cur = 0;
+        let cardTimer = null;
 
-        slides.forEach(function(img){
+        function setSlide(i) {
+            slides.forEach(function (img) {
+                img.classList.remove("active");
+            });
+            slides[i].classList.add("active");
+            cur = i;
+        }
 
-            img.classList.remove("active");
+        function advance() {
+            setSlide((cur + 1) % slides.length);
+        }
 
+        function retreat() {
+            setSlide((cur - 1 + slides.length) % slides.length);
+        }
+
+        if (next) {
+            next.addEventListener("click", function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                advance();
+            });
+        }
+
+        if (prev) {
+            prev.addEventListener("click", function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                retreat();
+            });
+        }
+
+        slider.addEventListener("mouseenter", function () {
+            cardTimer = setInterval(advance, 1800);
         });
 
-        slides[index].classList.add("active");
-
-    }
-
-    function nextSlide(){
-
-        current++;
-
-        if(current >= slides.length){
-
-            current = 0;
-
-        }
-
-        showSlide(current);
-
-    }
-
-    function prevSlide(){
-
-        current--;
-
-        if(current < 0){
-
-            current = slides.length-1;
-
-        }
-
-        showSlide(current);
-
-    }
-
-    slider.querySelector(".next").addEventListener("click",function(e){
-
-        e.preventDefault();
-
-        nextSlide();
-
-    });
-
-    slider.querySelector(".prev").addEventListener("click",function(e){
-
-        e.preventDefault();
-
-        prevSlide();
-
-    });
-
-    setInterval(nextSlide,3000);
-
-});document.addEventListener("DOMContentLoaded", function () {
-
-    document.querySelectorAll(".product-slider").forEach(function(slider){
-
-        const slides = slider.querySelectorAll("img");
-
-        const prev = slider.querySelector(".prev");
-
-        const next = slider.querySelector(".next");
-
-        let current = 0;
-
-        function showSlide(index){
-
-            slides.forEach(function(img){
-
-                img.classList.remove("active");
-
-            });
-
-            slides[index].classList.add("active");
-
-        }
-
-        function nextSlide(){
-
-            current++;
-
-            if(current >= slides.length){
-
-                current = 0;
-
+        slider.addEventListener("mouseleave", function () {
+            if (cardTimer) {
+                clearInterval(cardTimer);
+                cardTimer = null;
             }
-
-            showSlide(current);
-
-        }
-
-        function prevSlide(){
-
-            current--;
-
-            if(current < 0){
-
-                current = slides.length - 1;
-
-            }
-
-            showSlide(current);
-
-        }
-
-        if(slides.length > 1){
-
-            let interval = setInterval(nextSlide,3000);
-
-            next.addEventListener("click",function(e){
-
-                e.preventDefault();
-
-                e.stopPropagation();
-
-                nextSlide();
-
-            });
-
-            prev.addEventListener("click",function(e){
-
-                e.preventDefault();
-
-                e.stopPropagation();
-
-                prevSlide();
-
-            });
-
-            slider.addEventListener("mouseenter",function(){
-
-                clearInterval(interval);
-
-            });
-
-            slider.addEventListener("mouseleave",function(){
-
-                interval = setInterval(nextSlide,3000);
-
-            });
-
-        }
-
+            setSlide(0);
+        });
     });
-
 });
-
-
 </script>
 
- {% endblock%}
+{% endblock %}

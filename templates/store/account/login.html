@@ -15,7 +15,8 @@ Login
     justify-content:center;
     align-items:center;
     padding:60px 20px;
-    background:#fff8fb;
+    background:#FFF7FA;
+    font-family: var(--font-ui);
 }
 
 .login-card{
@@ -24,102 +25,99 @@ Login
     background:white;
     padding:35px 25px;
     border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    border: 1px solid rgba(209, 91, 128, 0.15);
+    box-shadow:0 10px 30px rgba(209, 91, 128, 0.08);
 }
 
 .login-card h1{
-
     text-align:center;
-    color:#ff4f88;
+    color:#D15B80;
     margin-bottom:10px;
+    font-family: var(--font-branding) !important;
+    font-size: 30px;
+    font-weight: 700;
 }
 
 .login-card p{
-
     text-align:center;
     color:#666;
     margin-bottom:35px;
+    font-family: var(--font-ui);
 }
 
 .form-group{
-
     margin-bottom:22px;
 }
 
 .form-group label{
-
     display:block;
     margin-bottom:8px;
     font-weight:600;
     color:#444;
+    font-family: var(--font-ui);
 }
 
 .form-control{
-
     width:100%;
     padding:13px 15px;
-    border:2px solid #ffd6e7;
+    border:1.5px solid rgba(209, 91, 128, 0.2);
     border-radius:10px;
     font-size:15px;
+    font-family: var(--font-ui);
     outline:none;
     transition:.3s;
 }
 
 .form-control:focus{
-
-    border-color:#ff4f88;
-    box-shadow:0 0 8px rgba(255,79,136,.2);
-
+    border-color:#D15B80;
+    box-shadow:0 0 0 3px rgba(209, 91, 128, 0.15);
 }
 
 .login-btn{
-
     width:100%;
     padding:14px;
-    background:#ff4f88;
+    background:#D15B80;
     color:white;
     border:none;
     border-radius:10px;
     font-size:16px;
     font-weight:600;
+    font-family: var(--font-ui);
     cursor:pointer;
     transition:.3s;
 }
 
 .login-btn:hover{
-
-    background:#ff2f72;
-
+    background:#B84368;
+    box-shadow: 0 6px 18px rgba(209, 91, 128, 0.25);
 }
 
 .extra-links{
-
     display:flex;
     justify-content:space-between;
     margin-top:20px;
     font-size:14px;
+    font-family: var(--font-ui);
 }
 
 .extra-links a{
-
-    color:#ff4f88;
+    color:#D15B80;
     text-decoration:none;
     font-weight:500;
 }
 
 .extra-links a:hover{
-
     text-decoration:underline;
 }
 
 .error-message{
-
     background:#ffe8ef;
     color:#d6336c;
     border-radius:8px;
     padding:10px;
     margin-bottom:20px;
     text-align:center;
+    font-family: var(--font-ui);
 }
 
 </style>
@@ -131,6 +129,14 @@ Login
         <h1>🌸 Welcome Back</h1>
 
         <p>Login to continue shopping beautiful handmade crochet products.</p>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div style="background: #e6f9ed; color: #155724; border: 1px solid #c3e6cb; border-radius: 8px; padding: 12px; margin-bottom: 20px; font-size: 14px; text-align: center;">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
 
         {% if form.errors %}
         <div class="error-message">
@@ -170,7 +176,7 @@ Login
 
         <div class="extra-links">
 
-            <a href="#">Forgot Password?</a>
+            <a href="{% url 'account:password_reset' %}">Forgot Password?</a>
 
             <a href="{% url 'account:register' %}">
                 Create Account

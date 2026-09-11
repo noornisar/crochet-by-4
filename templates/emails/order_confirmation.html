@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation #{{ order_number }} - {{ store_name }}</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #fff8fb;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #333333;
+            -webkit-font-smoothing: antialiased;
+        }
+        .wrapper {
+            width: 100%;
+            background-color: #fff8fb;
+            padding: 30px 15px;
+            box-sizing: border-box;
+        }
+        .email-card {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(209, 91, 128, 0.08);
+            border: 1px solid rgba(209, 91, 128, 0.15);
+        }
+        .header {
+            background: #D15B80;
+            padding: 32px 25px;
+            text-align: center;
+            color: #ffffff;
+        }
+        .header h1 {
+            margin: 0 0 6px;
+            font-size: 24px;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+        }
+        .header p {
+            margin: 0;
+            font-size: 14px;
+            opacity: 0.92;
+        }
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+        .content {
+            padding: 30px 25px;
+            line-height: 1.6;
+            font-size: 14.5px;
+            color: #4a4a4a;
+        }
+        .greeting {
+            font-size: 17px;
+            font-weight: 600;
+            color: #222222;
+            margin-bottom: 12px;
+        }
+        .meta-box {
+            display: table;
+            width: 100%;
+            background-color: #FFF8FB;
+            border: 1px solid rgba(209, 91, 128, 0.2);
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin: 18px 0 24px;
+            box-sizing: border-box;
+        }
+        .meta-row {
+            display: table-row;
+        }
+        .meta-cell {
+            display: table-cell;
+            padding: 4px 8px;
+            font-size: 13.5px;
+        }
+        .meta-cell strong {
+            color: #222222;
+        }
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .items-table th {
+            text-align: left;
+            padding: 10px 12px;
+            background-color: #FFF0F5;
+            color: #D15B80;
+            font-size: 13px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            border-bottom: 2px solid rgba(209, 91, 128, 0.2);
+        }
+        .items-table td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(209, 91, 128, 0.12);
+            font-size: 14px;
+            vertical-align: middle;
+        }
+        .product-name {
+            font-weight: 600;
+            color: #333333;
+        }
+        .text-right {
+            text-align: right;
+        }
+        .totals-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .totals-table td {
+            padding: 6px 12px;
+            font-size: 14px;
+            color: #555555;
+        }
+        .totals-table tr.grand-total td {
+            font-size: 18px;
+            font-weight: 700;
+            color: #D15B80;
+            padding-top: 12px;
+            border-top: 2px solid rgba(209, 91, 128, 0.2);
+            font-family: 'Poppins', sans-serif;
+        }
+        .whatsapp-box {
+            background-color: #f0fff4;
+            border: 1.5px solid #a3e6be;
+            border-radius: 12px;
+            padding: 16px 18px;
+            margin: 25px 0 15px;
+            color: #1e5a3a;
+            font-size: 13.5px;
+            line-height: 1.55;
+        }
+        .whatsapp-box strong {
+            color: #0d6e3f;
+        }
+        .footer {
+            background-color: #FFF0F5;
+            padding: 22px 25px;
+            text-align: center;
+            font-size: 12.5px;
+            color: #888888;
+            border-top: 1px solid rgba(209, 91, 128, 0.15);
+        }
+        .footer a {
+            color: #D15B80;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="email-card">
+            <div class="header">
+                <h1>🌸 {{ store_name }}</h1>
+                <p>Order Confirmed &bull; Thank You For Your Purchase!</p>
+                <div class="badge">Order #{{ order_number }}</div>
+            </div>
+
+            <div class="content">
+                <div class="greeting">Hi {{ customer_name }},</div>
+                <p>We are thrilled to let you know that we have received your order! Our crochet artisans are preparing your handmade creations with love and utmost care.</p>
+
+                <!-- Order Details Summary -->
+                <div class="meta-box">
+                    <div class="meta-row">
+                        <div class="meta-cell"><strong>Order Number:</strong> #{{ order_number }}</div>
+                        <div class="meta-cell"><strong>Date:</strong> {{ order_date|date:"F j, Y, g:i A" }}</div>
+                    </div>
+                    <div class="meta-row">
+                        <div class="meta-cell"><strong>Customer Email:</strong> {{ customer_email }}</div>
+                        <div class="meta-cell"><strong>Payment Method:</strong> {{ order.payment_method|title }}</div>
+                    </div>
+                    {% if order.address %}
+                    <div class="meta-row">
+                        <div class="meta-cell" style="padding-top:6px;" colspan="2">
+                            <strong>Shipping To:</strong> {{ order.address }}{% if order.city %}, {{ order.city }}{% endif %}{% if order.postal_code %} ({{ order.postal_code }}){% endif %}{% if order.phone %} &bull; Tel: {{ order.phone }}{% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Products Table -->
+                <table class="items-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th class="text-right">Qty</th>
+                            <th class="text-right">Price</th>
+                            <th class="text-right">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <tr>
+                            <td class="product-name">{{ item.product.title }}</td>
+                            <td class="text-right">{{ item.quantity }}</td>
+                            <td class="text-right">Rs {{ item.price }}</td>
+                            <td class="text-right"><strong>Rs {{ item.get_total_price }}</strong></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <!-- Totals -->
+                <table class="totals-table">
+                    <tr>
+                        <td class="text-right">Subtotal:</td>
+                        <td class="text-right" style="width: 110px;">Rs {{ subtotal }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-right">Shipping Charges:</td>
+                        <td class="text-right">Rs {{ shipping_cost }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-right">Tax (10%):</td>
+                        <td class="text-right">Rs {{ tax }}</td>
+                    </tr>
+                    <tr class="grand-total">
+                        <td class="text-right">Grand Total:</td>
+                        <td class="text-right">Rs {{ total_price }}</td>
+                    </tr>
+                </table>
+
+                <!-- WhatsApp Verification Notice -->
+                <div class="whatsapp-box">
+                    <strong>📱 Payment Slip Verification:</strong><br>
+                    If you paid via Easypaisa or Bank Transfer, please send a screenshot of your payment receipt / Transaction ID to our official WhatsApp at <strong>0313-7975149</strong> with your Order Number (<strong>#{{ order_number }}</strong>) so we can dispatch your parcel promptly!
+                </div>
+
+                <p style="margin-top: 20px; font-size: 13.5px; color: #777;">
+                    If you have any questions regarding your order, feel free to reply directly to this email or chat with us on WhatsApp at <strong>0313-7975149</strong>.
+                </p>
+            </div>
+
+            <div class="footer">
+                <p style="margin: 0 0 6px;">&copy; {{ store_name }}. Thank you for supporting handmade craft!</p>
+                <p style="margin: 0;">Sent to {{ customer_email }} &bull; <a href="http://{{ site_domain }}/">Visit Crochet Store</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

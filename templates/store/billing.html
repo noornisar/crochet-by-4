@@ -15,36 +15,39 @@ Billing & Payment - Crochet by 4
     width: 92%;
     max-width: 840px;
     margin: 40px auto 60px;
+    font-family: var(--font-ui);
 }
 
 .billing-header-title {
     text-align: center;
-    color: #ff4f88;
+    color: #D15B80;
     font-size: 36px;
     font-weight: 700;
     margin-bottom: 30px;
+    font-family: var(--font-branding) !important;
 }
 
 /* =========================
-   CARDS (Pink & White Theme)
+   CARDS (Brand Theme)
 ========================= */
 .billing-card {
     background: #ffffff;
     border-radius: 20px;
     padding: 30px;
-    box-shadow: 0 8px 25px rgba(255, 79, 136, 0.08);
-    border: 1px solid #ffe8f0;
+    box-shadow: 0 8px 25px rgba(209, 91, 128, 0.06);
+    border: 1px solid rgba(209, 91, 128, 0.15);
     margin-bottom: 24px;
 }
 
 .section-title {
-    color: #ff4f88;
+    color: #D15B80;
     font-size: 22px;
     font-weight: 600;
     margin-bottom: 22px;
     display: flex;
     align-items: center;
     gap: 10px;
+    font-family: var(--font-branding) !important;
 }
 
 /* =========================
@@ -56,7 +59,7 @@ Billing & Payment - Crochet by 4
     gap: 16px;
     padding-bottom: 16px;
     margin-bottom: 16px;
-    border-bottom: 1px solid #fcebf2;
+    border-bottom: 1px solid rgba(209, 91, 128, 0.12);
 }
 
 .order-product-item:last-of-type {
@@ -70,7 +73,7 @@ Billing & Payment - Crochet by 4
     height: 72px;
     object-fit: cover;
     border-radius: 14px;
-    border: 1.5px solid #ffd6e6;
+    border: 1.5px solid rgba(209, 91, 128, 0.2);
     flex-shrink: 0;
 }
 
@@ -83,24 +86,27 @@ Billing & Payment - Crochet by 4
     color: #2d2d2d;
     margin-bottom: 4px;
     font-weight: 600;
+    font-family: var(--font-branding);
 }
 
 .order-product-details p {
     font-size: 13px;
     color: #777;
     margin: 0;
+    font-family: var(--font-ui);
 }
 
 .order-item-price {
     font-size: 16px;
     font-weight: 700;
-    color: #ff4f88;
+    color: #D15B80;
     white-space: nowrap;
+    font-family: var(--font-branding);
 }
 
 .order-summary-divider {
     border: none;
-    border-top: 1.5px dashed #ffd0df;
+    border-top: 1.5px dashed rgba(209, 91, 128, 0.2);
     margin: 20px 0;
 }
 
@@ -110,6 +116,7 @@ Billing & Payment - Crochet by 4
     font-size: 15px;
     color: #555;
     margin-bottom: 12px;
+    font-family: var(--font-ui);
 }
 
 .summary-total-line {
@@ -120,11 +127,12 @@ Billing & Payment - Crochet by 4
     color: #2d2d2d;
     margin-top: 18px;
     padding-top: 16px;
-    border-top: 1.5px solid #ffd6e6;
+    border-top: 1.5px solid rgba(209, 91, 128, 0.15);
+    font-family: var(--font-branding);
 }
 
 .summary-total-line .total-price {
-    color: #ff4f88;
+    color: #D15B80;
     font-size: 24px;
 }
 
@@ -142,23 +150,24 @@ Billing & Payment - Crochet by 4
     align-items: center;
     justify-content: space-between;
     padding: 18px 20px;
-    border: 2px solid #f0dce4;
+    border: 2px solid rgba(209, 91, 128, 0.18);
     border-radius: 16px;
     background: #ffffff;
     cursor: pointer;
     transition: all 0.25s ease;
+    font-family: var(--font-ui);
 }
 
 .payment-method-card:hover {
-    border-color: #ff9fbd;
-    background: #fffbfe;
+    border-color: #D15B80;
+    background: #FFF8FB;
 }
 
 .payment-method-card.active,
 .payment-method-card:has(input:checked) {
-    border-color: #ff4f88;
-    background: linear-gradient(135deg, #fff7fa 0%, #ffffff 100%);
-    box-shadow: 0 4px 15px rgba(255, 79, 136, 0.12);
+    border-color: #D15B80;
+    background: linear-gradient(135deg, #FFF8FB 0%, #ffffff 100%);
+    box-shadow: 0 4px 15px rgba(209, 91, 128, 0.12);
 }
 
 .payment-method-left {
@@ -170,7 +179,7 @@ Billing & Payment - Crochet by 4
 .payment-method-card input[type="radio"] {
     width: 20px;
     height: 20px;
-    accent-color: #ff4f88;
+    accent-color: #D15B80;
     cursor: pointer;
 }
 
@@ -179,11 +188,13 @@ Billing & Payment - Crochet by 4
     font-size: 16px;
     color: #2d2d2d;
     margin-bottom: 2px;
+    font-family: var(--font-branding);
 }
 
 .payment-method-text span {
     font-size: 13px;
     color: #777;
+    font-family: var(--font-ui);
 }
 
 /* =========================
@@ -191,12 +202,13 @@ Billing & Payment - Crochet by 4
 ========================= */
 .details-box {
     display: none;
-    background: #fff8fb;
-    border: 1.5px solid #ffd0df;
+    background: #FFF8FB;
+    border: 1.5px solid rgba(209, 91, 128, 0.2);
     border-radius: 16px;
     padding: 22px;
     margin-top: 14px;
     animation: fadeIn 0.3s ease;
+    font-family: var(--font-ui);
 }
 
 @keyframes fadeIn {
@@ -211,7 +223,7 @@ Billing & Payment - Crochet by 4
     background: white;
     padding: 16px 18px;
     border-radius: 14px;
-    border: 1px solid #ffe3ed;
+    border: 1px solid rgba(209, 91, 128, 0.15);
     margin-bottom: 18px;
 }
 
@@ -292,13 +304,14 @@ Billing & Payment - Crochet by 4
     margin-top: 24px;
     padding: 16px 24px;
     border: none;
-    background: linear-gradient(135deg, #ff4f88 0%, #ff3377 100%);
+    background: #D15B80;
     color: white;
     border-radius: 14px;
     font-size: 17px;
     font-weight: 600;
+    font-family: var(--font-ui);
     cursor: pointer;
-    box-shadow: 0 8px 22px rgba(255, 79, 136, 0.35);
+    box-shadow: 0 8px 22px rgba(209, 91, 128, 0.25);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     align-items: center;
@@ -307,14 +320,14 @@ Billing & Payment - Crochet by 4
 }
 
 .complete-order-btn:hover {
-    background: linear-gradient(135deg, #ff3377 0%, #e02868 100%);
+    background: #B84368;
     transform: translateY(-2px);
-    box-shadow: 0 12px 28px rgba(255, 79, 136, 0.48);
+    box-shadow: 0 12px 28px rgba(209, 91, 128, 0.35);
 }
 
 .complete-order-btn:active {
     transform: translateY(0);
-    box-shadow: 0 4px 12px rgba(255, 79, 136, 0.3);
+    box-shadow: 0 4px 12px rgba(209, 91, 128, 0.2);
 }
 
 /* =========================
@@ -422,6 +435,12 @@ Billing & Payment - Crochet by 4
 
         <form method="POST" id="billing-form">
             {% csrf_token %}
+            <input type="hidden" name="email" value="{{ checkout_info.email }}">
+            <input type="hidden" name="full_name" value="{{ checkout_info.full_name }}">
+            <input type="hidden" name="phone" value="{{ checkout_info.phone }}">
+            <input type="hidden" name="address" value="{{ checkout_info.address }}">
+            <input type="hidden" name="city" value="{{ checkout_info.city }}">
+            <input type="hidden" name="postal_code" value="{{ checkout_info.postal_code }}">
 
             <div class="payment-methods-wrapper">
 
@@ -448,7 +467,7 @@ Billing & Payment - Crochet by 4
                             <strong>Account Title:</strong> Crochet by 4
                         </div>
                         <div class="bank-info-item">
-                            <strong>Easypaisa No:</strong> <span style="color:#ff4f88; font-weight:700;">0313-7975149</span>
+                            <strong>Easypaisa No:</strong> <span style="color:#D15B80; font-weight:700;">0313-7975149</span>
                         </div>
                     </div>
 
@@ -503,7 +522,7 @@ Billing & Payment - Crochet by 4
                             <strong>IBAN:</strong> PKXXXXXXXXXXXXXXXX
                         </div>
                         <div class="bank-info-item" style="grid-column: 1 / -1;">
-                            <strong>Phone Number:</strong> <span style="color:#ff4f88; font-weight:700;">0313-7975149</span>
+                            <strong>Phone Number:</strong> <span style="color:#D15B80; font-weight:700;">0313-7975149</span>
                         </div>
                     </div>
 

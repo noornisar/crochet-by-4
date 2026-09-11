@@ -15,7 +15,8 @@ Register
     justify-content:center;
     align-items:center;
     padding:60px 20px;
-    background:#fff8fb;
+    background:#FFF7FA;
+    font-family: var(--font-ui);
 }
 
 .register-card{
@@ -24,58 +25,57 @@ Register
     background:#fff;
     border-radius:20px;
     padding:35px 25px;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    border: 1px solid rgba(209, 91, 128, 0.15);
+    box-shadow:0 10px 30px rgba(209, 91, 128, 0.08);
 }
 
 .register-card h1{
-
     text-align:center;
-    color:#ff4f88;
+    color:#D15B80;
     margin-bottom:10px;
+    font-family: var(--font-branding) !important;
+    font-size: 30px;
+    font-weight: 700;
 }
 
 .register-card p{
-
     text-align:center;
     color:#666;
     margin-bottom:35px;
+    font-family: var(--font-ui);
 }
 
 .form-group{
-
     margin-bottom:22px;
 }
 
 .form-group label{
-
     display:block;
     margin-bottom:8px;
     font-weight:600;
     color:#444;
+    font-family: var(--font-ui);
 }
 
 .form-control{
-
     width:100%;
     padding:13px 16px;
-    border:2px solid #ffd6e7;
+    border:1.5px solid rgba(209, 91, 128, 0.2);
     border-radius:10px;
     font-size:15px;
+    font-family: var(--font-ui);
     transition:.3s;
     outline:none;
 }
 
 .form-control:focus{
-
-    border-color:#ff4f88;
-    box-shadow:0 0 10px rgba(255,79,136,.15);
-
+    border-color:#D15B80;
+    box-shadow:0 0 0 3px rgba(209, 91, 128, 0.15);
 }
 
 .register-btn{
-
     width:100%;
-    background:#ff4f88;
+    background:#D15B80;
     color:white;
     border:none;
     padding:14px;
@@ -83,45 +83,44 @@ Register
     font-size:16px;
     cursor:pointer;
     font-weight:600;
+    font-family: var(--font-ui);
     transition:.3s;
 }
 
 .register-btn:hover{
-
-    background:#ff2f72;
+    background:#B84368;
+    box-shadow: 0 6px 18px rgba(209, 91, 128, 0.25);
 }
 
 .login-link{
-
     text-align:center;
     margin-top:25px;
+    font-family: var(--font-ui);
 }
 
 .login-link a{
-
-    color:#ff4f88;
+    color:#D15B80;
     text-decoration:none;
     font-weight:600;
 }
 
 .login-link a:hover{
-
     text-decoration:underline;
 }
 
 .help-text{
-
     font-size:13px;
     color:#777;
     margin-top:5px;
+    font-family: var(--font-ui);
 }
 
 .errorlist{
-
     list-style:none;
-    color:red;
+    color:#d6336c;
     margin-top:5px;
     font-size:14px;
+    font-family: var(--font-ui);
 }
 
 </style>
@@ -145,6 +144,16 @@ Register
                 {{ form.username }}
 
                 {{ form.username.errors }}
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Email Address</label>
+
+                {{ form.email }}
+
+                {{ form.email.errors }}
 
             </div>
 
