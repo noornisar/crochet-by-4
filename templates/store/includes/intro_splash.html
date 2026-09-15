@@ -1,0 +1,449 @@
+{% load static %}
+<!-- ==========================================================================
+     CROCHET BY 4 - FULLSCREEN (WHOLE PAGE) INTRO ANIMATION SPLASH SCREEN
+     ========================================================================== -->
+<div id="crochet-intro-overlay" class="crochet-intro-overlay" aria-modal="true" role="dialog" aria-label="Welcome to Crochet by 4">
+    <!-- Immediate check to avoid flash of splash if already seen in this session -->
+    <script>
+        (function() {
+            try {
+                var urlParams = new URLSearchParams(window.location.search);
+                var forceIntro = urlParams.has('intro') || urlParams.has('replay_intro');
+                if (!forceIntro && sessionStorage.getItem('crochet_intro_seen') === 'true') {
+                    var el = document.getElementById('crochet-intro-overlay');
+                    if (el) el.style.display = 'none';
+                } else {
+                    document.documentElement.classList.add('crochet-intro-active');
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        })();
+    </script>
+
+    <!-- Top Action Controls (Skip & Sound) -->
+    <div class="intro-top-bar">
+        <button id="intro-sound-btn" class="intro-ctrl-btn" type="button" aria-label="Toggle Sound" title="Mute / Unmute">
+            <i class="fa-solid fa-volume-high" id="intro-sound-icon"></i>
+            <span class="intro-ctrl-text" id="intro-sound-text">Sound On</span>
+        </button>
+
+        <button id="intro-skip-btn" class="intro-ctrl-btn intro-skip-btn" type="button" aria-label="Skip to Home Page" title="Skip to Home Page">
+            <span>Skip</span>
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+    <!-- Whole Page Edge-to-Edge Video Container -->
+    <div class="intro-video-container" id="intro-video-container">
+        <video id="crochet-intro-video" class="crochet-intro-video" playsinline preload="auto" muted>
+            <source src="{% static 'videos/intro_animation.mp4' %}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Elegant Floating Unmute / Play Prompt -->
+    <div id="intro-start-prompt" class="intro-start-prompt">
+        <div class="intro-prompt-pill">
+            <i class="fa-solid fa-volume-high prompt-sound-icon"></i>
+            <span class="intro-prompt-msg">Click anywhere to play with sound</span>
+        </div>
+    </div>
+
+    <!-- Slim Bottom Progress Bar -->
+    <div class="intro-progress-bar-wrap">
+        <div id="intro-progress-bar" class="intro-progress-bar"></div>
+    </div>
+</div>
+
+<style>
+    /* Lock scrolling while splash is active */
+    html.crochet-intro-active,
+    html.crochet-intro-active body {
+        overflow: hidden !important;
+        height: 100vh !important;
+    }
+
+    /* Fullscreen Whole Page Overlay */
+    .crochet-intro-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 9999999;
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        cursor: pointer;
+        opacity: 1;
+        transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+        user-select: none;
+        -webkit-user-select: none;
+    }
+
+    .crochet-intro-overlay.intro-fade-out {
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+
+    /* Video Frame Container - Full Viewport Edge-to-Edge (Whole Page) */
+    .intro-video-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        margin: 0;
+        background: #ffffff;
+        overflow: hidden;
+    }
+
+    .crochet-intro-video {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        background: #ffffff;
+        border-radius: 0;
+        outline: none;
+        border: none;
+        display: block;
+    }
+
+    /* On mobile / portrait screens: contain ensures 'Crochet by 4' text never gets cropped */
+    @media (max-aspect-ratio: 1/1) {
+        .crochet-intro-video {
+            object-fit: contain;
+            background: #ffffff;
+        }
+    }
+
+    /* Top Action Controls Bar */
+    .intro-top-bar {
+        position: absolute;
+        top: 24px;
+        right: 28px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        z-index: 100;
+    }
+
+    .intro-ctrl-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.88);
+        border: 1px solid rgba(209, 91, 128, 0.22);
+        color: #2D2529;
+        font-family: var(--font-ui), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 13.5px;
+        font-weight: 600;
+        padding: 9px 18px;
+        border-radius: 999px;
+        cursor: pointer;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 4px 18px rgba(45, 37, 41, 0.08);
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .intro-ctrl-btn:hover {
+        background: #D15B80;
+        color: #ffffff;
+        border-color: #D15B80;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(209, 91, 128, 0.28);
+    }
+
+    .intro-ctrl-btn:hover i {
+        color: #ffffff;
+    }
+
+    .intro-skip-btn {
+        background: rgba(209, 91, 128, 0.1);
+        color: #B84368;
+        border-color: rgba(209, 91, 128, 0.3);
+    }
+
+    .intro-skip-btn:hover {
+        background: #D15B80;
+        color: #ffffff;
+    }
+
+    /* Bottom Prompt Pill */
+    .intro-start-prompt {
+        position: absolute;
+        bottom: 36px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 100;
+        transition: opacity 0.35s ease, transform 0.35s ease;
+        pointer-events: auto;
+    }
+
+    .intro-start-prompt.prompt-hidden {
+        opacity: 0;
+        transform: translate(-50%, 15px);
+        pointer-events: none;
+    }
+
+    .intro-prompt-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(255, 255, 255, 0.94);
+        border: 1.5px solid rgba(209, 91, 128, 0.28);
+        padding: 10px 22px;
+        border-radius: 999px;
+        box-shadow: 0 8px 24px rgba(209, 91, 128, 0.18);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        animation: introPulse 2.2s infinite ease-in-out;
+    }
+
+    .prompt-sound-icon {
+        color: #D15B80;
+        font-size: 13px;
+    }
+
+    .intro-prompt-msg {
+        font-family: var(--font-ui), sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        color: #2D2529;
+        letter-spacing: 0.2px;
+    }
+
+    @keyframes introPulse {
+        0%, 100% {
+            transform: scale(1);
+            box-shadow: 0 8px 24px rgba(209, 91, 128, 0.18);
+        }
+        50% {
+            transform: scale(1.03);
+            box-shadow: 0 12px 30px rgba(209, 91, 128, 0.3);
+        }
+    }
+
+    /* Bottom Slim Progress Bar */
+    .intro-progress-bar-wrap {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: rgba(209, 91, 128, 0.15);
+        z-index: 100;
+    }
+
+    .intro-progress-bar {
+        width: 0%;
+        height: 100%;
+        background: linear-gradient(90deg, #D15B80 0%, #B84368 100%);
+        border-radius: 0 4px 4px 0;
+        transition: width 0.1s linear;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+        .intro-top-bar {
+            top: 16px;
+            right: 16px;
+            gap: 8px;
+        }
+
+        .intro-ctrl-btn {
+            font-size: 12.5px;
+            padding: 7px 14px;
+        }
+
+        .intro-ctrl-text {
+            display: none;
+        }
+
+        .intro-start-prompt {
+            bottom: 24px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .intro-prompt-pill {
+            padding: 8px 16px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .intro-prompt-msg {
+            font-size: 12.5px;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var overlay = document.getElementById("crochet-intro-overlay");
+        var video = document.getElementById("crochet-intro-video");
+        var skipBtn = document.getElementById("intro-skip-btn");
+        var soundBtn = document.getElementById("intro-sound-btn");
+        var soundIcon = document.getElementById("intro-sound-icon");
+        var soundText = document.getElementById("intro-sound-text");
+        var startPrompt = document.getElementById("intro-start-prompt");
+        var progressBar = document.getElementById("intro-progress-bar");
+
+        if (!overlay || !video) return;
+
+        // Verify if already dismissed in session
+        var urlParams = new URLSearchParams(window.location.search);
+        var forceIntro = urlParams.has('intro') || urlParams.has('replay_intro');
+        if (!forceIntro && sessionStorage.getItem('crochet_intro_seen') === 'true') {
+            overlay.style.display = 'none';
+            document.documentElement.classList.remove('crochet-intro-active');
+            return;
+        }
+
+        var isDismissed = false;
+
+        function dismissIntro() {
+            if (isDismissed) return;
+            isDismissed = true;
+
+            try {
+                sessionStorage.setItem('crochet_intro_seen', 'true');
+            } catch (e) {
+                console.error(e);
+            }
+
+            // Smooth fade out directly revealing whole home page
+            overlay.classList.add('intro-fade-out');
+
+            setTimeout(function () {
+                overlay.style.display = 'none';
+                document.documentElement.classList.remove('crochet-intro-active');
+                if (video) {
+                    video.pause();
+                }
+            }, 650);
+        }
+
+        function updateSoundUI(isUnmuted) {
+            if (!soundIcon) return;
+            if (isUnmuted) {
+                soundIcon.className = "fa-solid fa-volume-high";
+                if (soundText) soundText.textContent = "Sound On";
+            } else {
+                soundIcon.className = "fa-solid fa-volume-xmark";
+                if (soundText) soundText.textContent = "Sound Off";
+            }
+        }
+
+        function playWithAudio() {
+            video.muted = false;
+            var p = video.play();
+            if (p !== undefined) {
+                p.then(function() {
+                    updateSoundUI(true);
+                    if (startPrompt) startPrompt.classList.add('prompt-hidden');
+                }).catch(function(err) {
+                    console.log("Audio play blocked, keeping muted:", err);
+                    video.muted = true;
+                    video.play();
+                    updateSoundUI(false);
+                });
+            }
+        }
+
+        // Toggle sound button
+        if (soundBtn) {
+            soundBtn.addEventListener("click", function (e) {
+                e.stopPropagation();
+                if (video.muted) {
+                    playWithAudio();
+                } else {
+                    video.muted = true;
+                    updateSoundUI(false);
+                }
+            });
+        }
+
+        // Skip Button Click
+        if (skipBtn) {
+            skipBtn.addEventListener("click", function (e) {
+                e.stopPropagation();
+                dismissIntro();
+            });
+        }
+
+        // Click anywhere on the whole page to start / unmute / interact
+        overlay.addEventListener("click", function () {
+            if (video.paused || video.muted) {
+                playWithAudio();
+            }
+        });
+
+        // Update progress bar
+        video.addEventListener("timeupdate", function () {
+            if (video.duration && progressBar) {
+                var pct = (video.currentTime / video.duration) * 100;
+                progressBar.style.width = pct + "%";
+            }
+        });
+
+        // Auto-dismiss when video finishes
+        video.addEventListener("ended", function () {
+            if (progressBar) progressBar.style.width = "100%";
+            setTimeout(dismissIntro, 300);
+        });
+
+        // Escape key to dismiss
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape" && !isDismissed) {
+                dismissIntro();
+            }
+        });
+
+        // Global function to replay intro anytime
+        window.replayCrochetIntro = function () {
+            isDismissed = false;
+            try {
+                sessionStorage.removeItem('crochet_intro_seen');
+            } catch (e) {}
+            if (video) {
+                video.currentTime = 0;
+            }
+            if (progressBar) progressBar.style.width = "0%";
+            overlay.classList.remove('intro-fade-out');
+            overlay.style.display = 'flex';
+            document.documentElement.classList.add('crochet-intro-active');
+            playWithAudio();
+        };
+
+        // Autoplay immediately on page load
+        // First try playing with sound:
+        video.muted = false;
+        var autoPlay = video.play();
+        if (autoPlay !== undefined) {
+            autoPlay.then(function () {
+                updateSoundUI(true);
+                if (startPrompt) startPrompt.classList.add('prompt-hidden');
+            }).catch(function () {
+                // If browser enforces mute policy on autoplay, autoplay muted so whole page is immediately alive
+                video.muted = true;
+                video.play().then(function () {
+                    updateSoundUI(false);
+                    if (startPrompt) startPrompt.classList.remove('prompt-hidden');
+                }).catch(function() {
+                    if (startPrompt) startPrompt.classList.remove('prompt-hidden');
+                });
+            });
+        }
+    });
+</script>
