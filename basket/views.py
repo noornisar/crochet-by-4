@@ -2,6 +2,7 @@ import logging
 from django.shortcuts import render, redirect, get_object_or_404 
 from django.http import JsonResponse
 from django.contrib.sites.shortcuts import get_current_site
+from django.contrib import messages
 
 from store.models import Product, Order, OrderItem
 from store.services.email_service import send_order_confirmation_email
@@ -96,60 +97,32 @@ def checkout(request):
         address = request.POST.get("address", "").strip()
         city = request.POST.get("city", "").strip()
         postal_code = request.POST.get("postal_code", "").strip()
+        payment_method = request.POST.get("payment_method", "bank").strip() or "bank"
 
-        request.session['checkout_info'] = {
+        current_data = {
             'first_name': first_name,
             'last_name': last_name,
-            'full_name': full_name or "Customer",
             'email': email,
             'phone': phone,
             'address': address,
             'city': city,
             'postal_code': postal_code,
+            'payment_method': payment_method,
         }
-        return redirect("basket:billing")
 
-    checkout_info = request.session.get('checkout_info', {})
-    return render(
-        request,
-        "store/checkout.html",
-        {"basket": basket, "checkout_info": checkout_info}
-    )
+        if not email:
+            messages.error(request, "Please enter your contact email address before placing your order.")
+            return render(request, "store/checkout.html", {"basket": basket, "checkout_info": current_data})
 
-def billing(request):
-    basket = Basket(request)
-    if len(basket) == 0:
-        return redirect('store:shop')
-
-    checkout_info = request.session.get('checkout_info', {})
-
-    if request.method == "POST":
-        payment_method = request.POST.get("payment_method", "bank")
-
-        customer_email = (
-            request.POST.get("email")
-            or checkout_info.get("email")
-            or (request.user.email if request.user.is_authenticated else "")
-        ).strip()
-        customer_name = (
-            request.POST.get("full_name")
-            or checkout_info.get("full_name")
-            or (request.user.get_full_name() or request.user.username if request.user.is_authenticated else "Customer")
-        ).strip()
-        phone = (request.POST.get("phone") or checkout_info.get("phone", "")).strip()
-        address = (request.POST.get("address") or checkout_info.get("address", "")).strip()
-        city = (request.POST.get("city") or checkout_info.get("city", "")).strip()
-        postal_code = (request.POST.get("postal_code") or checkout_info.get("postal_code", "")).strip()
-
-        if not customer_email:
-            messages.error(request, "Please enter your contact email on the checkout page before proceeding.")
-            return redirect("basket:checkout")
+        if not address or not city or not phone:
+            messages.error(request, "Please complete your phone number, street address, and city.")
+            return render(request, "store/checkout.html", {"basket": basket, "checkout_info": current_data})
 
         # 1. Create the Order
         order = Order.objects.create(
             user=request.user if request.user.is_authenticated else None,
-            full_name=customer_name or "Valued Customer",
-            email=customer_email,
+            full_name=full_name or "Valued Customer",
+            email=email,
             phone=phone,
             address=address,
             city=city,
@@ -190,14 +163,19 @@ def billing(request):
         if 'checkout_info' in request.session:
             del request.session['checkout_info']
 
-        # 5. Redirect to dedicated order confirmation page
+        # 5. Redirect directly to dedicated order confirmation page
         return redirect("basket:order_confirmation", order_number=order.order_number)
 
+    checkout_info = request.session.get('checkout_info', {})
     return render(
         request,
-        "store/billing.html",
+        "store/checkout.html",
         {"basket": basket, "checkout_info": checkout_info}
     )
+
+def billing(request):
+    """Redirect to unified single-page checkout."""
+    return redirect("basket:checkout")
 
 
 def order_confirmation(request, order_number):

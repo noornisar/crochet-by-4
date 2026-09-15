@@ -79,93 +79,163 @@ Checkout - Crochet Store
 /* =========================
    PAYMENT METHOD SECTION
 ========================= */
-.payment-card{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:18px 20px;
-    background:linear-gradient(135deg, #FFF8FB 0%, #ffffff 100%);
-    border:2px solid #D15B80;
-    border-radius:16px;
-    transition:all 0.3s ease;
-    box-shadow:0 4px 15px rgba(209, 91, 128, 0.08);
+.payment-methods-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
 
-.payment-card:hover{
-    box-shadow:0 6px 20px rgba(209, 91, 128, 0.15);
-    border-color:#B84368;
+.payment-method-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border: 2px solid rgba(209, 91, 128, 0.18);
+    border-radius: 16px;
+    background: #ffffff;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-family: var(--font-ui);
 }
 
-.payment-card-left{
-    display:flex;
-    align-items:center;
-    gap:15px;
+.payment-method-card:hover {
+    border-color: #D15B80;
+    background: #FFF8FB;
 }
 
-.payment-icon-wrapper{
-    width:48px;
-    height:48px;
-    background:#FFF0F5;
-    border-radius:14px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#D15B80;
-    font-size:22px;
-    flex-shrink:0;
-    border:1px solid rgba(209, 91, 128, 0.25);
+.payment-method-card.active,
+.payment-method-card:has(input:checked) {
+    border-color: #D15B80;
+    background: linear-gradient(135deg, #FFF8FB 0%, #ffffff 100%);
+    box-shadow: 0 4px 15px rgba(209, 91, 128, 0.12);
 }
 
-.payment-details strong{
-    display:block;
-    color:#2d2d2d;
-    font-size:16px;
-    font-weight:600;
-    margin-bottom:3px;
+.payment-method-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.payment-method-card input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #D15B80;
+    cursor: pointer;
+    margin: 0;
+}
+
+.payment-method-text strong {
+    display: block;
+    font-size: 16px;
+    color: #2d2d2d;
+    margin-bottom: 3px;
     font-family: var(--font-branding);
 }
 
-.payment-details span{
-    display:block;
-    color:#777;
-    font-size:13px;
+.payment-method-text span {
+    font-size: 13px;
+    color: #777;
     font-family: var(--font-ui);
 }
 
-.payment-selected-badge{
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    background:#D15B80;
-    color:white;
-    font-size:12px;
-    font-weight:600;
-    font-family: var(--font-ui);
-    padding:6px 14px;
-    border-radius:20px;
-    box-shadow:0 3px 10px rgba(209, 91, 128, 0.25);
+/* Details Box (Hidden by default, shown when selected) */
+.details-box {
+    display: none;
+    background: #FFF8FB;
+    border: 1.5px solid rgba(209, 91, 128, 0.25);
+    border-radius: 16px;
+    padding: 20px;
+    margin-top: 4px;
+    animation: fadeIn 0.3s ease;
 }
 
-.payment-info-box{
-    display:flex;
-    align-items:flex-start;
-    gap:12px;
-    background:#FFF8FB;
-    border:1px solid rgba(209, 91, 128, 0.18);
-    border-radius:14px;
-    padding:14px 16px;
-    margin-top:16px;
-    font-size:13px;
-    color:#555;
-    line-height:1.5;
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.bank-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 16px;
     font-family: var(--font-ui);
 }
 
-.payment-info-box i{
-    color:#D15B80;
-    font-size:16px;
-    margin-top:2px;
-    flex-shrink:0;
+.bank-info-item {
+    background: #ffffff;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(209, 91, 128, 0.15);
+}
+
+.bank-info-item strong {
+    color: #2d2d2d;
+    font-size: 13.5px;
+}
+
+/* WhatsApp Verification Box */
+.whatsapp-instruction-card {
+    background: #ffffff;
+    border-left: 4px solid #25D366;
+    border-radius: 12px;
+    padding: 16px 18px;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.08);
+    border: 1px solid rgba(37, 211, 102, 0.25);
+    border-left-width: 4px;
+}
+
+.whatsapp-instruction-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #128C7E;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 8px;
+    font-family: var(--font-branding);
+}
+
+.whatsapp-instruction-header i {
+    font-size: 20px;
+    color: #25D366;
+}
+
+.whatsapp-instruction-body {
+    font-size: 13px;
+    color: #4A4A4A;
+    line-height: 1.55;
+    margin-bottom: 14px;
+    font-family: var(--font-ui);
+}
+
+.whatsapp-instruction-body strong {
+    color: #111;
+}
+
+.whatsapp-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #25D366;
+    color: #ffffff !important;
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 25px;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    transition: all 0.25s ease;
+    font-family: var(--font-ui);
+}
+
+.whatsapp-action-btn:hover {
+    background: #1EBE5D;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
 }
 
 /* =========================
@@ -353,6 +423,17 @@ Checkout - Crochet Store
         <form method="POST" action="{% url 'basket:checkout' %}" class="checkout-form">
             {% csrf_token %}
 
+            {% if messages %}
+            <div class="checkout-messages" style="margin-bottom: 20px;">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" style="padding: 13px 18px; border-radius: 12px; background: #FFF0F5; border: 1.5px solid #D15B80; color: #D15B80; font-weight: 600; margin-bottom: 12px; font-size: 14px; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <span>{{ message }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
             <!-- Contact -->
             <div class="checkout-box">
                 <h2><i class="fa-regular fa-envelope"></i> Contact</h2>
@@ -409,33 +490,116 @@ Checkout - Crochet Store
             <div class="checkout-box">
                 <h2><i class="fa-solid fa-credit-card"></i> Payment Method</h2>
 
-                <div class="payment-card">
-                    <div class="payment-card-left">
-                        <div class="payment-icon-wrapper">
-                            <i class="fa-solid fa-building-columns"></i>
-                        </div>
-                        <div class="payment-details">
-                            <strong>🏦 Bank Deposit & 📱 Easypaisa</strong>
-                            <span>Pay directly via Bank Transfer or Easypaisa</span>
-                        </div>
-                    </div>
-                    <span class="payment-selected-badge">
-                        <i class="fa-solid fa-check"></i> Available
-                    </span>
-                </div>
+                <div class="payment-methods-wrapper">
 
-                <div class="payment-info-box">
-                    <i class="fa-solid fa-circle-info"></i>
-                    <div>
-                        Account title, account number, IBAN and payment receipt instructions will be chosen on the next payment step.
+                    <!-- Easypaisa Option -->
+                    <label class="payment-method-card" id="option-easypaisa">
+                        <div class="payment-method-left">
+                            <input
+                                type="radio"
+                                name="payment_method"
+                                value="easypaisa"
+                                id="easypaisa"
+                                {% if checkout_info.payment_method == 'easypaisa' %}checked{% endif %}
+                                required>
+                            <div class="payment-method-text">
+                                <strong>📱 Easypaisa</strong>
+                                <span>Pay using Easypaisa mobile account</span>
+                            </div>
+                        </div>
+                    </label>
+
+                    <!-- Easypaisa Details Box -->
+                    <div class="details-box" id="easypaisa-box">
+                        <div class="bank-info-grid">
+                            <div class="bank-info-item">
+                                <strong>Account Title:</strong> Crochet by 4
+                            </div>
+                            <div class="bank-info-item">
+                                <strong>Easypaisa No:</strong> <span style="color:#D15B80; font-weight:700;">0313-7975149</span>
+                            </div>
+                        </div>
+
+                        <!-- WhatsApp Screenshot Instruction -->
+                        <div class="whatsapp-instruction-card">
+                            <div class="whatsapp-instruction-header">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>Payment Screenshot Verification</span>
+                            </div>
+                            <div class="whatsapp-instruction-body">
+                                After transferring payment via Easypaisa, please take a <strong>screenshot of your payment receipt / Transaction ID</strong> and send it to our WhatsApp number <strong>0313-7975149</strong> to confirm your order.
+                            </div>
+                            <a
+                                href="https://wa.me/923137975149?text=Hi%21%20I%20have%20transferred%20the%20payment%20via%20Easypaisa%20for%20my%20Crochet%20order.%20Here%20is%20my%20payment%20screenshot%20receipt."
+                                target="_blank"
+                                class="whatsapp-action-btn">
+                                <i class="fab fa-whatsapp"></i> Share Receipt on WhatsApp (0313-7975149)
+                            </a>
+                        </div>
                     </div>
+
+                    <!-- Bank Deposit Option -->
+                    <label class="payment-method-card active" id="option-bank">
+                        <div class="payment-method-left">
+                            <input
+                                type="radio"
+                                name="payment_method"
+                                value="bank"
+                                id="bank"
+                                {% if checkout_info.payment_method != 'easypaisa' %}checked{% endif %}
+                                required>
+                            <div class="payment-method-text">
+                                <strong>🏦 Bank Deposit</strong>
+                                <span>Pay directly into our official bank account</span>
+                            </div>
+                        </div>
+                    </label>
+
+                    <!-- Bank Details & WhatsApp Instruction Box (Visible by default) -->
+                    <div class="details-box" id="bank-box" style="display: block;">
+                        <div class="bank-info-grid">
+                            <div class="bank-info-item">
+                                <strong>Bank Name:</strong> Your Bank Name
+                            </div>
+                            <div class="bank-info-item">
+                                <strong>Account Title:</strong> Crochet by 4
+                            </div>
+                            <div class="bank-info-item">
+                                <strong>Account No:</strong> XXXXXXXXXXXXX
+                            </div>
+                            <div class="bank-info-item">
+                                <strong>IBAN:</strong> PKXXXXXXXXXXXXXXXX
+                            </div>
+                            <div class="bank-info-item" style="grid-column: 1 / -1;">
+                                <strong>Phone Number:</strong> <span style="color:#D15B80; font-weight:700;">0313-7975149</span>
+                            </div>
+                        </div>
+
+                        <!-- WhatsApp Screenshot Instruction -->
+                        <div class="whatsapp-instruction-card">
+                            <div class="whatsapp-instruction-header">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>Payment Screenshot Verification</span>
+                            </div>
+                            <div class="whatsapp-instruction-body">
+                                Please transfer the total amount, take a <strong>screenshot of your deposit receipt / bank transfer slip</strong>, and share it on our WhatsApp at <strong>0313-7975149</strong> to verify and confirm your order.
+                            </div>
+                            <a
+                                href="https://wa.me/923137975149?text=Hi%21%20I%20have%20transferred%20the%20payment%20via%20Bank%20Deposit%20for%20my%20Crochet%20order.%20Here%20is%20my%20payment%20screenshot%20receipt."
+                                target="_blank"
+                                class="whatsapp-action-btn">
+                                <i class="fab fa-whatsapp"></i> Share Receipt on WhatsApp (0313-7975149)
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <!-- Continue Button -->
-            <button type="submit" class="continue-payment-btn">
-                <span>Continue to Payment</span>
-                <i class="fa-solid fa-arrow-right"></i>
+            <!-- Confirm Order Button -->
+            <button type="submit" class="continue-payment-btn" id="confirm-order-btn">
+                <span>Confirm Order 🌸</span>
+                <i class="fa-solid fa-check"></i>
             </button>
 
         </form>
@@ -494,5 +658,37 @@ Checkout - Crochet Store
     </div>
 
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const easypaisa = document.getElementById("easypaisa");
+    const bank = document.getElementById("bank");
+
+    const easypaisaBox = document.getElementById("easypaisa-box");
+    const bankBox = document.getElementById("bank-box");
+
+    const optionEasypaisa = document.getElementById("option-easypaisa");
+    const optionBank = document.getElementById("option-bank");
+
+    function updatePaymentSelection() {
+        if (bank && bank.checked) {
+            if (bankBox) bankBox.style.display = "block";
+            if (easypaisaBox) easypaisaBox.style.display = "none";
+            if (optionBank) optionBank.classList.add("active");
+            if (optionEasypaisa) optionEasypaisa.classList.remove("active");
+        } else if (easypaisa && easypaisa.checked) {
+            if (bankBox) bankBox.style.display = "none";
+            if (easypaisaBox) easypaisaBox.style.display = "block";
+            if (optionBank) optionBank.classList.remove("active");
+            if (optionEasypaisa) optionEasypaisa.classList.add("active");
+        }
+    }
+
+    if (easypaisa) easypaisa.addEventListener("change", updatePaymentSelection);
+    if (bank) bank.addEventListener("change", updatePaymentSelection);
+
+    updatePaymentSelection();
+});
+</script>
 
 {% endblock %}
