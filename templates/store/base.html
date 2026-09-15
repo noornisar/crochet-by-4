@@ -1018,9 +1018,11 @@
                         <i class="fa-solid fa-right-from-bracket"></i>
                     </a>
                     {% else %}
+                    {% comment %} Desktop Login temporarily hidden from frontend (available for future use)
                     <a href="{% url 'account:login' %}" class="auth-link">
                         <i class="fa-solid fa-user"></i> Login
                     </a>
+                    {% endcomment %}
                     <a href="{% url 'account:register' %}" class="auth-btn auth-btn-primary">
                         Register
                     </a>
@@ -1089,9 +1091,11 @@
                 <i class="fa-solid fa-right-from-bracket"></i> Logout
             </a>
             {% else %}
+            {% comment %} Mobile Drawer Login temporarily hidden from frontend (available for future use)
             <a href="{% url 'account:login' %}" class="auth-link" style="justify-content: center;">
                 <i class="fa-solid fa-user"></i> Login
             </a>
+            {% endcomment %}
             <a href="{% url 'account:register' %}" class="auth-btn auth-btn-primary" style="justify-content: center;">
                 <i class="fa-solid fa-user-plus"></i> Register
             </a>
