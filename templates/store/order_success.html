@@ -281,10 +281,12 @@ Order Confirmed #{{ order.order_number }} - Crochet Store
                 <span>Shipping</span>
                 <span>Rs {{ order.shipping_cost }}</span>
             </div>
+            <!-- Tax (10%) commented out
             <div class="total-row">
                 <span>Tax (10%)</span>
                 <span>Rs {{ order.tax }}</span>
             </div>
+            -->
             <div class="grand-total-row">
                 <span>Grand Total</span>
                 <span>Rs {{ order.total_price }}</span>

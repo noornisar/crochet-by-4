@@ -24,7 +24,7 @@ TOTALS:
 -------------------------------------------------------
 Subtotal:         Rs {{ subtotal }}
 Shipping Charges: Rs {{ shipping_cost }}
-Tax (10%):        Rs {{ tax }}
+{# Tax (10%):        Rs {{ tax }} #}
 Grand Total:      Rs {{ total_price }}
 
 PAYMENT VERIFICATION:

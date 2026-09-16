@@ -47,10 +47,7 @@ class Basket:
         return Decimal(subtotal).quantize(Decimal('0.01')) if subtotal else Decimal('0.00')
 
     def get_tax(self):
-        subtotal = self.get_subtotal()
-        if subtotal == Decimal('0.00'):
-            return Decimal('0.00')
-        return (subtotal * Decimal('0.10')).quantize(Decimal('0.01'))
+        return Decimal('0.00')
 
     def get_shipping_price(self):
         if len(self) == 0 or self.get_subtotal() == Decimal('0.00'):
@@ -60,7 +57,7 @@ class Basket:
     def get_total_price(self):
         if len(self) == 0 or self.get_subtotal() == Decimal('0.00'):
             return Decimal('0.00')
-        total = self.get_subtotal() + self.get_tax() + self.get_shipping_price()
+        total = self.get_subtotal() + self.get_shipping_price()
         return total.quantize(Decimal('0.01'))
 
     def get_items_data(self):

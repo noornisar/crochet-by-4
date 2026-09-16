@@ -967,6 +967,568 @@
                 bottom: 15px;
             }
         }
+
+        /* ========================================================
+           LUXURY THEMED FOOTER (CROCHET BY 4)
+           Inspired by reference layout with signature brand styling
+        ======================================================== */
+        .site-footer {
+            background: linear-gradient(180deg, #1F171C 0%, #171114 100%);
+            color: #DDD0D6;
+            border-top: 3px solid var(--brand-primary);
+            font-family: var(--font-ui);
+            position: relative;
+            margin-top: 60px;
+            width: 100%;
+        }
+
+        .footer-main {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 65px 24px 45px;
+            display: grid;
+            grid-template-columns: 1.3fr 0.95fr 1.25fr 1.4fr;
+            gap: 40px;
+        }
+
+        .footer-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Brand Story Column */
+        .footer-brand-logo {
+            display: inline-block;
+            margin-bottom: 18px;
+            text-decoration: none;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        .footer-brand-logo:hover {
+            transform: scale(1.02);
+            opacity: 0.95;
+        }
+
+        .footer-logo-img {
+            height: 48px;
+            width: auto;
+            max-width: 190px;
+            object-fit: contain;
+            display: block;
+            filter: drop-shadow(0 2px 10px rgba(209, 91, 128, 0.3));
+        }
+
+        .footer-bio {
+            color: #C5B5BE;
+            font-size: 13.8px;
+            line-height: 1.7;
+            margin-bottom: 22px;
+        }
+
+        .footer-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .footer-badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(209, 91, 128, 0.12);
+            color: #FFB3CA;
+            border: 1px solid rgba(209, 91, 128, 0.28);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+        }
+
+        /* Section Headings & Signature Rose Accent Underlines */
+        .footer-col-title {
+            color: #FFFFFF;
+            font-family: var(--font-branding) !important;
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            margin: 0 0 8px;
+        }
+
+        .footer-accent-bar {
+            width: 38px;
+            height: 3px;
+            background: linear-gradient(90deg, #D15B80 0%, #B84368 100%);
+            border-radius: 2px;
+            margin-bottom: 22px;
+            transition: width 0.3s ease;
+        }
+
+        .footer-col:hover .footer-accent-bar {
+            width: 54px;
+        }
+
+        /* Quick Links List */
+        .footer-links-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+        }
+
+        .footer-links-list li a {
+            color: #C5B5BE;
+            text-decoration: none;
+            font-size: 13.5px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .footer-links-list li a i {
+            font-size: 10px;
+            color: var(--brand-primary);
+            opacity: 0.7;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        .footer-links-list li a:hover {
+            color: #FFFFFF;
+            transform: translateX(4px);
+        }
+
+        .footer-links-list li a:hover i {
+            opacity: 1;
+            transform: translateX(3px);
+            color: #FF8EB0;
+        }
+
+        /* Contact Items */
+        .footer-contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 13px;
+        }
+
+        .footer-contact-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: rgba(209, 91, 128, 0.15);
+            border: 1px solid rgba(209, 91, 128, 0.3);
+            color: #FF8EB0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            flex-shrink: 0;
+            transition: all 0.25s ease;
+        }
+
+        .footer-contact-item:hover .footer-contact-icon {
+            background: var(--brand-primary);
+            color: #FFFFFF;
+            transform: scale(1.08);
+            border-color: var(--brand-primary);
+            box-shadow: 0 4px 12px rgba(209, 91, 128, 0.35);
+        }
+
+        .footer-contact-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-contact-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: #A6959E;
+            margin-bottom: 2px;
+            font-weight: 600;
+        }
+
+        .footer-contact-info a,
+        .footer-contact-info span {
+            color: #EEE4EA;
+            font-size: 13.8px;
+            text-decoration: none;
+            word-break: break-all;
+            transition: color 0.2s ease;
+        }
+
+        .footer-contact-info a:hover {
+            color: #FF8EB0;
+        }
+
+        /* Follow Us Social Icons */
+        .footer-social-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 26px;
+        }
+
+        .footer-social-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #FFFFFF;
+            text-decoration: none;
+            background: #2B2127;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-social-btn.instagram:hover {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(220, 39, 67, 0.45);
+        }
+
+        .footer-social-btn.whatsapp:hover {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(37, 211, 102, 0.45);
+        }
+
+        .footer-social-btn.email:hover {
+            background: linear-gradient(135deg, #D15B80, #B84368);
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(209, 91, 128, 0.45);
+        }
+
+        /* Order Policies List (Matching Screenshot "Our Locations" Layout) */
+        .footer-policies-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+        }
+
+        .footer-policy-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 13.5px;
+            line-height: 1.5;
+            color: #C5B5BE;
+        }
+
+        .footer-policy-icon {
+            color: var(--brand-primary);
+            font-size: 15px;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        .footer-policy-text strong {
+            color: #FFFFFF;
+            font-weight: 600;
+        }
+
+        /* Footer Bottom Bar */
+        .footer-bottom-bar {
+            border-top: 1px solid rgba(209, 91, 128, 0.22);
+            background: rgba(14, 9, 12, 0.55);
+            padding: 18px 24px;
+        }
+
+        .footer-bottom-inner {
+            max-width: 1240px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 18px;
+        }
+
+        .footer-policy-links {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 22px;
+        }
+
+        .footer-legal-link {
+            color: #DDD0D6;
+            font-size: 13.5px;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            font-family: inherit;
+            transition: color 0.2s ease;
+        }
+
+        .footer-legal-link:hover {
+            color: #FF8EB0;
+            text-decoration: underline;
+        }
+
+        .footer-bottom-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-copyright {
+            color: #A6959E;
+            font-size: 13.5px;
+            margin: 0;
+        }
+
+        .footer-scroll-top-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--brand-primary);
+            color: #FFFFFF;
+            border: none;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+            flex-shrink: 0;
+        }
+
+        .footer-scroll-top-btn:hover {
+            background: var(--brand-primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(209, 91, 128, 0.45);
+        }
+
+        /* Policy Modal Overlay & Card */
+        .policy-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 10, 13, 0.75);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 100000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .policy-modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .policy-modal-card {
+            background: #FFFFFF;
+            color: #2D2529;
+            width: 100%;
+            max-width: 680px;
+            max-height: 88vh;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transform: translateY(20px);
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .policy-modal-overlay.active .policy-modal-card {
+            transform: translateY(0);
+        }
+
+        .policy-modal-header {
+            background: #FFF0F5;
+            padding: 20px 24px;
+            border-bottom: 1px solid rgba(209, 91, 128, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .policy-modal-title {
+            color: #D15B80;
+            font-family: var(--font-branding) !important;
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .policy-modal-close {
+            background: none;
+            border: none;
+            font-size: 26px;
+            line-height: 1;
+            color: #6B5C64;
+            cursor: pointer;
+            padding: 4px;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .policy-modal-close:hover {
+            color: #D15B80;
+            transform: rotate(90deg);
+        }
+
+        .policy-modal-nav {
+            display: flex;
+            background: #FAF7F8;
+            border-bottom: 1px solid #EFE4EA;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .policy-modal-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .policy-tab-btn {
+            background: none;
+            border: none;
+            padding: 12px 18px;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #6B5C64;
+            cursor: pointer;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .policy-tab-btn.active {
+            color: #D15B80;
+            border-bottom-color: #D15B80;
+            background: #FFFFFF;
+        }
+
+        .policy-modal-body {
+            padding: 24px;
+            overflow-y: auto;
+            font-size: 14.5px;
+            line-height: 1.7;
+            color: #4A4045;
+        }
+
+        .policy-tab-panel {
+            display: none;
+        }
+
+        .policy-tab-panel.active {
+            display: block;
+            animation: fadeInPolicy 0.3s ease;
+        }
+
+        @keyframes fadeInPolicy {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .policy-tab-panel h3 {
+            color: #2D2529;
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .policy-tab-panel p {
+            margin-bottom: 14px;
+        }
+
+        .policy-highlight-box {
+            background: #FFF0F5;
+            border-left: 4px solid #D15B80;
+            padding: 14px 18px;
+            border-radius: 8px;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+
+        .policy-highlight-box ul {
+            margin: 8px 0 0 18px;
+            padding: 0;
+        }
+
+        .policy-highlight-box li {
+            margin-bottom: 6px;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+                gap: 36px;
+                padding: 50px 24px 35px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .footer-main {
+                grid-template-columns: 1fr;
+                gap: 34px;
+                padding: 40px 18px 25px;
+            }
+
+            .footer-bottom-bar {
+                padding-bottom: 80px; /* Clearance for floating WhatsApp button */
+            }
+
+            .footer-bottom-inner {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .footer-policy-links {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .footer-bottom-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
     </style>
 </head>
 
@@ -1144,10 +1706,13 @@
                 <span>Shipping</span>
                 <span>Rs <span id="shipping">{{ basket.get_shipping_price }}</span></span>
             </div>
+            <!-- Tax (10%) commented out
             <div class="summary-row">
                 <span>Tax (10%)</span>
-                <span>Rs <span id="tax">{{ basket.get_tax }}</span></span>
+                <span>Rs {{ basket.get_tax }}</span>
             </div>
+            -->
+            <span id="tax" style="display:none;">{{ basket.get_tax }}</span>
             <hr style="margin:10px 0; border:0; border-top:1px solid #ddd;">
             <div class="summary-row total">
                 <span>Total</span>
@@ -1293,6 +1858,313 @@
     <div id="content">
         {% block content %}{% endblock %}
     </div>
+
+    <!-- ========================================================
+         LUXURY THEMED FOOTER (CROCHET BY 4)
+    ======================================================== -->
+    <footer class="site-footer">
+        <div class="footer-main">
+            <!-- Column 1: Brand & About -->
+            <div class="footer-col footer-col-brand">
+                <a href="/" class="footer-brand-logo" aria-label="Crochet by 4 Home">
+                    <img src="{% static 'images/brand_logo.png' %}" alt="Crochet by 4" class="footer-logo-img">
+                </a>
+                <p class="footer-bio">
+                    Crochet by 4 crafts bespoke, delicate handmade crochet creations with premium yarn and heartfelt care. From adorable plushies and floral bouquets to custom gifts, we stitch love into every loop.
+                </p>
+                <div class="footer-badges">
+                    <span class="footer-badge-pill"><i class="fa-solid fa-heart"></i> 100% Handcrafted</span>
+                    <span class="footer-badge-pill"><i class="fa-solid fa-gem"></i> Premium Yarns</span>
+                    <span class="footer-badge-pill"><i class="fa-solid fa-truck-fast"></i> Nationwide Delivery</span>
+                </div>
+            </div>
+
+            <!-- Column 2: Quick Links -->
+            <div class="footer-col footer-col-links">
+                <h4 class="footer-col-title">Quick Links</h4>
+                <div class="footer-accent-bar"></div>
+                <ul class="footer-links-list">
+                    <li><a href="/"><i class="fa-solid fa-angle-right"></i> Home</a></li>
+                    <li><a href="{% url 'store:shop' %}"><i class="fa-solid fa-angle-right"></i> Shop Collection</a></li>
+                    <li><a href="{% url 'store:shop' %}"><i class="fa-solid fa-angle-right"></i> All Categories</a></li>
+                    <li><a href="{% url 'store:contact' %}"><i class="fa-solid fa-angle-right"></i> Contact Us</a></li>
+                    <li><a href="{% url 'basket:basket_summary' %}"><i class="fa-solid fa-angle-right"></i> My Shopping Cart</a></li>
+                    <li><a href="javascript:void(0)" onclick="openPolicyModal('custom')"><i class="fa-solid fa-angle-right"></i> Custom Order Guide</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Get in Touch -->
+            <div class="footer-col footer-col-contact">
+                <h4 class="footer-col-title">Get in Touch</h4>
+                <div class="footer-accent-bar"></div>
+                <div class="footer-contact-list">
+                    <div class="footer-contact-item">
+                        <div class="footer-contact-icon">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div class="footer-contact-info">
+                            <span class="footer-contact-label">Email Us</span>
+                            <a href="mailto:noornisar96@gmail.com">noornisar96@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <div class="footer-contact-item">
+                        <div class="footer-contact-icon">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div class="footer-contact-info">
+                            <span class="footer-contact-label">Call / WhatsApp</span>
+                            <a href="https://wa.me/923137975149" target="_blank" rel="noopener">+92 313 7975149</a>
+                        </div>
+                    </div>
+
+                    <div class="footer-contact-item">
+                        <div class="footer-contact-icon">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+                        <div class="footer-contact-info">
+                            <span class="footer-contact-label">Custom Order Inquiries</span>
+                            <a href="https://www.instagram.com/crochet_by_4?stkn=MXRidHYxbmptMDd3OA==" target="_blank" rel="noopener">DM on Instagram (@crochet_by_4)</a>
+                        </div>
+                    </div>
+
+                    <div class="footer-contact-item">
+                        <div class="footer-contact-icon">
+                            <i class="fa-regular fa-clock"></i>
+                        </div>
+                        <div class="footer-contact-info">
+                            <span class="footer-contact-label">Working Hours</span>
+                            <span>Mon – Sat: 10:00 AM – 9:00 PM (PKT)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 4: Follow Us & Order Policies -->
+            <div class="footer-col footer-col-policies">
+                <h4 class="footer-col-title">Follow Us</h4>
+                <div class="footer-accent-bar"></div>
+                <div class="footer-social-row">
+                    <a href="https://www.instagram.com/crochet_by_4?stkn=MXRidHYxbmptMDd3OA==" class="footer-social-btn instagram" target="_blank" rel="noopener" title="Follow us on Instagram" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/923137975149" class="footer-social-btn whatsapp" target="_blank" rel="noopener" title="Chat on WhatsApp" aria-label="WhatsApp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                    <a href="mailto:noornisar96@gmail.com" class="footer-social-btn email" title="Send us an email" aria-label="Email">
+                        <i class="fa-solid fa-envelope"></i>
+                    </a>
+                </div>
+
+                <h4 class="footer-col-title" style="margin-top: 10px;">Order Policies</h4>
+                <div class="footer-accent-bar"></div>
+                <ul class="footer-policies-list">
+                    <li class="footer-policy-item">
+                        <i class="fa-solid fa-wand-magic-sparkles footer-policy-icon"></i>
+                        <div class="footer-policy-text">
+                            <strong>Custom Orders:</strong> DM on Instagram or WhatsApp to customize your pieces.
+                        </div>
+                    </li>
+                    <li class="footer-policy-item">
+                        <i class="fa-solid fa-credit-card footer-policy-icon"></i>
+                        <div class="footer-policy-text">
+                            <strong>50% Advance Payment:</strong> Required to confirm & begin handcrafted orders.
+                        </div>
+                    </li>
+                    <li class="footer-policy-item">
+                        <i class="fa-solid fa-calendar-check footer-policy-icon"></i>
+                        <div class="footer-policy-text">
+                            <strong>Early Booking:</strong> Book at least 1 to 2 weeks early for preparation.
+                        </div>
+                    </li>
+                    <li class="footer-policy-item">
+                        <i class="fa-solid fa-ban footer-policy-icon"></i>
+                        <div class="footer-policy-text">
+                            <strong>No Refund & Exchange:</strong> Handmade custom orders are non-refundable & final sale.
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="footer-bottom-bar">
+            <div class="footer-bottom-inner">
+                <div class="footer-policy-links">
+                    <button type="button" class="footer-legal-link" onclick="openPolicyModal('privacy')">Privacy Policy</button>
+                    <button type="button" class="footer-legal-link" onclick="openPolicyModal('refund')">Cancellation and Refund</button>
+                    <button type="button" class="footer-legal-link" onclick="openPolicyModal('shipping')">Shipping and Delivery</button>
+                    <button type="button" class="footer-legal-link" onclick="openPolicyModal('terms')">Terms And Conditions</button>
+                </div>
+
+                <div class="footer-bottom-right">
+                    <p class="footer-copyright">
+                        &copy; 2024–2026 <strong>Crochet by 4</strong>. All rights reserved.
+                    </p>
+                    <button type="button" class="footer-scroll-top-btn" id="footer-scroll-top" title="Back to top" aria-label="Back to top">
+                        <i class="fa-solid fa-chevron-up"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Policy Modal -->
+    <div class="policy-modal-overlay" id="policy-modal" role="dialog" aria-modal="true" aria-labelledby="policy-modal-heading">
+        <div class="policy-modal-card">
+            <div class="policy-modal-header">
+                <h2 class="policy-modal-title" id="policy-modal-heading">
+                    <i class="fa-solid fa-shield-heart"></i> Store Policies & Terms
+                </h2>
+                <button type="button" class="policy-modal-close" id="policy-modal-close-btn" aria-label="Close modal">&times;</button>
+            </div>
+
+            <div class="policy-modal-nav">
+                <button type="button" class="policy-tab-btn active" data-tab="custom">Custom Orders</button>
+                <button type="button" class="policy-tab-btn" data-tab="refund">Cancellation & Refund</button>
+                <button type="button" class="policy-tab-btn" data-tab="shipping">Shipping & Delivery</button>
+                <button type="button" class="policy-tab-btn" data-tab="terms">Terms & Conditions</button>
+                <button type="button" class="policy-tab-btn" data-tab="privacy">Privacy Policy</button>
+            </div>
+
+            <div class="policy-modal-body">
+                <!-- Custom Orders -->
+                <div class="policy-tab-panel active" id="tab-custom">
+                    <h3><i class="fa-solid fa-wand-magic-sparkles" style="color: #D15B80;"></i> Custom & Bespoke Orders</h3>
+                    <p>At <strong>Crochet by 4</strong>, each custom item is passionately hand-knitted from scratch to fulfill your personal design dreams!</p>
+                    <div class="policy-highlight-box">
+                        <strong>Important Custom Booking Guidelines:</strong>
+                        <ul>
+                            <li><strong>How to Order:</strong> Simply send a Direct Message (DM) to our Instagram (<a href="https://www.instagram.com/crochet_by_4?stkn=MXRidHYxbmptMDd3OA==" target="_blank" style="color:#D15B80; text-decoration: underline;">@crochet_by_4</a>) or message our WhatsApp at <a href="https://wa.me/923137975149" target="_blank" style="color:#D15B80; text-decoration: underline;"><strong>+92 313 7975149</strong></a> with your desired design, color preferences, and sizing.</li>
+                            <li><strong>Advance Payment:</strong> A <strong>50% advance deposit</strong> is strictly required before we purchase specific yarn and begin stitching your piece.</li>
+                            <li><strong>Early Booking:</strong> Handmade craft requires meticulous dedication. Please place your custom order <strong>at least 1 to 2 weeks early</strong> before your required date or event.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Cancellation & Refund -->
+                <div class="policy-tab-panel" id="tab-refund">
+                    <h3><i class="fa-solid fa-ban" style="color: #D15B80;"></i> Cancellation & Refund Policy</h3>
+                    <p>Because every crochet piece is custom handcrafted and cannot be restocked or reused once prepared, our policies are as follows:</p>
+                    <div class="policy-highlight-box">
+                        <ul>
+                            <li><strong>No Refund & No Exchange:</strong> All handmade and custom orders are strictly final sale. We do not offer refunds, order cancellations after yarn preparation has begun, or product exchanges.</li>
+                            <li><strong>Order Confirmation:</strong> Once the 50% advance is paid, the order is locked into production and cannot be cancelled.</li>
+                            <li><strong>Transit Damage Protection:</strong> In the rare event an item arrives physically defective due to shipping, please contact us via WhatsApp within 24 hours of delivery with an unboxing video.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Shipping & Delivery -->
+                <div class="policy-tab-panel" id="tab-shipping">
+                    <h3><i class="fa-solid fa-truck-fast" style="color: #D15B80;"></i> Shipping & Delivery</h3>
+                    <p>We deliver our handcrafted crochet items nationwide across Pakistan directly to your doorstep.</p>
+                    <div class="policy-highlight-box">
+                        <ul>
+                            <li><strong>Delivery Timeline:</strong> Once handmade crafting is completed (1–2 weeks), courier delivery typically takes <strong>3 to 5 business days</strong> depending on your city.</li>
+                            <li><strong>Tracking:</strong> Tracking IDs and courier details will be shared with you via WhatsApp as soon as your parcel is dispatched.</li>
+                            <li><strong>Packaging:</strong> Each piece is wrapped securely with aesthetic boutique packaging to ensure it arrives in pristine condition.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Terms & Conditions -->
+                <div class="policy-tab-panel" id="tab-terms">
+                    <h3><i class="fa-solid fa-file-contract" style="color: #D15B80;"></i> Terms & Conditions</h3>
+                    <p>By placing an order on the Crochet by 4 website, Instagram, or WhatsApp, you agree to our standard handcrafted store terms:</p>
+                    <div class="policy-highlight-box">
+                        <ul>
+                            <li>Each product is 100% handmade; slight natural variations in stitch tightness, dimensions, or yarn dye lot colors add to the unique character of authentic crochet art.</li>
+                            <li>Prices and lead times for custom orders are quoted on a per-project basis based on complexity and materials.</li>
+                            <li>Customer is responsible for providing accurate delivery address and contact numbers.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Privacy Policy -->
+                <div class="policy-tab-panel" id="tab-privacy">
+                    <h3><i class="fa-solid fa-user-shield" style="color: #D15B80;"></i> Privacy Policy</h3>
+                    <p>Your privacy is of utmost importance to us. When you place an order or contact us:</p>
+                    <div class="policy-highlight-box">
+                        <ul>
+                            <li>We collect personal information (name, address, phone number, email) strictly to process and deliver your orders.</li>
+                            <li>We will never sell, rent, or distribute your private contact details to any third-party marketing services.</li>
+                            <li>Payment receipts and transaction proofs are kept secure and confidential.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Scripts: Scroll to Top & Policy Modal -->
+    <script>
+        // Scroll to Top Button
+        const scrollTopBtn = document.getElementById("footer-scroll-top");
+        if (scrollTopBtn) {
+            scrollTopBtn.addEventListener("click", function () {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            });
+        }
+
+        // Policy Modal Functions
+        const policyModal = document.getElementById("policy-modal");
+        const policyCloseBtn = document.getElementById("policy-modal-close-btn");
+        const policyTabBtns = document.querySelectorAll(".policy-tab-btn");
+        const policyPanels = document.querySelectorAll(".policy-tab-panel");
+
+        function openPolicyModal(tabName) {
+            if (!policyModal) return;
+            policyModal.classList.add("active");
+            document.body.style.overflow = "hidden";
+
+            if (tabName) {
+                switchPolicyTab(tabName);
+            }
+        }
+
+        function closePolicyModal() {
+            if (!policyModal) return;
+            policyModal.classList.remove("active");
+            document.body.style.overflow = "";
+        }
+
+        function switchPolicyTab(tabName) {
+            policyTabBtns.forEach(btn => {
+                btn.classList.toggle("active", btn.dataset.tab === tabName);
+            });
+            policyPanels.forEach(panel => {
+                panel.classList.toggle("active", panel.id === "tab-" + tabName);
+            });
+        }
+
+        if (policyCloseBtn) {
+            policyCloseBtn.addEventListener("click", closePolicyModal);
+        }
+
+        if (policyModal) {
+            policyModal.addEventListener("click", function (e) {
+                if (e.target === policyModal) {
+                    closePolicyModal();
+                }
+            });
+        }
+
+        policyTabBtns.forEach(btn => {
+            btn.addEventListener("click", function () {
+                switchPolicyTab(this.dataset.tab);
+            });
+        });
+
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape" && policyModal && policyModal.classList.contains("active")) {
+                closePolicyModal();
+            }
+        });
+    </script>
 
 </body>
 
