@@ -864,6 +864,7 @@
 
             .mobile-dropdown {
                 width: 100%;
+                position: relative;
             }
 
             .mobile-dropdown-btn {
@@ -873,26 +874,109 @@
                 align-items: center;
                 padding: 10px 14px;
                 border-radius: 10px;
+                background: transparent;
+                border: none;
+                font-size: 15px;
+                font-weight: 500;
+                color: #333;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                font-family: inherit;
             }
 
-            .mobile-dropdown-btn:hover {
+            .mobile-dropdown-btn:hover,
+            .mobile-dropdown-btn.active {
                 background: #FFF0F5;
+                color: #D15B80;
+            }
+
+            .mobile-dropdown-btn i {
+                font-size: 13px;
+                color: #888;
+                transition: transform 0.25s ease, color 0.25s ease;
+            }
+
+            .mobile-dropdown-btn.active i {
+                transform: rotate(180deg);
+                color: #D15B80;
             }
 
             .mobile-dropdown-menu {
                 display: none !important;
                 position: static !important;
+                top: auto !important;
+                left: auto !important;
+                right: auto !important;
+                bottom: auto !important;
+                transform: none !important;
                 width: 100% !important;
+                min-width: 0 !important;
+                max-width: 100% !important;
+                box-sizing: border-box !important;
                 box-shadow: none !important;
-                padding: 4px 0 4px 15px !important;
-                background: #FFF8FB !important;
-                border-radius: 8px !important;
-                margin-top: 4px !important;
-                border: none !important;
+                padding: 6px 8px !important;
+                background: #FFF7FA !important;
+                border-radius: 10px !important;
+                margin: 6px 0 8px 0 !important;
+                border: 1px solid rgba(209, 91, 128, 0.16) !important;
+                border-left: 3px solid #D15B80 !important;
+                list-style: none !important;
+                z-index: auto !important;
             }
 
             .mobile-dropdown-menu.show {
                 display: flex !important;
+                flex-direction: column !important;
+                gap: 2px !important;
+            }
+
+            .mobile-dropdown-menu li {
+                width: 100% !important;
+                display: block !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                list-style: none !important;
+            }
+
+            .mobile-dropdown-menu li a {
+                display: flex !important;
+                align-items: center !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                padding: 9px 12px !important;
+                font-size: 14px !important;
+                font-weight: 500 !important;
+                color: #55484E !important;
+                text-decoration: none !important;
+                white-space: normal !important;
+                word-break: break-word !important;
+                border-radius: 8px !important;
+                transition: all 0.18s ease !important;
+                background: transparent !important;
+                text-transform: capitalize !important;
+            }
+
+            .mobile-dropdown-menu li a::before {
+                content: "•";
+                color: #D15B80;
+                font-size: 14px;
+                margin-right: 8px;
+                line-height: 1;
+                opacity: 0.7;
+                transition: transform 0.2s ease, opacity 0.2s ease;
+            }
+
+            .mobile-dropdown-menu li a:hover,
+            .mobile-dropdown-menu li a:active {
+                background: #FFEBF2 !important;
+                color: #D15B80 !important;
+                padding-left: 16px !important;
+                font-weight: 600 !important;
+            }
+
+            .mobile-dropdown-menu li a:hover::before {
+                opacity: 1;
+                transform: scale(1.3);
             }
 
             .mobile-auth-section {
